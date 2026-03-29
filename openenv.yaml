@@ -1,0 +1,10 @@
+name: "logtriage-env"
+version: "0.1.0"
+description: "An SRE simulation environment for log investigation and incident triage."
+authors:
+  - "anirban12124"
+entrypoint: "app:app" # This tells OpenEnv where your FastAPI server lives
+tags:
+  - "sre"
+  - "logs"
+  - "hackathon"
