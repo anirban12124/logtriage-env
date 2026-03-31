@@ -1,10 +1,78 @@
-name: "logtriage-env"
-version: "0.1.0"
-description: "An SRE simulation environment for log investigation and incident triage."
-authors:
-  - "anirban12124"
-entrypoint: "app:app" # This tells OpenEnv where your FastAPI server lives
+name: log-triage
+version: "3.0.0"
+description: >
+  SRE log review and incident triage environment.
+  An AI agent investigates system logs to identify errors,
+  correlate events across services, classify severity,
+  and produce incident reports. Simulates real-world
+  Site Reliability Engineer work during outages and
+  security incidents.
+author: logtriage-team
 tags:
-  - "sre"
-  - "logs"
-  - "hackathon"
+  - openenv
+  - sre
+  - log-analysis
+  - incident-response
+  - security
+
+observation_space:
+  type: object
+  description: >
+    Current log page (20 entries, truncated to 200 chars),
+    dashboard summary (severity counts, service list),
+    agent work summary (annotations, correlations, draft report),
+    system state (filters, step count, feedback signals).
+
+action_space:
+  type: object
+  description: >
+    JSON object with action_type and params.
+    15 action types across navigation, investigation, and conclusion.
+  actions:
+    - search
+    - filter_severity
+    - filter_service
+    - filter_time_range
+    - clear_filters
+    - scroll
+    - inspect
+    - annotate
+    - correlate
+    - classify_incident
+    - draft_report
+    - submit_report
+    - noop
+
+tasks:
+  - id: task_easy
+    name: "Database Connection Failures"
+    difficulty: easy
+    max_steps: 15
+    description: >
+      Single-service investigation. Find obvious database
+      connection errors in auth-service logs.
+
+  - id: task_medium
+    name: "Cascading Service Failure"
+    difficulty: medium
+    max_steps: 25
+    description: >
+      Multi-service cascading failure. Trace root cause
+      through payment, order, and gateway services.
+
+  - id: task_hard
+    name: "Security Breach Investigation"
+    difficulty: hard
+    max_steps: 40
+    description: >
+      Multi-stage security breach across 5 services.
+      Identify attack chain hidden in noisy operational logs.
+
+reward:
+  type: dense
+  range: [-0.15, 0.40]
+  description: >
+    Per-step rewards for correct discoveries, penalties for
+    false positives. Dynamic scaling based on difficulty,
+    timing, and coverage. Anti-exploit guards for spam
+    and repetitive actions.
