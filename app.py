@@ -1,13 +1,6 @@
-# BEFORE (flat — everything in root):
-from env import LogTriageEnv
-from tasks import TASKS
-
-# AFTER (src/ package):
 from src.environment import LogTriageEnv
 from src.tasks import TASKS
 from src.session import SessionManager
-
-# ─── rest of app.py updated ─────────────────────────────────
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel

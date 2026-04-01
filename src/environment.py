@@ -7,7 +7,7 @@ from src.log_generator import generate_logs
 from src.reward import RewardCalculator
 from src.grader import TaskGrader
 
-
+from typing import List, Dict, Optional, Any
 class LogTriageEnv:
     def __init__(self):
         self.task_config: Optional[dict] = None

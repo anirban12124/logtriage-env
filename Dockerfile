@@ -1,45 +1,16 @@
-import uuid
-import time
-from typing import Dict
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from env import LogTriageEnv
-from tasks import TASKS
+FROM python:3.12-slim
 
-app = FastAPI(title="LogTriage Environment", version="3.0")
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
 
+WORKDIR /app
 
-# ─── Session Management ─────────────────────────────────────────
+COPY requirements.txt ./
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-class SessionEntry:
-    def __init__(self, env: LogTriageEnv, task_id: str):
-        self.env = env
-        self.task_id = task_id
-        self.created_at = time.time()
-        self.last_accessed = time.time()
+COPY . .
 
+EXPOSE 7860
 
-sessions: Dict[str, SessionEntry] = {}
-MAX_SESSIONS = 10
-TTL_SECONDS = 1800  # 30 minutes
-
-
-def _cleanup_expired():
-    now = time.time()
-    expired = [sid for sid, s in sessions.items()
-               if now - s.last_accessed > TTL_SECONDS]
-    for sid in expired:
-        del sessions[sid]
-
-
-def _get_session(session_id: str) -> SessionEntry:
-    _cleanup_expired()
-    if session_id not in sessions:
-        raise HTTPException(status_code=404,
-                            detail="Session not found. Call /reset first.")
-    entry = sessions[session_id]
-    entry.last_accessed = time.time()
-    return entry
-
-
-# ─── Request Models ──────────
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
