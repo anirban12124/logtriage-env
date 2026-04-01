@@ -1,0 +1,4914 @@
+[
+  {
+    "id": "log_001",
+    "timestamp": "2024-01-15T02:00:21.680Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=27/50 idle=21",
+    "metadata": {}
+  },
+  {
+    "id": "log_002",
+    "timestamp": "2024-01-15T02:00:38.647Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_39344",
+      "source_ip": "10.0.194.34"
+    }
+  },
+  {
+    "id": "log_003",
+    "timestamp": "2024-01-15T02:00:57.331Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_004",
+    "timestamp": "2024-01-15T02:01:13.087Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 1417ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_005",
+    "timestamp": "2024-01-15T02:01:17.463Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1569"
+    }
+  },
+  {
+    "id": "log_006",
+    "timestamp": "2024-01-15T02:01:41.767Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_007",
+    "timestamp": "2024-01-15T02:01:43.525Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_008",
+    "timestamp": "2024-01-15T02:02:07.019Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_009",
+    "timestamp": "2024-01-15T02:02:10.987Z",
+    "service": "audit-log",
+    "severity": "ERROR",
+    "message": "Connection pool stats: active=7/50 idle=23",
+    "metadata": {}
+  },
+  {
+    "id": "log_010",
+    "timestamp": "2024-01-15T02:02:25.738Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_011",
+    "timestamp": "2024-01-15T02:02:37.680Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 1268ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_012",
+    "timestamp": "2024-01-15T02:03:01.714Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "6"
+    }
+  },
+  {
+    "id": "log_013",
+    "timestamp": "2024-01-15T02:03:04.709Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_014",
+    "timestamp": "2024-01-15T02:03:28.238Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "463"
+    }
+  },
+  {
+    "id": "log_015",
+    "timestamp": "2024-01-15T02:03:58.670Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_64062",
+    "metadata": {
+      "hit_rate": "86%"
+    }
+  },
+  {
+    "id": "log_016",
+    "timestamp": "2024-01-15T02:04:15.380Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "197"
+    }
+  },
+  {
+    "id": "log_017",
+    "timestamp": "2024-01-15T02:04:21.235Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "423"
+    }
+  },
+  {
+    "id": "log_018",
+    "timestamp": "2024-01-15T02:04:25.715Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Thread pool near capacity: 93% utilization",
+    "metadata": {}
+  },
+  {
+    "id": "log_019",
+    "timestamp": "2024-01-15T02:04:32.816Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "6"
+    }
+  },
+  {
+    "id": "log_020",
+    "timestamp": "2024-01-15T02:04:59.967Z",
+    "service": "auth-service",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_021",
+    "timestamp": "2024-01-15T02:05:03.409Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "252"
+    }
+  },
+  {
+    "id": "log_022",
+    "timestamp": "2024-01-15T02:05:32.542Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1909"
+    }
+  },
+  {
+    "id": "log_023",
+    "timestamp": "2024-01-15T02:05:50.061Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Unusual connection pattern detected from 198.51.100.23. Sequential probing of ports 22, 80, 443, 8080, 8443, 5432 within 30 seconds.",
+    "metadata": {
+      "source_ip": "198.51.100.23",
+      "ports_probed": "22,80,443,8080,8443,5432",
+      "geo": "RO",
+      "user_agent": "python-requests/2.28.0"
+    }
+  },
+  {
+    "id": "log_024",
+    "timestamp": "2024-01-15T02:06:11.913Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1654"
+    }
+  },
+  {
+    "id": "log_025",
+    "timestamp": "2024-01-15T02:06:35.385Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 81%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_026",
+    "timestamp": "2024-01-15T02:06:45.533Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_75235",
+      "source_ip": "10.0.46.6"
+    }
+  },
+  {
+    "id": "log_027",
+    "timestamp": "2024-01-15T02:06:51.068Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "3177"
+    }
+  },
+  {
+    "id": "log_028",
+    "timestamp": "2024-01-15T02:07:18.395Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1158"
+    }
+  },
+  {
+    "id": "log_029",
+    "timestamp": "2024-01-15T02:07:30.400Z",
+    "service": "user-service",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_030",
+    "timestamp": "2024-01-15T02:07:49.928Z",
+    "service": "file-service",
+    "severity": "ERROR",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_031",
+    "timestamp": "2024-01-15T02:08:17.235Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "472"
+    }
+  },
+  {
+    "id": "log_032",
+    "timestamp": "2024-01-15T02:08:44.130Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v18",
+    "metadata": {}
+  },
+  {
+    "id": "log_033",
+    "timestamp": "2024-01-15T02:09:10.760Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_14232",
+    "metadata": {
+      "hit_rate": "90%"
+    }
+  },
+  {
+    "id": "log_034",
+    "timestamp": "2024-01-15T02:09:38.675Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 1282ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_035",
+    "timestamp": "2024-01-15T02:09:42.491Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=14/50 idle=6",
+    "metadata": {}
+  },
+  {
+    "id": "log_036",
+    "timestamp": "2024-01-15T02:10:03.282Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 2839ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_037",
+    "timestamp": "2024-01-15T02:10:33.369Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Retry attempt 2/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_038",
+    "timestamp": "2024-01-15T02:10:46.019Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2235ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_039",
+    "timestamp": "2024-01-15T02:10:55.768Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_040",
+    "timestamp": "2024-01-15T02:10:57.738Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2846ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_041",
+    "timestamp": "2024-01-15T02:11:22.299Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_042",
+    "timestamp": "2024-01-15T02:11:46.410Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "DNS resolution timeout for metrics.internal (retried OK)",
+    "metadata": {
+      "resolver": "10.0.0.2"
+    }
+  },
+  {
+    "id": "log_043",
+    "timestamp": "2024-01-15T02:12:02.108Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_044",
+    "timestamp": "2024-01-15T02:12:14.621Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "238"
+    }
+  },
+  {
+    "id": "log_045",
+    "timestamp": "2024-01-15T02:12:32.665Z",
+    "service": "user-service",
+    "severity": "ERROR",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2874"
+    }
+  },
+  {
+    "id": "log_046",
+    "timestamp": "2024-01-15T02:13:02.056Z",
+    "service": "auth-service",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_047",
+    "timestamp": "2024-01-15T02:13:13.942Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 1499ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_048",
+    "timestamp": "2024-01-15T02:13:40.063Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 73%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_049",
+    "timestamp": "2024-01-15T02:13:58.685Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 1266ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_050",
+    "timestamp": "2024-01-15T02:14:21.688Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=32/50 idle=16",
+    "metadata": {}
+  },
+  {
+    "id": "log_051",
+    "timestamp": "2024-01-15T02:14:49.729Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_052",
+    "timestamp": "2024-01-15T02:15:03.264Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 3320ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_053",
+    "timestamp": "2024-01-15T02:15:16.861Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=26/50 idle=9",
+    "metadata": {}
+  },
+  {
+    "id": "log_054",
+    "timestamp": "2024-01-15T02:15:27.344Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "DNS resolution timeout for metrics.internal (retried OK)",
+    "metadata": {
+      "resolver": "10.0.0.2"
+    }
+  },
+  {
+    "id": "log_055",
+    "timestamp": "2024-01-15T02:15:36.629Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "3"
+    }
+  },
+  {
+    "id": "log_056",
+    "timestamp": "2024-01-15T02:15:45.051Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1535"
+    }
+  },
+  {
+    "id": "log_057",
+    "timestamp": "2024-01-15T02:16:03.561Z",
+    "service": "audit-log",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_058",
+    "timestamp": "2024-01-15T02:16:29.223Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "85"
+    }
+  },
+  {
+    "id": "log_059",
+    "timestamp": "2024-01-15T02:16:58.095Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Slow query detected: 1003ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_060",
+    "timestamp": "2024-01-15T02:17:05.354Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=30/50 idle=25",
+    "metadata": {}
+  },
+  {
+    "id": "log_061",
+    "timestamp": "2024-01-15T02:17:19.114Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_58855",
+    "metadata": {
+      "hit_rate": "93%"
+    }
+  },
+  {
+    "id": "log_062",
+    "timestamp": "2024-01-15T02:17:43.682Z",
+    "service": "auth-service",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_063",
+    "timestamp": "2024-01-15T02:18:10.176Z",
+    "service": "user-service",
+    "severity": "ERROR",
+    "message": "Connection reset by peer: 10.0.5.22:3306",
+    "metadata": {
+      "retry": "true"
+    }
+  },
+  {
+    "id": "log_064",
+    "timestamp": "2024-01-15T02:18:37.394Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_065",
+    "timestamp": "2024-01-15T02:18:42.113Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2021ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_066",
+    "timestamp": "2024-01-15T02:19:11.088Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_067",
+    "timestamp": "2024-01-15T02:19:19.447Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_41900",
+    "metadata": {
+      "hit_rate": "81%"
+    }
+  },
+  {
+    "id": "log_068",
+    "timestamp": "2024-01-15T02:19:30.571Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_96952",
+      "source_ip": "10.0.102.254"
+    }
+  },
+  {
+    "id": "log_069",
+    "timestamp": "2024-01-15T02:19:52.928Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_70326",
+    "metadata": {
+      "hit_rate": "66%"
+    }
+  },
+  {
+    "id": "log_070",
+    "timestamp": "2024-01-15T02:20:18.042Z",
+    "service": "file-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 1542ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_071",
+    "timestamp": "2024-01-15T02:20:47.385Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=19/50 idle=6",
+    "metadata": {}
+  },
+  {
+    "id": "log_072",
+    "timestamp": "2024-01-15T02:21:01.907Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_50100",
+    "metadata": {
+      "hit_rate": "89%"
+    }
+  },
+  {
+    "id": "log_073",
+    "timestamp": "2024-01-15T02:21:13.179Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=28/50 idle=24",
+    "metadata": {}
+  },
+  {
+    "id": "log_074",
+    "timestamp": "2024-01-15T02:21:24.169Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 3264ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_075",
+    "timestamp": "2024-01-15T02:21:40.726Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 1190ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_076",
+    "timestamp": "2024-01-15T02:22:00.595Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-108d"
+    }
+  },
+  {
+    "id": "log_077",
+    "timestamp": "2024-01-15T02:22:20.990Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 192ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_078",
+    "timestamp": "2024-01-15T02:22:28.303Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Failed login attempt for user 'admin' from 198.51.100.23. Attempt count: 47. Automated pattern detected. User-Agent: python-requests/2.28.0",
+    "metadata": {
+      "source_ip": "198.51.100.23",
+      "username": "admin",
+      "attempt_count": "47",
+      "geo": "RO",
+      "user_agent": "python-requests/2.28.0"
+    }
+  },
+  {
+    "id": "log_079",
+    "timestamp": "2024-01-15T02:22:39.973Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_080",
+    "timestamp": "2024-01-15T02:22:49.558Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_78562",
+    "metadata": {
+      "hit_rate": "78%"
+    }
+  },
+  {
+    "id": "log_081",
+    "timestamp": "2024-01-15T02:23:03.159Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_082",
+    "timestamp": "2024-01-15T02:23:32.162Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "124"
+    }
+  },
+  {
+    "id": "log_083",
+    "timestamp": "2024-01-15T02:24:02.817Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=38/50 idle=15",
+    "metadata": {}
+  },
+  {
+    "id": "log_084",
+    "timestamp": "2024-01-15T02:24:06.758Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "7"
+    }
+  },
+  {
+    "id": "log_085",
+    "timestamp": "2024-01-15T02:24:30.794Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Retry attempt 2/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_086",
+    "timestamp": "2024-01-15T02:24:40.475Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-2373"
+    }
+  },
+  {
+    "id": "log_087",
+    "timestamp": "2024-01-15T02:24:50.825Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "7"
+    }
+  },
+  {
+    "id": "log_088",
+    "timestamp": "2024-01-15T02:25:04.217Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_56726",
+      "source_ip": "10.0.15.206"
+    }
+  },
+  {
+    "id": "log_089",
+    "timestamp": "2024-01-15T02:25:30.047Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_80104",
+      "source_ip": "10.0.81.93"
+    }
+  },
+  {
+    "id": "log_090",
+    "timestamp": "2024-01-15T02:25:32.544Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 1164ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_091",
+    "timestamp": "2024-01-15T02:25:56.643Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Failed login attempt for user 'svc-deploy' from 198.51.100.23. Attempt count: 23. Known service account targeted. User-Agent: python-requests/2.28.0",
+    "metadata": {
+      "source_ip": "198.51.100.23",
+      "username": "svc-deploy",
+      "attempt_count": "23",
+      "geo": "RO",
+      "user_agent": "python-requests/2.28.0"
+    }
+  },
+  {
+    "id": "log_092",
+    "timestamp": "2024-01-15T02:25:58.757Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_093",
+    "timestamp": "2024-01-15T02:26:16.790Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_53942",
+    "metadata": {
+      "hit_rate": "94%"
+    }
+  },
+  {
+    "id": "log_094",
+    "timestamp": "2024-01-15T02:26:42.340Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_095",
+    "timestamp": "2024-01-15T02:27:06.523Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "2"
+    }
+  },
+  {
+    "id": "log_096",
+    "timestamp": "2024-01-15T02:27:33.283Z",
+    "service": "file-service",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v7",
+    "metadata": {}
+  },
+  {
+    "id": "log_097",
+    "timestamp": "2024-01-15T02:27:50.267Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 74%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_098",
+    "timestamp": "2024-01-15T02:28:01.982Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 1749ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_099",
+    "timestamp": "2024-01-15T02:28:20.105Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-09b2"
+    }
+  },
+  {
+    "id": "log_100",
+    "timestamp": "2024-01-15T02:28:46.613Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "5"
+    }
+  },
+  {
+    "id": "log_101",
+    "timestamp": "2024-01-15T02:28:59.505Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_10235",
+    "metadata": {
+      "hit_rate": "86%"
+    }
+  },
+  {
+    "id": "log_102",
+    "timestamp": "2024-01-15T02:29:07.427Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1234"
+    }
+  },
+  {
+    "id": "log_103",
+    "timestamp": "2024-01-15T02:29:30.759Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_67866",
+    "metadata": {
+      "hit_rate": "76%"
+    }
+  },
+  {
+    "id": "log_104",
+    "timestamp": "2024-01-15T02:29:33.959Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_105",
+    "timestamp": "2024-01-15T02:29:44.706Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Cache hit for key user_profile_31106",
+    "metadata": {
+      "hit_rate": "98%"
+    }
+  },
+  {
+    "id": "log_106",
+    "timestamp": "2024-01-15T02:29:56.479Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2802ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_107",
+    "timestamp": "2024-01-15T02:30:24.216Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1e1d"
+    }
+  },
+  {
+    "id": "log_108",
+    "timestamp": "2024-01-15T02:30:39.990Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_109",
+    "timestamp": "2024-01-15T02:31:06.093Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 3123ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_110",
+    "timestamp": "2024-01-15T02:31:31.982Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_111",
+    "timestamp": "2024-01-15T02:31:55.440Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 456ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_112",
+    "timestamp": "2024-01-15T02:31:58.030Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-22bd"
+    }
+  },
+  {
+    "id": "log_113",
+    "timestamp": "2024-01-15T02:32:24.047Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_114",
+    "timestamp": "2024-01-15T02:32:37.572Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "8"
+    }
+  },
+  {
+    "id": "log_115",
+    "timestamp": "2024-01-15T02:33:07.221Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Retry attempt 1/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_116",
+    "timestamp": "2024-01-15T02:33:33.840Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2571"
+    }
+  },
+  {
+    "id": "log_117",
+    "timestamp": "2024-01-15T02:33:50.934Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-08ad"
+    }
+  },
+  {
+    "id": "log_118",
+    "timestamp": "2024-01-15T02:34:10.882Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Slow query detected: 1950ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_119",
+    "timestamp": "2024-01-15T02:34:30.588Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_83907",
+    "metadata": {
+      "hit_rate": "61%"
+    }
+  },
+  {
+    "id": "log_120",
+    "timestamp": "2024-01-15T02:34:59.268Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "1"
+    }
+  },
+  {
+    "id": "log_121",
+    "timestamp": "2024-01-15T02:35:08.795Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_76676",
+    "metadata": {
+      "hit_rate": "86%"
+    }
+  },
+  {
+    "id": "log_122",
+    "timestamp": "2024-01-15T02:35:22.117Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1906"
+    }
+  },
+  {
+    "id": "log_123",
+    "timestamp": "2024-01-15T02:35:32.994Z",
+    "service": "file-service",
+    "severity": "ERROR",
+    "message": "Connection reset by peer: 10.0.5.22:3306",
+    "metadata": {
+      "retry": "true"
+    }
+  },
+  {
+    "id": "log_124",
+    "timestamp": "2024-01-15T02:35:40.075Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Slow query detected: 3216ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_125",
+    "timestamp": "2024-01-15T02:35:57.151Z",
+    "service": "audit-log",
+    "severity": "ERROR",
+    "message": "Request completed: GET /api/v1/users in 968ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_126",
+    "timestamp": "2024-01-15T02:36:06.712Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=19/50 idle=18",
+    "metadata": {}
+  },
+  {
+    "id": "log_127",
+    "timestamp": "2024-01-15T02:36:18.961Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_128",
+    "timestamp": "2024-01-15T02:36:40.237Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 2899ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_129",
+    "timestamp": "2024-01-15T02:36:53.600Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_11226",
+      "source_ip": "10.0.33.253"
+    }
+  },
+  {
+    "id": "log_130",
+    "timestamp": "2024-01-15T02:37:21.419Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_131",
+    "timestamp": "2024-01-15T02:37:37.528Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 713ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_132",
+    "timestamp": "2024-01-15T02:37:49.934Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_52959",
+    "metadata": {
+      "hit_rate": "98%"
+    }
+  },
+  {
+    "id": "log_133",
+    "timestamp": "2024-01-15T02:38:00.810Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0437"
+    }
+  },
+  {
+    "id": "log_134",
+    "timestamp": "2024-01-15T02:38:04.836Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_135",
+    "timestamp": "2024-01-15T02:38:29.271Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Thread pool utilization: 47%",
+    "metadata": {}
+  },
+  {
+    "id": "log_136",
+    "timestamp": "2024-01-15T02:38:34.586Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "3"
+    }
+  },
+  {
+    "id": "log_137",
+    "timestamp": "2024-01-15T02:38:39.933Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "439"
+    }
+  },
+  {
+    "id": "log_138",
+    "timestamp": "2024-01-15T02:39:07.148Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 388ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_139",
+    "timestamp": "2024-01-15T02:39:23.122Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "15"
+    }
+  },
+  {
+    "id": "log_140",
+    "timestamp": "2024-01-15T02:39:49.338Z",
+    "service": "file-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 66ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_141",
+    "timestamp": "2024-01-15T02:39:58.354Z",
+    "service": "audit-log",
+    "severity": "ERROR",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-078b"
+    }
+  },
+  {
+    "id": "log_142",
+    "timestamp": "2024-01-15T02:40:02.460Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "378"
+    }
+  },
+  {
+    "id": "log_143",
+    "timestamp": "2024-01-15T02:40:04.570Z",
+    "service": "file-service",
+    "severity": "ERROR",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_144",
+    "timestamp": "2024-01-15T02:40:29.232Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_16672",
+      "source_ip": "10.0.149.148"
+    }
+  },
+  {
+    "id": "log_145",
+    "timestamp": "2024-01-15T02:40:37.123Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Successful authentication for user 'svc-deploy' from 198.51.100.23. Note: 91 prior failed attempts from this IP in last 2 hours. Session token issued.",
+    "metadata": {
+      "source_ip": "198.51.100.23",
+      "username": "svc-deploy",
+      "prior_failures": "91",
+      "geo": "RO",
+      "session_id": "sess-x7k2m9"
+    }
+  },
+  {
+    "id": "log_146",
+    "timestamp": "2024-01-15T02:41:03.694Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "SQL query executed in 852ms",
+    "metadata": {
+      "query": "SELECT * FROM sessions"
+    }
+  },
+  {
+    "id": "log_147",
+    "timestamp": "2024-01-15T02:41:15.529Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "3027"
+    }
+  },
+  {
+    "id": "log_148",
+    "timestamp": "2024-01-15T02:41:28.777Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_64940",
+      "source_ip": "10.0.15.211"
+    }
+  },
+  {
+    "id": "log_149",
+    "timestamp": "2024-01-15T02:41:53.662Z",
+    "service": "file-service",
+    "severity": "ERROR",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-2603"
+    }
+  },
+  {
+    "id": "log_150",
+    "timestamp": "2024-01-15T02:42:13.581Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_151",
+    "timestamp": "2024-01-15T02:42:39.927Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_152",
+    "timestamp": "2024-01-15T02:42:43.234Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_153",
+    "timestamp": "2024-01-15T02:42:45.855Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 1434ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_154",
+    "timestamp": "2024-01-15T02:43:04.267Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Thread pool utilization: 37%",
+    "metadata": {}
+  },
+  {
+    "id": "log_155",
+    "timestamp": "2024-01-15T02:43:18.528Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1619"
+    }
+  },
+  {
+    "id": "log_156",
+    "timestamp": "2024-01-15T02:43:43.219Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-25be"
+    }
+  },
+  {
+    "id": "log_157",
+    "timestamp": "2024-01-15T02:43:52.406Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_18752",
+    "metadata": {
+      "hit_rate": "93%"
+    }
+  },
+  {
+    "id": "log_158",
+    "timestamp": "2024-01-15T02:44:10.548Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "DNS resolution timeout for metrics.internal (retried OK)",
+    "metadata": {
+      "resolver": "10.0.0.2"
+    }
+  },
+  {
+    "id": "log_159",
+    "timestamp": "2024-01-15T02:44:12.457Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 95%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_160",
+    "timestamp": "2024-01-15T02:44:26.642Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 89%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_161",
+    "timestamp": "2024-01-15T02:44:50.276Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1547"
+    }
+  },
+  {
+    "id": "log_162",
+    "timestamp": "2024-01-15T02:45:05.445Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 1352ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_163",
+    "timestamp": "2024-01-15T02:45:13.399Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1194"
+    }
+  },
+  {
+    "id": "log_164",
+    "timestamp": "2024-01-15T02:45:25.658Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "57"
+    }
+  },
+  {
+    "id": "log_165",
+    "timestamp": "2024-01-15T02:45:42.728Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Slow query detected: 2213ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_166",
+    "timestamp": "2024-01-15T02:45:55.156Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-22b3"
+    }
+  },
+  {
+    "id": "log_167",
+    "timestamp": "2024-01-15T02:46:23.556Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 91%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_168",
+    "timestamp": "2024-01-15T02:46:27.714Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 102ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_169",
+    "timestamp": "2024-01-15T02:46:32.907Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "236"
+    }
+  },
+  {
+    "id": "log_170",
+    "timestamp": "2024-01-15T02:46:42.797Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_58509",
+      "source_ip": "10.0.47.251"
+    }
+  },
+  {
+    "id": "log_171",
+    "timestamp": "2024-01-15T02:46:44.818Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "5"
+    }
+  },
+  {
+    "id": "log_172",
+    "timestamp": "2024-01-15T02:47:01.061Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Slow query detected: 2370ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_173",
+    "timestamp": "2024-01-15T02:47:20.410Z",
+    "service": "user-service",
+    "severity": "DEBUG",
+    "message": "Thread pool utilization: 39%",
+    "metadata": {}
+  },
+  {
+    "id": "log_174",
+    "timestamp": "2024-01-15T02:47:26.519Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_175",
+    "timestamp": "2024-01-15T02:47:44.851Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 1036ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_176",
+    "timestamp": "2024-01-15T02:47:46.165Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_177",
+    "timestamp": "2024-01-15T02:48:03.998Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "476"
+    }
+  },
+  {
+    "id": "log_178",
+    "timestamp": "2024-01-15T02:48:22.932Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Retry attempt 1/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_179",
+    "timestamp": "2024-01-15T02:48:46.975Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_180",
+    "timestamp": "2024-01-15T02:49:04.621Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=10/50 idle=25",
+    "metadata": {}
+  },
+  {
+    "id": "log_181",
+    "timestamp": "2024-01-15T02:49:24.772Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_182",
+    "timestamp": "2024-01-15T02:49:26.396Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=32/50 idle=19",
+    "metadata": {}
+  },
+  {
+    "id": "log_183",
+    "timestamp": "2024-01-15T02:49:30.363Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "131"
+    }
+  },
+  {
+    "id": "log_184",
+    "timestamp": "2024-01-15T02:49:57.706Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "4"
+    }
+  },
+  {
+    "id": "log_185",
+    "timestamp": "2024-01-15T02:50:12.358Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_11305",
+    "metadata": {
+      "hit_rate": "94%"
+    }
+  },
+  {
+    "id": "log_186",
+    "timestamp": "2024-01-15T02:50:18.444Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=6/50 idle=20",
+    "metadata": {}
+  },
+  {
+    "id": "log_187",
+    "timestamp": "2024-01-15T02:50:28.605Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 90%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_188",
+    "timestamp": "2024-01-15T02:50:49.823Z",
+    "service": "audit-log",
+    "severity": "ERROR",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "284"
+    }
+  },
+  {
+    "id": "log_189",
+    "timestamp": "2024-01-15T02:51:09.961Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_83383",
+      "source_ip": "10.0.42.109"
+    }
+  },
+  {
+    "id": "log_190",
+    "timestamp": "2024-01-15T02:51:29.835Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 1515ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_191",
+    "timestamp": "2024-01-15T02:51:31.624Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0a6a"
+    }
+  },
+  {
+    "id": "log_192",
+    "timestamp": "2024-01-15T02:51:44.334Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-125b"
+    }
+  },
+  {
+    "id": "log_193",
+    "timestamp": "2024-01-15T02:51:59.340Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Response time elevated: 2133ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_194",
+    "timestamp": "2024-01-15T02:52:27.203Z",
+    "service": "file-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 2141ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_195",
+    "timestamp": "2024-01-15T02:52:48.579Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "3413"
+    }
+  },
+  {
+    "id": "log_196",
+    "timestamp": "2024-01-15T02:53:01.624Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_21636",
+      "source_ip": "10.0.239.114"
+    }
+  },
+  {
+    "id": "log_197",
+    "timestamp": "2024-01-15T02:53:25.153Z",
+    "service": "user-service",
+    "severity": "ERROR",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1751"
+    }
+  },
+  {
+    "id": "log_198",
+    "timestamp": "2024-01-15T02:53:51.315Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 1721ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_199",
+    "timestamp": "2024-01-15T02:54:00.313Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_200",
+    "timestamp": "2024-01-15T02:54:08.323Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "7"
+    }
+  },
+  {
+    "id": "log_201",
+    "timestamp": "2024-01-15T02:54:35.510Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "User 'svc-deploy' accessed admin endpoint GET /api/admin/users without ADMIN role. Request allowed by legacy policy. Review required.",
+    "metadata": {
+      "source_ip": "198.51.100.23",
+      "username": "svc-deploy",
+      "endpoint": "/api/admin/users",
+      "role": "SERVICE",
+      "policy": "legacy-allow"
+    }
+  },
+  {
+    "id": "log_202",
+    "timestamp": "2024-01-15T02:54:41.034Z",
+    "service": "file-service",
+    "severity": "DEBUG",
+    "message": "SQL query executed in 3228ms",
+    "metadata": {
+      "query": "SELECT * FROM sessions"
+    }
+  },
+  {
+    "id": "log_203",
+    "timestamp": "2024-01-15T02:54:56.127Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 1385ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_204",
+    "timestamp": "2024-01-15T02:55:07.429Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_205",
+    "timestamp": "2024-01-15T02:55:29.540Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_206",
+    "timestamp": "2024-01-15T02:55:46.260Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_59153",
+    "metadata": {
+      "hit_rate": "82%"
+    }
+  },
+  {
+    "id": "log_207",
+    "timestamp": "2024-01-15T02:56:04.269Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=10/50 idle=6",
+    "metadata": {}
+  },
+  {
+    "id": "log_208",
+    "timestamp": "2024-01-15T02:56:27.605Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Connection reset by peer: 10.0.5.22:3306",
+    "metadata": {
+      "retry": "true"
+    }
+  },
+  {
+    "id": "log_209",
+    "timestamp": "2024-01-15T02:56:33.649Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Slow query detected: 1742ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_210",
+    "timestamp": "2024-01-15T02:56:37.266Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_211",
+    "timestamp": "2024-01-15T02:56:46.934Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 78%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_212",
+    "timestamp": "2024-01-15T02:57:10.838Z",
+    "service": "file-service",
+    "severity": "ERROR",
+    "message": "Cache hit for key user_profile_70121",
+    "metadata": {
+      "hit_rate": "99%"
+    }
+  },
+  {
+    "id": "log_213",
+    "timestamp": "2024-01-15T02:57:26.906Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 532ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_214",
+    "timestamp": "2024-01-15T02:57:45.682Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 713ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_215",
+    "timestamp": "2024-01-15T02:58:06.225Z",
+    "service": "user-service",
+    "severity": "ERROR",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "126"
+    }
+  },
+  {
+    "id": "log_216",
+    "timestamp": "2024-01-15T02:58:32.477Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_217",
+    "timestamp": "2024-01-15T02:58:41.914Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=7/50 idle=14",
+    "metadata": {}
+  },
+  {
+    "id": "log_218",
+    "timestamp": "2024-01-15T02:58:46.483Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "101"
+    }
+  },
+  {
+    "id": "log_219",
+    "timestamp": "2024-01-15T02:59:00.443Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_220",
+    "timestamp": "2024-01-15T02:59:03.880Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_221",
+    "timestamp": "2024-01-15T02:59:25.995Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "93"
+    }
+  },
+  {
+    "id": "log_222",
+    "timestamp": "2024-01-15T02:59:34.374Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "3401"
+    }
+  },
+  {
+    "id": "log_223",
+    "timestamp": "2024-01-15T02:59:49.668Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-218c"
+    }
+  },
+  {
+    "id": "log_224",
+    "timestamp": "2024-01-15T02:59:55.476Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "395"
+    }
+  },
+  {
+    "id": "log_225",
+    "timestamp": "2024-01-15T03:00:01.767Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_37552",
+    "metadata": {
+      "hit_rate": "78%"
+    }
+  },
+  {
+    "id": "log_226",
+    "timestamp": "2024-01-15T03:00:06.010Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 116ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_227",
+    "timestamp": "2024-01-15T03:00:26.238Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 1240ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_228",
+    "timestamp": "2024-01-15T03:00:35.159Z",
+    "service": "file-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 2350ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_229",
+    "timestamp": "2024-01-15T03:00:53.856Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0f61"
+    }
+  },
+  {
+    "id": "log_230",
+    "timestamp": "2024-01-15T03:01:04.222Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=45/50 idle=8",
+    "metadata": {}
+  },
+  {
+    "id": "log_231",
+    "timestamp": "2024-01-15T03:01:24.007Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "3"
+    }
+  },
+  {
+    "id": "log_232",
+    "timestamp": "2024-01-15T03:01:46.090Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 3369ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_233",
+    "timestamp": "2024-01-15T03:02:16.552Z",
+    "service": "audit-log",
+    "severity": "ERROR",
+    "message": "Cache hit for key user_profile_62260",
+    "metadata": {
+      "hit_rate": "89%"
+    }
+  },
+  {
+    "id": "log_234",
+    "timestamp": "2024-01-15T03:02:28.277Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "7"
+    }
+  },
+  {
+    "id": "log_235",
+    "timestamp": "2024-01-15T03:02:32.454Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "344"
+    }
+  },
+  {
+    "id": "log_236",
+    "timestamp": "2024-01-15T03:02:35.213Z",
+    "service": "audit-log",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v1",
+    "metadata": {}
+  },
+  {
+    "id": "log_237",
+    "timestamp": "2024-01-15T03:02:48.737Z",
+    "service": "audit-log",
+    "severity": "DEBUG",
+    "message": "SQL query executed in 1334ms",
+    "metadata": {
+      "query": "SELECT * FROM sessions"
+    }
+  },
+  {
+    "id": "log_238",
+    "timestamp": "2024-01-15T03:02:53.494Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_61719",
+      "source_ip": "10.0.219.165"
+    }
+  },
+  {
+    "id": "log_239",
+    "timestamp": "2024-01-15T03:03:02.563Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-162e"
+    }
+  },
+  {
+    "id": "log_240",
+    "timestamp": "2024-01-15T03:03:18.488Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0b2f"
+    }
+  },
+  {
+    "id": "log_241",
+    "timestamp": "2024-01-15T03:03:22.925Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 1879ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_242",
+    "timestamp": "2024-01-15T03:03:49.554Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_36783",
+      "source_ip": "10.0.109.252"
+    }
+  },
+  {
+    "id": "log_243",
+    "timestamp": "2024-01-15T03:04:08.306Z",
+    "service": "user-service",
+    "severity": "ERROR",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "2"
+    }
+  },
+  {
+    "id": "log_244",
+    "timestamp": "2024-01-15T03:04:24.030Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "TLS certificate expiring in 14 days for api.example.com",
+    "metadata": {}
+  },
+  {
+    "id": "log_245",
+    "timestamp": "2024-01-15T03:04:39.905Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1047"
+    }
+  },
+  {
+    "id": "log_246",
+    "timestamp": "2024-01-15T03:04:48.337Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_49873",
+    "metadata": {
+      "hit_rate": "83%"
+    }
+  },
+  {
+    "id": "log_247",
+    "timestamp": "2024-01-15T03:04:50.648Z",
+    "service": "audit-log",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_248",
+    "timestamp": "2024-01-15T03:05:01.502Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=32/50 idle=7",
+    "metadata": {}
+  },
+  {
+    "id": "log_249",
+    "timestamp": "2024-01-15T03:05:30.932Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2805"
+    }
+  },
+  {
+    "id": "log_250",
+    "timestamp": "2024-01-15T03:05:50.923Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=44/50 idle=27",
+    "metadata": {}
+  },
+  {
+    "id": "log_251",
+    "timestamp": "2024-01-15T03:06:13.575Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 121ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_252",
+    "timestamp": "2024-01-15T03:06:36.069Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0d59"
+    }
+  },
+  {
+    "id": "log_253",
+    "timestamp": "2024-01-15T03:06:46.226Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "87"
+    }
+  },
+  {
+    "id": "log_254",
+    "timestamp": "2024-01-15T03:07:05.528Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Cache hit for key user_profile_64203",
+    "metadata": {
+      "hit_rate": "79%"
+    }
+  },
+  {
+    "id": "log_255",
+    "timestamp": "2024-01-15T03:07:30.078Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_35504",
+      "source_ip": "10.0.214.143"
+    }
+  },
+  {
+    "id": "log_256",
+    "timestamp": "2024-01-15T03:07:39.926Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=22/50 idle=7",
+    "metadata": {}
+  },
+  {
+    "id": "log_257",
+    "timestamp": "2024-01-15T03:07:41.908Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=21/50 idle=18",
+    "metadata": {}
+  },
+  {
+    "id": "log_258",
+    "timestamp": "2024-01-15T03:08:11.965Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 3037ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_259",
+    "timestamp": "2024-01-15T03:08:36.748Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1589"
+    }
+  },
+  {
+    "id": "log_260",
+    "timestamp": "2024-01-15T03:08:39.187Z",
+    "service": "user-service",
+    "severity": "ERROR",
+    "message": "Connection reset by peer: 10.0.5.22:3306",
+    "metadata": {
+      "retry": "true"
+    }
+  },
+  {
+    "id": "log_261",
+    "timestamp": "2024-01-15T03:08:55.112Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 84%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_262",
+    "timestamp": "2024-01-15T03:09:11.618Z",
+    "service": "user-service",
+    "severity": "DEBUG",
+    "message": "SQL query executed in 1981ms",
+    "metadata": {
+      "query": "SELECT * FROM sessions"
+    }
+  },
+  {
+    "id": "log_263",
+    "timestamp": "2024-01-15T03:09:15.646Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "4"
+    }
+  },
+  {
+    "id": "log_264",
+    "timestamp": "2024-01-15T03:09:26.992Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "890"
+    }
+  },
+  {
+    "id": "log_265",
+    "timestamp": "2024-01-15T03:09:29.819Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "7"
+    }
+  },
+  {
+    "id": "log_266",
+    "timestamp": "2024-01-15T03:09:38.910Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-056a"
+    }
+  },
+  {
+    "id": "log_267",
+    "timestamp": "2024-01-15T03:09:53.823Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Bulk data export: 15,247 user records downloaded by user 'svc-deploy'. Export size: 48.3MB. Includes PII fields: email, phone, address.",
+    "metadata": {
+      "username": "svc-deploy",
+      "records": "15247",
+      "size_mb": "48.3",
+      "pii_fields": "email,phone,address",
+      "source_ip": "198.51.100.23"
+    }
+  },
+  {
+    "id": "log_268",
+    "timestamp": "2024-01-15T03:10:12.019Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1c13"
+    }
+  },
+  {
+    "id": "log_269",
+    "timestamp": "2024-01-15T03:10:30.440Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_36294",
+      "source_ip": "10.0.90.170"
+    }
+  },
+  {
+    "id": "log_270",
+    "timestamp": "2024-01-15T03:10:36.954Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Response time elevated: 2144ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_271",
+    "timestamp": "2024-01-15T03:10:41.670Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=16/50 idle=12",
+    "metadata": {}
+  },
+  {
+    "id": "log_272",
+    "timestamp": "2024-01-15T03:10:53.740Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Connection pool stats: active=21/50 idle=16",
+    "metadata": {}
+  },
+  {
+    "id": "log_273",
+    "timestamp": "2024-01-15T03:10:56.073Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "404"
+    }
+  },
+  {
+    "id": "log_274",
+    "timestamp": "2024-01-15T03:11:05.183Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "1"
+    }
+  },
+  {
+    "id": "log_275",
+    "timestamp": "2024-01-15T03:11:12.616Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 2170ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_276",
+    "timestamp": "2024-01-15T03:11:22.577Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 1874ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_277",
+    "timestamp": "2024-01-15T03:11:52.614Z",
+    "service": "audit-log",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v17",
+    "metadata": {}
+  },
+  {
+    "id": "log_278",
+    "timestamp": "2024-01-15T03:12:17.262Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Slow query detected: 1796ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_279",
+    "timestamp": "2024-01-15T03:12:42.148Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_280",
+    "timestamp": "2024-01-15T03:13:10.868Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0eac"
+    }
+  },
+  {
+    "id": "log_281",
+    "timestamp": "2024-01-15T03:13:23.186Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "497"
+    }
+  },
+  {
+    "id": "log_282",
+    "timestamp": "2024-01-15T03:13:41.253Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "6"
+    }
+  },
+  {
+    "id": "log_283",
+    "timestamp": "2024-01-15T03:13:58.752Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_284",
+    "timestamp": "2024-01-15T03:14:06.425Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_285",
+    "timestamp": "2024-01-15T03:14:31.956Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_286",
+    "timestamp": "2024-01-15T03:14:37.201Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_54278",
+      "source_ip": "10.0.166.156"
+    }
+  },
+  {
+    "id": "log_287",
+    "timestamp": "2024-01-15T03:14:54.886Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 1417ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_288",
+    "timestamp": "2024-01-15T03:15:06.354Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "SQL query executed in 2280ms",
+    "metadata": {
+      "query": "SELECT * FROM sessions"
+    }
+  },
+  {
+    "id": "log_289",
+    "timestamp": "2024-01-15T03:15:35.247Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_290",
+    "timestamp": "2024-01-15T03:15:44.392Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "SQL query executed in 3436ms",
+    "metadata": {
+      "query": "SELECT * FROM sessions"
+    }
+  },
+  {
+    "id": "log_291",
+    "timestamp": "2024-01-15T03:15:47.709Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1751"
+    }
+  },
+  {
+    "id": "log_292",
+    "timestamp": "2024-01-15T03:16:07.465Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "321"
+    }
+  },
+  {
+    "id": "log_293",
+    "timestamp": "2024-01-15T03:16:36.709Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_13788",
+      "source_ip": "10.0.82.228"
+    }
+  },
+  {
+    "id": "log_294",
+    "timestamp": "2024-01-15T03:16:44.394Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_295",
+    "timestamp": "2024-01-15T03:17:09.665Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Retry attempt 1/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_296",
+    "timestamp": "2024-01-15T03:17:20.920Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2618"
+    }
+  },
+  {
+    "id": "log_297",
+    "timestamp": "2024-01-15T03:17:43.188Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_298",
+    "timestamp": "2024-01-15T03:17:52.332Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_299",
+    "timestamp": "2024-01-15T03:18:15.889Z",
+    "service": "file-service",
+    "severity": "ERROR",
+    "message": "Cache hit for key user_profile_59936",
+    "metadata": {
+      "hit_rate": "91%"
+    }
+  },
+  {
+    "id": "log_300",
+    "timestamp": "2024-01-15T03:18:19.183Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1128"
+    }
+  },
+  {
+    "id": "log_301",
+    "timestamp": "2024-01-15T03:18:35.564Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_28770",
+    "metadata": {
+      "hit_rate": "70%"
+    }
+  },
+  {
+    "id": "log_302",
+    "timestamp": "2024-01-15T03:18:53.445Z",
+    "service": "auth-service",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v5",
+    "metadata": {}
+  },
+  {
+    "id": "log_303",
+    "timestamp": "2024-01-15T03:19:16.984Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 3160ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_304",
+    "timestamp": "2024-01-15T03:19:45.153Z",
+    "service": "audit-log",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_305",
+    "timestamp": "2024-01-15T03:19:58.692Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 468ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_306",
+    "timestamp": "2024-01-15T03:20:27.529Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_34044",
+      "source_ip": "10.0.42.148"
+    }
+  },
+  {
+    "id": "log_307",
+    "timestamp": "2024-01-15T03:20:34.493Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Response time elevated: 2860ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_308",
+    "timestamp": "2024-01-15T03:20:58.333Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 91%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_309",
+    "timestamp": "2024-01-15T03:21:11.012Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Memory usage elevated: 83% of heap",
+    "metadata": {
+      "heap_max": "4096MB"
+    }
+  },
+  {
+    "id": "log_310",
+    "timestamp": "2024-01-15T03:21:18.590Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_46904",
+    "metadata": {
+      "hit_rate": "61%"
+    }
+  },
+  {
+    "id": "log_311",
+    "timestamp": "2024-01-15T03:21:29.861Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "22"
+    }
+  },
+  {
+    "id": "log_312",
+    "timestamp": "2024-01-15T03:21:35.069Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Authentication token sess-x7k2m9 used from new service context: file-service. Original auth on auth-service. Cross-service token reuse detected.",
+    "metadata": {
+      "session_id": "sess-x7k2m9",
+      "username": "svc-deploy",
+      "origin_service": "auth-service",
+      "current_service": "file-service",
+      "source_ip": "198.51.100.23"
+    }
+  },
+  {
+    "id": "log_313",
+    "timestamp": "2024-01-15T03:22:04.457Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-2099"
+    }
+  },
+  {
+    "id": "log_314",
+    "timestamp": "2024-01-15T03:22:32.544Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_315",
+    "timestamp": "2024-01-15T03:23:00.103Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-19fe"
+    }
+  },
+  {
+    "id": "log_316",
+    "timestamp": "2024-01-15T03:23:13.838Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1467"
+    }
+  },
+  {
+    "id": "log_317",
+    "timestamp": "2024-01-15T03:23:39.582Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "432"
+    }
+  },
+  {
+    "id": "log_318",
+    "timestamp": "2024-01-15T03:23:56.012Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_319",
+    "timestamp": "2024-01-15T03:24:11.289Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2520ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_320",
+    "timestamp": "2024-01-15T03:24:14.733Z",
+    "service": "audit-log",
+    "severity": "ERROR",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "3"
+    }
+  },
+  {
+    "id": "log_321",
+    "timestamp": "2024-01-15T03:24:16.987Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=34/50 idle=24",
+    "metadata": {}
+  },
+  {
+    "id": "log_322",
+    "timestamp": "2024-01-15T03:24:44.258Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_323",
+    "timestamp": "2024-01-15T03:25:14.255Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_89788",
+      "source_ip": "10.0.5.209"
+    }
+  },
+  {
+    "id": "log_324",
+    "timestamp": "2024-01-15T03:25:44.993Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Rate limit threshold reached: 3/1000 requests",
+    "metadata": {}
+  },
+  {
+    "id": "log_325",
+    "timestamp": "2024-01-15T03:25:52.016Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_80051",
+    "metadata": {
+      "hit_rate": "77%"
+    }
+  },
+  {
+    "id": "log_326",
+    "timestamp": "2024-01-15T03:26:16.171Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2063ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_327",
+    "timestamp": "2024-01-15T03:26:28.015Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 3302ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_328",
+    "timestamp": "2024-01-15T03:26:45.478Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2177ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_329",
+    "timestamp": "2024-01-15T03:26:53.809Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Request completed: GET /api/v1/users in 3168ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_330",
+    "timestamp": "2024-01-15T03:27:21.377Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "3353"
+    }
+  },
+  {
+    "id": "log_331",
+    "timestamp": "2024-01-15T03:27:30.778Z",
+    "service": "auth-service",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_332",
+    "timestamp": "2024-01-15T03:27:35.617Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_48428",
+      "source_ip": "10.0.49.166"
+    }
+  },
+  {
+    "id": "log_333",
+    "timestamp": "2024-01-15T03:28:04.333Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_87628",
+      "source_ip": "10.0.119.1"
+    }
+  },
+  {
+    "id": "log_334",
+    "timestamp": "2024-01-15T03:28:18.609Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_72523",
+      "source_ip": "10.0.218.118"
+    }
+  },
+  {
+    "id": "log_335",
+    "timestamp": "2024-01-15T03:28:40.509Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Slow query detected: 3484ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_336",
+    "timestamp": "2024-01-15T03:28:54.786Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Thread pool near capacity: 78% utilization",
+    "metadata": {}
+  },
+  {
+    "id": "log_337",
+    "timestamp": "2024-01-15T03:29:03.360Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0ca8"
+    }
+  },
+  {
+    "id": "log_338",
+    "timestamp": "2024-01-15T03:29:17.127Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Backup job completed with warnings",
+    "metadata": {
+      "warnings": "2"
+    }
+  },
+  {
+    "id": "log_339",
+    "timestamp": "2024-01-15T03:29:28.782Z",
+    "service": "file-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 90%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_340",
+    "timestamp": "2024-01-15T03:29:53.111Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "7"
+    }
+  },
+  {
+    "id": "log_341",
+    "timestamp": "2024-01-15T03:30:03.259Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 1594ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_342",
+    "timestamp": "2024-01-15T03:30:05.741Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1f7d"
+    }
+  },
+  {
+    "id": "log_343",
+    "timestamp": "2024-01-15T03:30:30.550Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2473"
+    }
+  },
+  {
+    "id": "log_344",
+    "timestamp": "2024-01-15T03:30:41.379Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_345",
+    "timestamp": "2024-01-15T03:30:57.136Z",
+    "service": "audit-log",
+    "severity": "ERROR",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "285"
+    }
+  },
+  {
+    "id": "log_346",
+    "timestamp": "2024-01-15T03:31:22.553Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Slow query detected: 697ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_347",
+    "timestamp": "2024-01-15T03:31:25.758Z",
+    "service": "file-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 2082ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_348",
+    "timestamp": "2024-01-15T03:31:47.215Z",
+    "service": "user-service",
+    "severity": "ERROR",
+    "message": "Connection pool stats: active=12/50 idle=30",
+    "metadata": {}
+  },
+  {
+    "id": "log_349",
+    "timestamp": "2024-01-15T03:31:59.847Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=38/50 idle=15",
+    "metadata": {}
+  },
+  {
+    "id": "log_350",
+    "timestamp": "2024-01-15T03:32:29.421Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_351",
+    "timestamp": "2024-01-15T03:32:38.653Z",
+    "service": "auth-service",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v14",
+    "metadata": {}
+  },
+  {
+    "id": "log_352",
+    "timestamp": "2024-01-15T03:32:46.726Z",
+    "service": "file-service",
+    "severity": "ERROR",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1692"
+    }
+  },
+  {
+    "id": "log_353",
+    "timestamp": "2024-01-15T03:33:03.547Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "6"
+    }
+  },
+  {
+    "id": "log_354",
+    "timestamp": "2024-01-15T03:33:29.461Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_355",
+    "timestamp": "2024-01-15T03:33:57.029Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Backup job completed with warnings",
+    "metadata": {
+      "warnings": "2"
+    }
+  },
+  {
+    "id": "log_356",
+    "timestamp": "2024-01-15T03:34:24.096Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=9/50 idle=18",
+    "metadata": {}
+  },
+  {
+    "id": "log_357",
+    "timestamp": "2024-01-15T03:34:38.890Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_358",
+    "timestamp": "2024-01-15T03:34:53.680Z",
+    "service": "file-service",
+    "severity": "ERROR",
+    "message": "Request completed: GET /api/v1/users in 2373ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_359",
+    "timestamp": "2024-01-15T03:34:58.295Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_360",
+    "timestamp": "2024-01-15T03:35:06.102Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Thread pool utilization: 91%",
+    "metadata": {}
+  },
+  {
+    "id": "log_361",
+    "timestamp": "2024-01-15T03:35:30.949Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_362",
+    "timestamp": "2024-01-15T03:35:51.394Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "2"
+    }
+  },
+  {
+    "id": "log_363",
+    "timestamp": "2024-01-15T03:36:13.791Z",
+    "service": "auth-service",
+    "severity": "DEBUG",
+    "message": "SQL query executed in 2576ms",
+    "metadata": {
+      "query": "SELECT * FROM sessions"
+    }
+  },
+  {
+    "id": "log_364",
+    "timestamp": "2024-01-15T03:36:28.332Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "1"
+    }
+  },
+  {
+    "id": "log_365",
+    "timestamp": "2024-01-15T03:36:55.351Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 188ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_366",
+    "timestamp": "2024-01-15T03:37:24.906Z",
+    "service": "user-service",
+    "severity": "ERROR",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_62396",
+      "source_ip": "10.0.6.125"
+    }
+  },
+  {
+    "id": "log_367",
+    "timestamp": "2024-01-15T03:37:38.313Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=40/50 idle=5",
+    "metadata": {}
+  },
+  {
+    "id": "log_368",
+    "timestamp": "2024-01-15T03:37:43.569Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Rate limit threshold reached: 1/1000 requests",
+    "metadata": {}
+  },
+  {
+    "id": "log_369",
+    "timestamp": "2024-01-15T03:38:00.423Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2944ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_370",
+    "timestamp": "2024-01-15T03:38:22.751Z",
+    "service": "file-service",
+    "severity": "ERROR",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_371",
+    "timestamp": "2024-01-15T03:38:51.887Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_372",
+    "timestamp": "2024-01-15T03:38:59.150Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Retry attempt 2/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_373",
+    "timestamp": "2024-01-15T03:39:13.895Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_13285",
+      "source_ip": "10.0.171.35"
+    }
+  },
+  {
+    "id": "log_374",
+    "timestamp": "2024-01-15T03:39:26.945Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2884ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_375",
+    "timestamp": "2024-01-15T03:39:38.318Z",
+    "service": "file-service",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_376",
+    "timestamp": "2024-01-15T03:40:05.765Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=42/50 idle=11",
+    "metadata": {}
+  },
+  {
+    "id": "log_377",
+    "timestamp": "2024-01-15T03:40:23.502Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "920"
+    }
+  },
+  {
+    "id": "log_378",
+    "timestamp": "2024-01-15T03:40:47.436Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_379",
+    "timestamp": "2024-01-15T03:41:08.393Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "SQL query executed in 3193ms",
+    "metadata": {
+      "query": "SELECT * FROM sessions"
+    }
+  },
+  {
+    "id": "log_380",
+    "timestamp": "2024-01-15T03:41:34.616Z",
+    "service": "file-service",
+    "severity": "DEBUG",
+    "message": "Thread pool utilization: 76%",
+    "metadata": {}
+  },
+  {
+    "id": "log_381",
+    "timestamp": "2024-01-15T03:42:01.452Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_382",
+    "timestamp": "2024-01-15T03:42:24.686Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 3500ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_383",
+    "timestamp": "2024-01-15T03:42:31.784Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_26134",
+    "metadata": {
+      "hit_rate": "93%"
+    }
+  },
+  {
+    "id": "log_384",
+    "timestamp": "2024-01-15T03:42:49.034Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_385",
+    "timestamp": "2024-01-15T03:43:01.051Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2171ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_386",
+    "timestamp": "2024-01-15T03:43:20.806Z",
+    "service": "audit-log",
+    "severity": "ERROR",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "3040"
+    }
+  },
+  {
+    "id": "log_387",
+    "timestamp": "2024-01-15T03:43:25.662Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 1402ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_388",
+    "timestamp": "2024-01-15T03:43:31.343Z",
+    "service": "user-service",
+    "severity": "ERROR",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_68731",
+      "source_ip": "10.0.239.8"
+    }
+  },
+  {
+    "id": "log_389",
+    "timestamp": "2024-01-15T03:43:49.648Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Bulk file download: 342 files from /confidential/reports/ by user 'svc-deploy'. Total size: 2.1GB. Download completed at 03:47 UTC.",
+    "metadata": {
+      "username": "svc-deploy",
+      "file_count": "342",
+      "directory": "/confidential/reports/",
+      "size_gb": "2.1",
+      "source_ip": "198.51.100.23",
+      "time": "03:47"
+    }
+  },
+  {
+    "id": "log_390",
+    "timestamp": "2024-01-15T03:43:59.053Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 81%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_391",
+    "timestamp": "2024-01-15T03:44:11.253Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_392",
+    "timestamp": "2024-01-15T03:44:25.654Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_393",
+    "timestamp": "2024-01-15T03:44:34.888Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_79985",
+      "source_ip": "10.0.58.28"
+    }
+  },
+  {
+    "id": "log_394",
+    "timestamp": "2024-01-15T03:44:56.790Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 3332ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_395",
+    "timestamp": "2024-01-15T03:45:17.719Z",
+    "service": "file-service",
+    "severity": "ERROR",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "8"
+    }
+  },
+  {
+    "id": "log_396",
+    "timestamp": "2024-01-15T03:45:29.965Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_56009",
+    "metadata": {
+      "hit_rate": "79%"
+    }
+  },
+  {
+    "id": "log_397",
+    "timestamp": "2024-01-15T03:45:50.688Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "2"
+    }
+  },
+  {
+    "id": "log_398",
+    "timestamp": "2024-01-15T03:46:03.941Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 857ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_399",
+    "timestamp": "2024-01-15T03:46:22.955Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "100"
+    }
+  },
+  {
+    "id": "log_400",
+    "timestamp": "2024-01-15T03:46:43.429Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_401",
+    "timestamp": "2024-01-15T03:46:59.486Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "54"
+    }
+  },
+  {
+    "id": "log_402",
+    "timestamp": "2024-01-15T03:47:07.162Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "346"
+    }
+  },
+  {
+    "id": "log_403",
+    "timestamp": "2024-01-15T03:47:13.957Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Thread pool utilization: 92%",
+    "metadata": {}
+  },
+  {
+    "id": "log_404",
+    "timestamp": "2024-01-15T03:47:33.473Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=30/50 idle=21",
+    "metadata": {}
+  },
+  {
+    "id": "log_405",
+    "timestamp": "2024-01-15T03:47:50.621Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 1396ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_406",
+    "timestamp": "2024-01-15T03:48:02.158Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "424"
+    }
+  },
+  {
+    "id": "log_407",
+    "timestamp": "2024-01-15T03:48:14.900Z",
+    "service": "audit-log",
+    "severity": "DEBUG",
+    "message": "Thread pool utilization: 63%",
+    "metadata": {}
+  },
+  {
+    "id": "log_408",
+    "timestamp": "2024-01-15T03:48:35.194Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_409",
+    "timestamp": "2024-01-15T03:48:46.140Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "77"
+    }
+  },
+  {
+    "id": "log_410",
+    "timestamp": "2024-01-15T03:48:55.797Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "3"
+    }
+  },
+  {
+    "id": "log_411",
+    "timestamp": "2024-01-15T03:49:07.320Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_412",
+    "timestamp": "2024-01-15T03:49:26.557Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Cache hit for key user_profile_97029",
+    "metadata": {
+      "hit_rate": "84%"
+    }
+  },
+  {
+    "id": "log_413",
+    "timestamp": "2024-01-15T03:49:36.401Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-112b"
+    }
+  },
+  {
+    "id": "log_414",
+    "timestamp": "2024-01-15T03:50:05.924Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_415",
+    "timestamp": "2024-01-15T03:50:17.237Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=39/50 idle=11",
+    "metadata": {}
+  },
+  {
+    "id": "log_416",
+    "timestamp": "2024-01-15T03:50:39.145Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "339"
+    }
+  },
+  {
+    "id": "log_417",
+    "timestamp": "2024-01-15T03:51:02.299Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_68456",
+    "metadata": {
+      "hit_rate": "70%"
+    }
+  },
+  {
+    "id": "log_418",
+    "timestamp": "2024-01-15T03:51:28.764Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 667ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_419",
+    "timestamp": "2024-01-15T03:51:39.430Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 1402ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_420",
+    "timestamp": "2024-01-15T03:51:50.167Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "266"
+    }
+  },
+  {
+    "id": "log_421",
+    "timestamp": "2024-01-15T03:52:04.078Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 1430ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_422",
+    "timestamp": "2024-01-15T03:52:18.982Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 2531ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_423",
+    "timestamp": "2024-01-15T03:52:25.934Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0844"
+    }
+  },
+  {
+    "id": "log_424",
+    "timestamp": "2024-01-15T03:52:49.026Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2776"
+    }
+  },
+  {
+    "id": "log_425",
+    "timestamp": "2024-01-15T03:53:17.255Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "3400"
+    }
+  },
+  {
+    "id": "log_426",
+    "timestamp": "2024-01-15T03:53:46.292Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1528"
+    }
+  },
+  {
+    "id": "log_427",
+    "timestamp": "2024-01-15T03:53:58.578Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_67877",
+      "source_ip": "10.0.166.123"
+    }
+  },
+  {
+    "id": "log_428",
+    "timestamp": "2024-01-15T03:54:25.134Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_429",
+    "timestamp": "2024-01-15T03:54:51.495Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_430",
+    "timestamp": "2024-01-15T03:55:05.566Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_96463",
+    "metadata": {
+      "hit_rate": "76%"
+    }
+  },
+  {
+    "id": "log_431",
+    "timestamp": "2024-01-15T03:55:26.174Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2551"
+    }
+  },
+  {
+    "id": "log_432",
+    "timestamp": "2024-01-15T03:55:50.707Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_82200",
+    "metadata": {
+      "hit_rate": "92%"
+    }
+  },
+  {
+    "id": "log_433",
+    "timestamp": "2024-01-15T03:55:58.627Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 1533ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_434",
+    "timestamp": "2024-01-15T03:56:20.716Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "167"
+    }
+  },
+  {
+    "id": "log_435",
+    "timestamp": "2024-01-15T03:56:24.929Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_83330",
+      "source_ip": "10.0.215.46"
+    }
+  },
+  {
+    "id": "log_436",
+    "timestamp": "2024-01-15T03:56:29.099Z",
+    "service": "file-service",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_437",
+    "timestamp": "2024-01-15T03:56:57.942Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_31271",
+    "metadata": {
+      "hit_rate": "97%"
+    }
+  },
+  {
+    "id": "log_438",
+    "timestamp": "2024-01-15T03:56:59.978Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "96"
+    }
+  },
+  {
+    "id": "log_439",
+    "timestamp": "2024-01-15T03:57:14.966Z",
+    "service": "user-service",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_440",
+    "timestamp": "2024-01-15T03:57:20.984Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_81432",
+      "source_ip": "10.0.167.22"
+    }
+  },
+  {
+    "id": "log_441",
+    "timestamp": "2024-01-15T03:57:43.684Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2285"
+    }
+  },
+  {
+    "id": "log_442",
+    "timestamp": "2024-01-15T03:58:11.031Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_31889",
+      "source_ip": "10.0.214.162"
+    }
+  },
+  {
+    "id": "log_443",
+    "timestamp": "2024-01-15T03:58:20.862Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_444",
+    "timestamp": "2024-01-15T03:58:24.880Z",
+    "service": "file-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 72%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_445",
+    "timestamp": "2024-01-15T03:58:45.037Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Cache hit for key user_profile_46173",
+    "metadata": {
+      "hit_rate": "88%"
+    }
+  },
+  {
+    "id": "log_446",
+    "timestamp": "2024-01-15T03:58:58.232Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2346"
+    }
+  },
+  {
+    "id": "log_447",
+    "timestamp": "2024-01-15T03:59:08.138Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_448",
+    "timestamp": "2024-01-15T03:59:36.718Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_449",
+    "timestamp": "2024-01-15T03:59:55.905Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_450",
+    "timestamp": "2024-01-15T04:00:05.994Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "3"
+    }
+  },
+  {
+    "id": "log_451",
+    "timestamp": "2024-01-15T04:00:18.787Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 158ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_452",
+    "timestamp": "2024-01-15T04:00:41.729Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_453",
+    "timestamp": "2024-01-15T04:01:08.108Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 91%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_454",
+    "timestamp": "2024-01-15T04:01:35.585Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_455",
+    "timestamp": "2024-01-15T04:01:37.092Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_15998",
+      "source_ip": "10.0.126.242"
+    }
+  },
+  {
+    "id": "log_456",
+    "timestamp": "2024-01-15T04:02:06.729Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2406ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_457",
+    "timestamp": "2024-01-15T04:02:36.532Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Slow query detected: 3269ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_458",
+    "timestamp": "2024-01-15T04:02:54.042Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "5"
+    }
+  },
+  {
+    "id": "log_459",
+    "timestamp": "2024-01-15T04:03:16.408Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_460",
+    "timestamp": "2024-01-15T04:03:28.132Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_47974",
+      "source_ip": "10.0.144.169"
+    }
+  },
+  {
+    "id": "log_461",
+    "timestamp": "2024-01-15T04:03:40.492Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_462",
+    "timestamp": "2024-01-15T04:03:58.630Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_463",
+    "timestamp": "2024-01-15T04:04:27.312Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_13737",
+    "metadata": {
+      "hit_rate": "80%"
+    }
+  },
+  {
+    "id": "log_464",
+    "timestamp": "2024-01-15T04:04:30.788Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1432"
+    }
+  },
+  {
+    "id": "log_465",
+    "timestamp": "2024-01-15T04:04:43.711Z",
+    "service": "audit-log",
+    "severity": "WARN",
+    "message": "Response time elevated: 391ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_466",
+    "timestamp": "2024-01-15T04:04:58.609Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v8",
+    "metadata": {}
+  },
+  {
+    "id": "log_467",
+    "timestamp": "2024-01-15T04:05:09.324Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "51"
+    }
+  },
+  {
+    "id": "log_468",
+    "timestamp": "2024-01-15T04:05:32.249Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "293"
+    }
+  },
+  {
+    "id": "log_469",
+    "timestamp": "2024-01-15T04:05:43.841Z",
+    "service": "file-service",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_470",
+    "timestamp": "2024-01-15T04:05:49.396Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_25073",
+    "metadata": {
+      "hit_rate": "85%"
+    }
+  },
+  {
+    "id": "log_471",
+    "timestamp": "2024-01-15T04:05:57.679Z",
+    "service": "file-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 1698ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_472",
+    "timestamp": "2024-01-15T04:06:09.349Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=44/50 idle=23",
+    "metadata": {}
+  },
+  {
+    "id": "log_473",
+    "timestamp": "2024-01-15T04:06:29.287Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_59952",
+    "metadata": {
+      "hit_rate": "81%"
+    }
+  },
+  {
+    "id": "log_474",
+    "timestamp": "2024-01-15T04:06:54.261Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2465ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_475",
+    "timestamp": "2024-01-15T04:07:00.659Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_80131",
+    "metadata": {
+      "hit_rate": "71%"
+    }
+  },
+  {
+    "id": "log_476",
+    "timestamp": "2024-01-15T04:07:19.211Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "7"
+    }
+  },
+  {
+    "id": "log_477",
+    "timestamp": "2024-01-15T04:07:33.815Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Connection pool stats: active=45/50 idle=16",
+    "metadata": {}
+  },
+  {
+    "id": "log_478",
+    "timestamp": "2024-01-15T04:07:50.258Z",
+    "service": "auth-service",
+    "severity": "DEBUG",
+    "message": "Thread pool utilization: 80%",
+    "metadata": {}
+  },
+  {
+    "id": "log_479",
+    "timestamp": "2024-01-15T04:08:05.322Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_480",
+    "timestamp": "2024-01-15T04:08:18.615Z",
+    "service": "file-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 2695ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_481",
+    "timestamp": "2024-01-15T04:08:40.305Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "437"
+    }
+  },
+  {
+    "id": "log_482",
+    "timestamp": "2024-01-15T04:08:55.080Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Thread pool utilization: 82%",
+    "metadata": {}
+  },
+  {
+    "id": "log_483",
+    "timestamp": "2024-01-15T04:09:20.052Z",
+    "service": "audit-log",
+    "severity": "DEBUG",
+    "message": "Thread pool utilization: 69%",
+    "metadata": {}
+  },
+  {
+    "id": "log_484",
+    "timestamp": "2024-01-15T04:09:24.278Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 1588ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_485",
+    "timestamp": "2024-01-15T04:09:52.774Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 2167ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_486",
+    "timestamp": "2024-01-15T04:10:22.844Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_94671",
+      "source_ip": "10.0.208.5"
+    }
+  },
+  {
+    "id": "log_487",
+    "timestamp": "2024-01-15T04:10:41.000Z",
+    "service": "user-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 211ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_488",
+    "timestamp": "2024-01-15T04:10:51.535Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "8"
+    }
+  },
+  {
+    "id": "log_489",
+    "timestamp": "2024-01-15T04:11:21.187Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=26/50 idle=20",
+    "metadata": {}
+  },
+  {
+    "id": "log_490",
+    "timestamp": "2024-01-15T04:11:27.971Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_491",
+    "timestamp": "2024-01-15T04:11:46.534Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_71572",
+      "source_ip": "10.0.148.77"
+    }
+  },
+  {
+    "id": "log_492",
+    "timestamp": "2024-01-15T04:12:03.481Z",
+    "service": "audit-log",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-185a"
+    }
+  },
+  {
+    "id": "log_493",
+    "timestamp": "2024-01-15T04:12:13.235Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_80572",
+    "metadata": {
+      "hit_rate": "81%"
+    }
+  },
+  {
+    "id": "log_494",
+    "timestamp": "2024-01-15T04:12:38.075Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Retry attempt 2/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_495",
+    "timestamp": "2024-01-15T04:13:05.009Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 1852ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_496",
+    "timestamp": "2024-01-15T04:13:34.656Z",
+    "service": "file-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1807"
+    }
+  },
+  {
+    "id": "log_497",
+    "timestamp": "2024-01-15T04:14:00.672Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_28611",
+    "metadata": {
+      "hit_rate": "85%"
+    }
+  },
+  {
+    "id": "log_498",
+    "timestamp": "2024-01-15T04:14:17.130Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "121"
+    }
+  },
+  {
+    "id": "log_499",
+    "timestamp": "2024-01-15T04:14:23.587Z",
+    "service": "user-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=20/50 idle=24",
+    "metadata": {}
+  },
+  {
+    "id": "log_500",
+    "timestamp": "2024-01-15T04:14:38.952Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 1577ms",
+    "metadata": {
+      "status": "200"
+    }
+  }
+]

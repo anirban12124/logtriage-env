@@ -24,11 +24,14 @@ The environment tests 7 cognitive dimensions:
 ```bash
 # Build and run locally
 docker build -t logtriage .
-docker run -p 7860:7860 logtriage
+docker run -p 8000:8000 logtriage
+
+# Or run directly
+uvicorn app:app --host 0.0.0.0 --port 8000
 
 # In another terminal, run the baseline agent
 export API_BASE_URL="https://router.huggingface.co/v1"
 export MODEL_NAME="your-model-name"
 export HF_TOKEN="your-token"
-export SPACE_URL="http://localhost:7860"
+export SPACE_URL="http://localhost:8000"
 python inference.py

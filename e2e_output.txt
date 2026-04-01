@@ -1,0 +1,174 @@
+﻿=================================================================
+LogTriage ΓÇö End-to-End Grader Test
+=================================================================
+
+== API Health Checks ==
+[HEALTH] {'status': 'ok', 'version': '3.0', 'sessions_active': 0}
+[TASKS] ['task_easy', 'task_medium', 'task_hard']
+
+== ORACLE AGENT (expects high scores) ==
+
+  [ORACLE] task_easy  goal: Review the auth-service logs. Identify all database connectiΓÇª
+  [ORACLE] total_logs=50  max_steps=15
+    step 01: filter_severity        reward=+0.0067  cum=+0.0067  done=False  msg=OK
+    step 02: inspect                reward=+0.0000  cum=+0.0067  done=False  msg=Inspecting log_008.
+    step 03: annotate               reward=+0.2216  cum=+0.2284  done=False  msg=Annotated log_008 as 'error'.
+    step 04: inspect                reward=+0.0000  cum=+0.2284  done=False  msg=Inspecting log_023.
+    step 05: annotate               reward=+0.1900  cum=+0.4183  done=False  msg=Annotated log_023 as 'error'.
+    step 06: inspect                reward=+0.0000  cum=+0.4183  done=False  msg=Inspecting log_041.
+    step 07: annotate               reward=+0.3380  cum=+0.7564  done=False  msg=Annotated log_041 as 'error'.
+    step 08: classify_incident      reward=+0.2000  cum=+0.9564  done=False  msg=Incident classified as MEDIUM.
+    step 09: draft_report           reward=+0.0400  cum=+0.9964  done=False  msg=Draft saved.
+    step 10: submit_report          reward=+0.3000  cum=+1.2964  done=True  msg=Report submitted. Episode complete.
+  >> ORACLE task_easy FINAL SCORE: 0.8808
+     Components:
+       annotation_precision           score=1.0000  weight=0.15  weighted=0.1500
+       annotation_recall              score=1.0000  weight=0.15  weighted=0.1500
+       annotation_quality             score=1.0000  weight=0.05  weighted=0.0500
+       correlation_precision          score=1.0000  weight=0.02  weighted=0.0200
+       correlation_recall             score=1.0000  weight=0.02  weighted=0.0200
+       chain_reconstruction           score=1.0000  weight=0.00  weighted=0.0000
+       severity_classification        score=1.0000  weight=0.15  weighted=0.1500
+       report_completeness            score=0.9000  weight=0.18  weighted=0.1620
+       report_coherence               score=0.6250  weight=0.13  weighted=0.0813
+       investigation_efficiency       score=0.6500  weight=0.15  weighted=0.0975
+
+  [ORACLE] task_medium  goal: Investigate logs from api-gateway, order-service, and paymenΓÇª
+  [ORACLE] total_logs=200  max_steps=25
+    step 01: filter_service         reward=+0.0008  cum=+0.0008  done=False  msg=OK
+    step 02: inspect                reward=+0.0000  cum=+0.0008  done=False  msg=Inspecting log_045.
+    step 03: annotate               reward=+0.2000  cum=+0.2008  done=False  msg=Annotated log_045 as 'root_cause'.
+    step 04: inspect                reward=+0.0000  cum=+0.2008  done=False  msg=Inspecting log_067.
+    step 05: annotate               reward=+0.1514  cum=+0.3522  done=False  msg=Annotated log_067 as 'symptom'.
+    step 06: filter_service         reward=+0.0000  cum=+0.3522  done=False  msg=OK
+    step 07: inspect                reward=+0.0000  cum=+0.3522  done=False  msg=Inspecting log_089.
+    step 08: annotate               reward=+0.1450  cum=+0.4972  done=False  msg=Annotated log_089 as 'symptom'.
+    step 09: inspect                reward=+0.0000  cum=+0.4972  done=False  msg=Inspecting log_134.
+    step 10: annotate               reward=+0.0650  cum=+0.5622  done=False  msg=Annotated log_134 as 'cascading_failure'
+    step 11: filter_service         reward=+0.0000  cum=+0.5622  done=False  msg=OK
+    step 12: inspect                reward=+0.0000  cum=+0.5622  done=False  msg=Inspecting log_102.
+    step 13: annotate               reward=+0.1520  cum=+0.7142  done=False  msg=Annotated log_102 as 'symptom'.
+    step 14: inspect                reward=+0.0000  cum=+0.7142  done=False  msg=Inspecting log_156.
+    step 15: annotate               reward=+0.2020  cum=+0.9162  done=False  msg=Annotated log_156 as 'cascading_failure'
+    step 16: correlate              reward=+0.1950  cum=+1.1112  done=False  msg=Correlated log_045 ΓåÆ log_067.
+    step 17: correlate              reward=+0.2450  cum=+1.3561  done=False  msg=Correlated log_067 ΓåÆ log_134.
+    step 18: correlate              reward=+0.1365  cum=+1.4927  done=False  msg=Correlated log_089 ΓåÆ log_156.
+    step 19: classify_incident      reward=+0.2000  cum=+1.6926  done=False  msg=Incident classified as HIGH.
+    step 20: submit_report          reward=+0.0855  cum=+1.7781  done=True  msg=Report submitted. Episode complete.
+  >> ORACLE task_medium FINAL SCORE: 0.9378
+     Components:
+       annotation_precision           score=1.0000  weight=0.12  weighted=0.1200
+       annotation_recall              score=1.0000  weight=0.12  weighted=0.1200
+       annotation_quality             score=1.0000  weight=0.08  weighted=0.0800
+       correlation_precision          score=1.0000  weight=0.10  weighted=0.1000
+       correlation_recall             score=1.0000  weight=0.10  weighted=0.1000
+       chain_reconstruction           score=1.0000  weight=0.08  weighted=0.0800
+       severity_classification        score=1.0000  weight=0.10  weighted=0.1000
+       report_completeness            score=1.0000  weight=0.12  weighted=0.1200
+       report_coherence               score=0.6600  weight=0.08  weighted=0.0528
+       investigation_efficiency       score=0.6500  weight=0.10  weighted=0.0650
+
+  [ORACLE] task_hard  goal: Investigate a potential security breach across 5 services. LΓÇª
+  [ORACLE] total_logs=500  max_steps=40
+    step 01: search                 reward=+0.0800  cum=+0.0800  done=False  msg=Search '198.51.100': 8 results.
+    step 02: inspect                reward=+0.0000  cum=+0.0800  done=False  msg=Inspecting log_023.
+    step 03: annotate               reward=+0.2000  cum=+0.2800  done=False  msg=Annotated log_023 as 'reconnaissance'.
+    step 04: inspect                reward=+0.0000  cum=+0.2800  done=False  msg=Inspecting log_078.
+    step 05: annotate               reward=+0.2500  cum=+0.5300  done=False  msg=Annotated log_078 as 'brute_force'.
+    step 06: inspect                reward=+0.0000  cum=+0.5300  done=False  msg=Inspecting log_091.
+    step 07: annotate               reward=+0.2000  cum=+0.7300  done=False  msg=Annotated log_091 as 'brute_force'.
+    step 08: inspect                reward=+0.0000  cum=+0.7300  done=False  msg=Inspecting log_145.
+    step 09: annotate               reward=+0.2800  cum=+1.0100  done=False  msg=Annotated log_145 as 'credential_comprom
+    step 10: inspect                reward=+0.0000  cum=+1.0100  done=False  msg=Inspecting log_201.
+    step 11: annotate               reward=+0.2000  cum=+1.2100  done=False  msg=Annotated log_201 as 'privilege_escalati
+    step 12: inspect                reward=+0.0000  cum=+1.2100  done=False  msg=Inspecting log_267.
+    step 13: annotate               reward=+0.2760  cum=+1.4860  done=False  msg=Annotated log_267 as 'data_exfiltration'
+    step 14: inspect                reward=+0.0000  cum=+1.4860  done=False  msg=Inspecting log_312.
+    step 15: annotate               reward=+0.1408  cum=+1.6268  done=False  msg=Annotated log_312 as 'lateral_movement'.
+    step 16: inspect                reward=+0.0000  cum=+1.6268  done=False  msg=Inspecting log_389.
+    step 17: annotate               reward=+0.2908  cum=+1.9176  done=False  msg=Annotated log_389 as 'data_exfiltration'
+    step 18: correlate              reward=+0.2400  cum=+2.1576  done=False  msg=Correlated log_023 ΓåÆ log_078.
+    step 19: correlate              reward=+0.2400  cum=+2.3976  done=False  msg=Correlated log_091 ΓåÆ log_145.
+    step 20: correlate              reward=+0.2900  cum=+2.6876  done=False  msg=Correlated log_145 ΓåÆ log_201.
+    step 21: correlate              reward=+0.2900  cum=+2.9776  done=False  msg=Correlated log_201 ΓåÆ log_267.
+    step 22: correlate              reward=+0.2400  cum=+3.0000  done=False  msg=Correlated log_201 ΓåÆ log_312.
+    step 23: correlate              reward=+0.2900  cum=+3.0000  done=False  msg=Correlated log_312 ΓåÆ log_389.
+    step 24: classify_incident      reward=+0.2000  cum=+3.0000  done=False  msg=Incident classified as CRITICAL.
+    step 25: submit_report          reward=+0.4000  cum=+3.0000  done=True  msg=Report submitted. Episode complete.
+  >> ORACLE task_hard FINAL SCORE: 0.9183
+     Components:
+       annotation_precision           score=1.0000  weight=0.10  weighted=0.1000
+       annotation_recall              score=1.0000  weight=0.10  weighted=0.1000
+       annotation_quality             score=1.0000  weight=0.10  weighted=0.1000
+       correlation_precision          score=1.0000  weight=0.12  weighted=0.1200
+       correlation_recall             score=1.0000  weight=0.12  weighted=0.1200
+       chain_reconstruction           score=1.0000  weight=0.10  weighted=0.1000
+       severity_classification        score=1.0000  weight=0.08  weighted=0.0800
+       report_completeness            score=0.8500  weight=0.10  weighted=0.0850
+       report_coherence               score=0.6042  weight=0.08  weighted=0.0483
+       investigation_efficiency       score=0.6500  weight=0.10  weighted=0.0650
+
+== PARTIAL AGENT (expects mid scores) ==
+
+  [PARTIAL] task_easy  goal: Review the auth-service logs. Identify all database connectiΓÇª
+  [PARTIAL] total_logs=50  max_steps=15
+    step 01: inspect                reward=+0.0000  cum=+0.0000  done=False  msg=Inspecting log_008.
+    step 02: annotate               reward=+0.2216  cum=+0.2216  done=False  msg=Annotated log_008 as 'error'.
+    step 03: classify_incident      reward=+0.0500  cum=+0.2716  done=False  msg=Incident classified as HIGH.
+    step 04: submit_report          reward=+0.1650  cum=+0.4366  done=True  msg=Report submitted. Episode complete.
+  >> PARTIAL task_easy FINAL SCORE: 0.5025
+
+== BAD AGENT (expects low scores) ==
+
+  [BAD] task_easy  goal: Review the auth-service logs. Identify all database connectiΓÇª
+  [BAD] total_logs=50  max_steps=15
+    step 01: annotate               reward=-0.1500  cum=-0.1500  done=False  msg=Annotated log_001 as 'error'.
+    step 02: annotate               reward=-0.1500  cum=-0.3000  done=False  msg=Annotated log_002 as 'error'.
+    step 03: annotate               reward=-0.1500  cum=-0.4500  done=False  msg=Annotated log_003 as 'error'.
+    step 04: submit_report          reward=+0.1650  cum=-0.2850  done=True  msg=Report submitted. Episode complete.
+  >> BAD task_easy FINAL SCORE: 0.0718
+
+== DETERMINISM CHECK (oracle_easy x2) ==
+
+  [DET-1] task_easy  goal: Review the auth-service logs. Identify all database connectiΓÇª
+  [DET-1] total_logs=50  max_steps=15
+    step 01: filter_severity        reward=+0.0067  cum=+0.0067  done=False  msg=OK
+    step 02: inspect                reward=+0.0000  cum=+0.0067  done=False  msg=Inspecting log_008.
+    step 03: annotate               reward=+0.2216  cum=+0.2284  done=False  msg=Annotated log_008 as 'error'.
+    step 04: inspect                reward=+0.0000  cum=+0.2284  done=False  msg=Inspecting log_023.
+    step 05: annotate               reward=+0.1900  cum=+0.4183  done=False  msg=Annotated log_023 as 'error'.
+    step 06: inspect                reward=+0.0000  cum=+0.4183  done=False  msg=Inspecting log_041.
+    step 07: annotate               reward=+0.3380  cum=+0.7564  done=False  msg=Annotated log_041 as 'error'.
+    step 08: classify_incident      reward=+0.2000  cum=+0.9564  done=False  msg=Incident classified as MEDIUM.
+    step 09: draft_report           reward=+0.0400  cum=+0.9964  done=False  msg=Draft saved.
+    step 10: submit_report          reward=+0.3000  cum=+1.2964  done=True  msg=Report submitted. Episode complete.
+
+  [DET-2] task_easy  goal: Review the auth-service logs. Identify all database connectiΓÇª
+  [DET-2] total_logs=50  max_steps=15
+    step 01: filter_severity        reward=+0.0067  cum=+0.0067  done=False  msg=OK
+    step 02: inspect                reward=+0.0000  cum=+0.0067  done=False  msg=Inspecting log_008.
+    step 03: annotate               reward=+0.2216  cum=+0.2284  done=False  msg=Annotated log_008 as 'error'.
+    step 04: inspect                reward=+0.0000  cum=+0.2284  done=False  msg=Inspecting log_023.
+    step 05: annotate               reward=+0.1900  cum=+0.4183  done=False  msg=Annotated log_023 as 'error'.
+    step 06: inspect                reward=+0.0000  cum=+0.4183  done=False  msg=Inspecting log_041.
+    step 07: annotate               reward=+0.3380  cum=+0.7564  done=False  msg=Annotated log_041 as 'error'.
+    step 08: classify_incident      reward=+0.2000  cum=+0.9564  done=False  msg=Incident classified as MEDIUM.
+    step 09: draft_report           reward=+0.0400  cum=+0.9964  done=False  msg=Draft saved.
+    step 10: submit_report          reward=+0.3000  cum=+1.2964  done=True  msg=Report submitted. Episode complete.
+  Run 1: 0.880800  Run 2: 0.880800  MATCH: YES
+
+=================================================================
+GRADER SCORE SUMMARY
+=================================================================
+  Agent       Task                Score  Expected range
+  -------------------------------------------------------
+  oracle      task_easy          0.8808  0.60-1.0 (oracle)  OK
+  oracle      task_medium        0.9378  0.40-1.0 (oracle)  OK
+  oracle      task_hard          0.9183  0.30-1.0 (oracle)  OK
+  partial     task_easy          0.5025  0.10-0.60 (partial)  OK
+  bad         task_easy          0.0718  0.00-0.20 (bad)  OK
+
+  Determinism: PASS
+  Score ranges: ALL PASS
+
+OVERALL: PASS

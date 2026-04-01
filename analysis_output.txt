@@ -1,0 +1,118 @@
+﻿
+=======================================================
+  EASY  ù  50 total logs
+=======================================================
+
+  SEVERITY DISTRIBUTION:
+    DEBUG     3  (  6.0%)  #
+    INFO     34  ( 68.0%)  ####################
+    WARN      7  ( 14.0%)  ####
+    ERROR     6  ( 12.0%)  ###
+    FATAL     0  (  0.0%)  
+
+  SERVICE DISTRIBUTION:
+    auth-service                50  (100.0%)
+
+  GROUND TRUTH (3 signals, signal ratio=6.0%):
+    log_008  [ERROR] [error                    ]  Failed to acquire connection to db-primary:5432. java.s
+    log_023  [ERROR] [error                    ]  Failed to acquire connection to db-primary:5432. java.s
+    log_041  [ERROR] [error                    ]  Database connection pool exhausted. java.sql.SQLExcepti
+
+  GT severity breakdown: {'ERROR': 3}
+  Noise logs:  47 (94.0%)
+  GT logs:     3 (6.0%)
+
+  EXPECTED SEVERITY: MEDIUM
+  KEY FINDINGS:
+    - database connection refused
+    - auth-service affected
+    - postgresql port 5432
+
+=======================================================
+  MEDIUM  ù  200 total logs
+=======================================================
+
+  SEVERITY DISTRIBUTION:
+    DEBUG    13  (  6.5%)  #
+    INFO    118  ( 59.0%)  #################
+    WARN     40  ( 20.0%)  ######
+    ERROR    28  ( 14.0%)  ####
+    FATAL     1  (  0.5%)  
+
+  SERVICE DISTRIBUTION:
+    payment-service             74  ( 37.0%)
+    order-service               67  ( 33.5%)
+    api-gateway                 59  ( 29.5%)
+
+  GROUND TRUTH (6 signals, signal ratio=3.0%):
+    log_045  [ERROR] [root_cause               ]  Connection pool exhausted: 50/50 connections in use. Al
+    log_067  [ERROR] [symptom                  ]  Transaction timeout after 30200ms waiting for database 
+    log_089  [ERROR] [symptom                  ]  Request queue at capacity: 500/500. Rejecting new payme
+    log_102  [ERROR] [symptom                  ]  Timeout waiting for payment-service response. POST /api
+    log_134  [FATAL] [cascading_failure        ]  Message queue depth critical: 15000 messages pending (t
+    log_156  [ERROR] [cascading_failure        ]  HTTP 503 Service Unavailable returned to client. Downst
+
+  GT severity breakdown: {'ERROR': 5, 'FATAL': 1}
+  Noise logs:  194 (97.0%)
+  GT logs:     6 (3.0%)
+
+  CORRELATIONS (3 pairs):
+    log_045 -> log_067
+    log_067 -> log_134
+    log_089 -> log_156
+
+  EXPECTED SEVERITY: HIGH
+  KEY FINDINGS:
+    - payment service database pool exhausted
+    - order service queue backup
+    - api gateway 503 errors
+    - cascading failure from payment to gateway
+
+=======================================================
+  HARD  ù  500 total logs
+=======================================================
+
+  SEVERITY DISTRIBUTION:
+    DEBUG    39  (  7.8%)  ##
+    INFO    322  ( 64.4%)  ###################
+    WARN     95  ( 19.0%)  #####
+    ERROR    44  (  8.8%)  ##
+    FATAL     0  (  0.0%)  
+
+  SERVICE DISTRIBUTION:
+    api-gateway                107  ( 21.4%)
+    audit-log                  107  ( 21.4%)
+    auth-service               105  ( 21.0%)
+    user-service                93  ( 18.6%)
+    file-service                88  ( 17.6%)
+
+  GROUND TRUTH (8 signals, signal ratio=1.6%):
+    log_023  [WARN ] [reconnaissance           ]  Unusual connection pattern detected from 198.51.100.23.
+    log_078  [WARN ] [brute_force              ]  Failed login attempt for user 'admin' from 198.51.100.2
+    log_091  [WARN ] [brute_force              ]  Failed login attempt for user 'svc-deploy' from 198.51.
+    log_145  [INFO ] [credential_compromise    ]  Successful authentication for user 'svc-deploy' from 19
+    log_201  [WARN ] [privilege_escalation     ]  User 'svc-deploy' accessed admin endpoint GET /api/admi
+    log_267  [INFO ] [data_exfiltration        ]  Bulk data export: 15,247 user records downloaded by use
+    log_312  [INFO ] [lateral_movement         ]  Authentication token sess-x7k2m9 used from new service 
+    log_389  [INFO ] [data_exfiltration        ]  Bulk file download: 342 files from /confidential/report
+
+  GT severity breakdown: {'WARN': 4, 'INFO': 4}
+  Noise logs:  492 (98.4%)
+  GT logs:     8 (1.6%)
+
+  CORRELATIONS (6 pairs):
+    log_023 -> log_078
+    log_091 -> log_145
+    log_145 -> log_201
+    log_201 -> log_267
+    log_201 -> log_312
+    log_312 -> log_389
+
+  EXPECTED SEVERITY: CRITICAL
+  KEY FINDINGS:
+    - brute force login attempts
+    - privilege escalation via admin api
+    - data exfiltration of customer records
+    - lateral movement to file service
+    - compromised credentials
+    - unauthorized admin access

@@ -1,0 +1,31 @@
+{
+  "annotations": {
+    "log_045": "root_cause",
+    "log_067": "symptom",
+    "log_089": "symptom",
+    "log_102": "symptom",
+    "log_134": "cascading_failure",
+    "log_156": "cascading_failure"
+  },
+  "correlations": [
+    [
+      "log_045",
+      "log_067"
+    ],
+    [
+      "log_067",
+      "log_134"
+    ],
+    [
+      "log_089",
+      "log_156"
+    ]
+  ],
+  "severity": "HIGH",
+  "key_findings": [
+    "payment service database pool exhausted",
+    "order service queue backup",
+    "api gateway 503 errors",
+    "cascading failure from payment to gateway"
+  ]
+}

@@ -1,0 +1,1964 @@
+[
+  {
+    "id": "log_001",
+    "timestamp": "2024-01-15T09:00:02.362Z",
+    "service": "payment-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 83%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_002",
+    "timestamp": "2024-01-15T09:00:27.608Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "197"
+    }
+  },
+  {
+    "id": "log_003",
+    "timestamp": "2024-01-15T09:00:33.826Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 2965ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_004",
+    "timestamp": "2024-01-15T09:00:36.472Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "430"
+    }
+  },
+  {
+    "id": "log_005",
+    "timestamp": "2024-01-15T09:00:48.030Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "442"
+    }
+  },
+  {
+    "id": "log_006",
+    "timestamp": "2024-01-15T09:00:58.823Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 79%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_007",
+    "timestamp": "2024-01-15T09:01:04.248Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_008",
+    "timestamp": "2024-01-15T09:01:11.161Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=23/50 idle=14",
+    "metadata": {}
+  },
+  {
+    "id": "log_009",
+    "timestamp": "2024-01-15T09:01:36.753Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 3233ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_010",
+    "timestamp": "2024-01-15T09:02:06.270Z",
+    "service": "payment-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 2299ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_011",
+    "timestamp": "2024-01-15T09:02:28.827Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_25265",
+    "metadata": {
+      "hit_rate": "97%"
+    }
+  },
+  {
+    "id": "log_012",
+    "timestamp": "2024-01-15T09:02:39.747Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_013",
+    "timestamp": "2024-01-15T09:03:09.902Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_014",
+    "timestamp": "2024-01-15T09:03:29.331Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "3206"
+    }
+  },
+  {
+    "id": "log_015",
+    "timestamp": "2024-01-15T09:03:58.220Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_016",
+    "timestamp": "2024-01-15T09:04:07.165Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 2701ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_017",
+    "timestamp": "2024-01-15T09:04:13.599Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_018",
+    "timestamp": "2024-01-15T09:04:37.456Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "274"
+    }
+  },
+  {
+    "id": "log_019",
+    "timestamp": "2024-01-15T09:05:01.357Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_020",
+    "timestamp": "2024-01-15T09:05:09.564Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 88%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_021",
+    "timestamp": "2024-01-15T09:05:36.369Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 496ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_022",
+    "timestamp": "2024-01-15T09:05:56.684Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "SQL query executed in 851ms",
+    "metadata": {
+      "query": "SELECT * FROM sessions"
+    }
+  },
+  {
+    "id": "log_023",
+    "timestamp": "2024-01-15T09:06:21.313Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1748"
+    }
+  },
+  {
+    "id": "log_024",
+    "timestamp": "2024-01-15T09:06:50.403Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Connection pool stats: active=30/50 idle=6",
+    "metadata": {}
+  },
+  {
+    "id": "log_025",
+    "timestamp": "2024-01-15T09:06:58.335Z",
+    "service": "order-service",
+    "severity": "ERROR",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_16111",
+      "source_ip": "10.0.234.181"
+    }
+  },
+  {
+    "id": "log_026",
+    "timestamp": "2024-01-15T09:07:14.458Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_99731",
+    "metadata": {
+      "hit_rate": "84%"
+    }
+  },
+  {
+    "id": "log_027",
+    "timestamp": "2024-01-15T09:07:38.523Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "758"
+    }
+  },
+  {
+    "id": "log_028",
+    "timestamp": "2024-01-15T09:07:54.329Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=43/50 idle=27",
+    "metadata": {}
+  },
+  {
+    "id": "log_029",
+    "timestamp": "2024-01-15T09:08:13.171Z",
+    "service": "payment-service",
+    "severity": "ERROR",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "413"
+    }
+  },
+  {
+    "id": "log_030",
+    "timestamp": "2024-01-15T09:08:22.802Z",
+    "service": "payment-service",
+    "severity": "WARN",
+    "message": "Retry attempt 1/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_031",
+    "timestamp": "2024-01-15T09:08:24.875Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_032",
+    "timestamp": "2024-01-15T09:08:50.494Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=38/50 idle=14",
+    "metadata": {}
+  },
+  {
+    "id": "log_033",
+    "timestamp": "2024-01-15T09:09:13.456Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_034",
+    "timestamp": "2024-01-15T09:09:16.282Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "4"
+    }
+  },
+  {
+    "id": "log_035",
+    "timestamp": "2024-01-15T09:09:26.039Z",
+    "service": "payment-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 75%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_036",
+    "timestamp": "2024-01-15T09:09:54.391Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 1581ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_037",
+    "timestamp": "2024-01-15T09:10:19.120Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_038",
+    "timestamp": "2024-01-15T09:10:43.700Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_039",
+    "timestamp": "2024-01-15T09:11:08.347Z",
+    "service": "payment-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 770ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_040",
+    "timestamp": "2024-01-15T09:11:11.354Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_041",
+    "timestamp": "2024-01-15T09:11:40.710Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "168"
+    }
+  },
+  {
+    "id": "log_042",
+    "timestamp": "2024-01-15T09:11:47.687Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "6"
+    }
+  },
+  {
+    "id": "log_043",
+    "timestamp": "2024-01-15T09:12:09.517Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "8"
+    }
+  },
+  {
+    "id": "log_044",
+    "timestamp": "2024-01-15T09:12:12.506Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_045",
+    "timestamp": "2024-01-15T09:12:37.286Z",
+    "service": "payment-service",
+    "severity": "ERROR",
+    "message": "Connection pool exhausted: 50/50 connections in use. All acquire attempts timing out after 30000ms. Transactions failing.",
+    "metadata": {
+      "pool_active": "50",
+      "pool_max": "50",
+      "timeout_ms": "30000",
+      "pending_tx": "23"
+    }
+  },
+  {
+    "id": "log_046",
+    "timestamp": "2024-01-15T09:13:01.031Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_81865",
+      "source_ip": "10.0.39.242"
+    }
+  },
+  {
+    "id": "log_047",
+    "timestamp": "2024-01-15T09:13:31.670Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2781"
+    }
+  },
+  {
+    "id": "log_048",
+    "timestamp": "2024-01-15T09:13:53.269Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_049",
+    "timestamp": "2024-01-15T09:13:58.575Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "JVM garbage collection pause: 2000ms",
+    "metadata": {
+      "gc_type": "G1 Young"
+    }
+  },
+  {
+    "id": "log_050",
+    "timestamp": "2024-01-15T09:14:20.025Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Retry attempt 1/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_051",
+    "timestamp": "2024-01-15T09:14:40.624Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "252"
+    }
+  },
+  {
+    "id": "log_052",
+    "timestamp": "2024-01-15T09:14:45.990Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_83020",
+    "metadata": {
+      "hit_rate": "67%"
+    }
+  },
+  {
+    "id": "log_053",
+    "timestamp": "2024-01-15T09:14:50.104Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_054",
+    "timestamp": "2024-01-15T09:15:18.556Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "376"
+    }
+  },
+  {
+    "id": "log_055",
+    "timestamp": "2024-01-15T09:15:26.586Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-15dc"
+    }
+  },
+  {
+    "id": "log_056",
+    "timestamp": "2024-01-15T09:15:28.739Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0da4"
+    }
+  },
+  {
+    "id": "log_057",
+    "timestamp": "2024-01-15T09:15:32.113Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-2204"
+    }
+  },
+  {
+    "id": "log_058",
+    "timestamp": "2024-01-15T09:15:40.587Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=25/50 idle=17",
+    "metadata": {}
+  },
+  {
+    "id": "log_059",
+    "timestamp": "2024-01-15T09:15:42.853Z",
+    "service": "payment-service",
+    "severity": "ERROR",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "188"
+    }
+  },
+  {
+    "id": "log_060",
+    "timestamp": "2024-01-15T09:15:46.241Z",
+    "service": "order-service",
+    "severity": "ERROR",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0ac1"
+    }
+  },
+  {
+    "id": "log_061",
+    "timestamp": "2024-01-15T09:15:49.068Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=8/50 idle=6",
+    "metadata": {}
+  },
+  {
+    "id": "log_062",
+    "timestamp": "2024-01-15T09:16:14.482Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=9/50 idle=15",
+    "metadata": {}
+  },
+  {
+    "id": "log_063",
+    "timestamp": "2024-01-15T09:16:40.684Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "5"
+    }
+  },
+  {
+    "id": "log_064",
+    "timestamp": "2024-01-15T09:16:43.694Z",
+    "service": "payment-service",
+    "severity": "ERROR",
+    "message": "Cache hit for key user_profile_70873",
+    "metadata": {
+      "hit_rate": "61%"
+    }
+  },
+  {
+    "id": "log_065",
+    "timestamp": "2024-01-15T09:17:06.674Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_066",
+    "timestamp": "2024-01-15T09:17:21.500Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v18",
+    "metadata": {}
+  },
+  {
+    "id": "log_067",
+    "timestamp": "2024-01-15T09:17:26.087Z",
+    "service": "payment-service",
+    "severity": "ERROR",
+    "message": "Transaction timeout after 30200ms waiting for database connection. Payment processing failed for order ord-8812.",
+    "metadata": {
+      "order_id": "ord-8812",
+      "timeout_ms": "30200"
+    }
+  },
+  {
+    "id": "log_068",
+    "timestamp": "2024-01-15T09:17:49.571Z",
+    "service": "payment-service",
+    "severity": "WARN",
+    "message": "Stale NFS handle detected for shared mount",
+    "metadata": {}
+  },
+  {
+    "id": "log_069",
+    "timestamp": "2024-01-15T09:18:09.866Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2571"
+    }
+  },
+  {
+    "id": "log_070",
+    "timestamp": "2024-01-15T09:18:17.839Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-2675"
+    }
+  },
+  {
+    "id": "log_071",
+    "timestamp": "2024-01-15T09:18:40.235Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=25/50 idle=30",
+    "metadata": {}
+  },
+  {
+    "id": "log_072",
+    "timestamp": "2024-01-15T09:19:10.607Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 701ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_073",
+    "timestamp": "2024-01-15T09:19:19.413Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "6"
+    }
+  },
+  {
+    "id": "log_074",
+    "timestamp": "2024-01-15T09:19:40.641Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "377"
+    }
+  },
+  {
+    "id": "log_075",
+    "timestamp": "2024-01-15T09:19:46.710Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_92074",
+      "source_ip": "10.0.202.18"
+    }
+  },
+  {
+    "id": "log_076",
+    "timestamp": "2024-01-15T09:19:58.476Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_077",
+    "timestamp": "2024-01-15T09:20:06.847Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_078",
+    "timestamp": "2024-01-15T09:20:36.552Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 2892ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_079",
+    "timestamp": "2024-01-15T09:21:02.784Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "377"
+    }
+  },
+  {
+    "id": "log_080",
+    "timestamp": "2024-01-15T09:21:22.334Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 283ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_081",
+    "timestamp": "2024-01-15T09:21:50.353Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-10e8"
+    }
+  },
+  {
+    "id": "log_082",
+    "timestamp": "2024-01-15T09:21:59.194Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Retry attempt 2/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_083",
+    "timestamp": "2024-01-15T09:22:06.114Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "195"
+    }
+  },
+  {
+    "id": "log_084",
+    "timestamp": "2024-01-15T09:22:21.794Z",
+    "service": "payment-service",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v6",
+    "metadata": {}
+  },
+  {
+    "id": "log_085",
+    "timestamp": "2024-01-15T09:22:39.562Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_55243",
+    "metadata": {
+      "hit_rate": "87%"
+    }
+  },
+  {
+    "id": "log_086",
+    "timestamp": "2024-01-15T09:22:53.838Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-071a"
+    }
+  },
+  {
+    "id": "log_087",
+    "timestamp": "2024-01-15T09:22:55.575Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "8"
+    }
+  },
+  {
+    "id": "log_088",
+    "timestamp": "2024-01-15T09:23:09.657Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "3"
+    }
+  },
+  {
+    "id": "log_089",
+    "timestamp": "2024-01-15T09:23:32.697Z",
+    "service": "payment-service",
+    "severity": "ERROR",
+    "message": "Request queue at capacity: 500/500. Rejecting new payment requests. Service degraded.",
+    "metadata": {
+      "queue_depth": "500",
+      "queue_max": "500",
+      "rejected_count": "45"
+    }
+  },
+  {
+    "id": "log_090",
+    "timestamp": "2024-01-15T09:23:53.939Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_36375",
+    "metadata": {
+      "hit_rate": "89%"
+    }
+  },
+  {
+    "id": "log_091",
+    "timestamp": "2024-01-15T09:24:02.737Z",
+    "service": "payment-service",
+    "severity": "WARN",
+    "message": "DNS resolution timeout for metrics.internal (retried OK)",
+    "metadata": {
+      "resolver": "10.0.0.2"
+    }
+  },
+  {
+    "id": "log_092",
+    "timestamp": "2024-01-15T09:24:09.570Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Retry attempt 2/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_093",
+    "timestamp": "2024-01-15T09:24:20.617Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 58ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_094",
+    "timestamp": "2024-01-15T09:24:26.174Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 2137ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_095",
+    "timestamp": "2024-01-15T09:24:39.521Z",
+    "service": "payment-service",
+    "severity": "ERROR",
+    "message": "Cache hit for key user_profile_14532",
+    "metadata": {
+      "hit_rate": "84%"
+    }
+  },
+  {
+    "id": "log_096",
+    "timestamp": "2024-01-15T09:25:07.537Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1f7a"
+    }
+  },
+  {
+    "id": "log_097",
+    "timestamp": "2024-01-15T09:25:14.747Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-23c2"
+    }
+  },
+  {
+    "id": "log_098",
+    "timestamp": "2024-01-15T09:25:24.233Z",
+    "service": "payment-service",
+    "severity": "DEBUG",
+    "message": "SQL query executed in 1643ms",
+    "metadata": {
+      "query": "SELECT * FROM sessions"
+    }
+  },
+  {
+    "id": "log_099",
+    "timestamp": "2024-01-15T09:25:52.314Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "440"
+    }
+  },
+  {
+    "id": "log_100",
+    "timestamp": "2024-01-15T09:26:03.079Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "3"
+    }
+  },
+  {
+    "id": "log_101",
+    "timestamp": "2024-01-15T09:26:32.010Z",
+    "service": "payment-service",
+    "severity": "WARN",
+    "message": "Retry attempt 1/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_102",
+    "timestamp": "2024-01-15T09:27:02.223Z",
+    "service": "order-service",
+    "severity": "ERROR",
+    "message": "Timeout waiting for payment-service response. POST /api/v1/payments timed out after 60000ms. Order ord-9923 stuck in PENDING.",
+    "metadata": {
+      "order_id": "ord-9923",
+      "timeout_ms": "60000",
+      "target": "payment-service"
+    }
+  },
+  {
+    "id": "log_103",
+    "timestamp": "2024-01-15T09:27:09.728Z",
+    "service": "payment-service",
+    "severity": "ERROR",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_104",
+    "timestamp": "2024-01-15T09:27:24.741Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=6/50 idle=6",
+    "metadata": {}
+  },
+  {
+    "id": "log_105",
+    "timestamp": "2024-01-15T09:27:54.744Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "285"
+    }
+  },
+  {
+    "id": "log_106",
+    "timestamp": "2024-01-15T09:27:56.199Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "8"
+    }
+  },
+  {
+    "id": "log_107",
+    "timestamp": "2024-01-15T09:28:01.086Z",
+    "service": "payment-service",
+    "severity": "DEBUG",
+    "message": "SQL query executed in 3334ms",
+    "metadata": {
+      "query": "SELECT * FROM sessions"
+    }
+  },
+  {
+    "id": "log_108",
+    "timestamp": "2024-01-15T09:28:06.235Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-10e3"
+    }
+  },
+  {
+    "id": "log_109",
+    "timestamp": "2024-01-15T09:28:36.618Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=30/50 idle=26",
+    "metadata": {}
+  },
+  {
+    "id": "log_110",
+    "timestamp": "2024-01-15T09:28:56.279Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=14/50 idle=7",
+    "metadata": {}
+  },
+  {
+    "id": "log_111",
+    "timestamp": "2024-01-15T09:29:11.491Z",
+    "service": "payment-service",
+    "severity": "ERROR",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_112",
+    "timestamp": "2024-01-15T09:29:19.225Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 3061ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_113",
+    "timestamp": "2024-01-15T09:29:47.828Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Connection pool stats: active=18/50 idle=26",
+    "metadata": {}
+  },
+  {
+    "id": "log_114",
+    "timestamp": "2024-01-15T09:30:00.324Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_53342",
+    "metadata": {
+      "hit_rate": "86%"
+    }
+  },
+  {
+    "id": "log_115",
+    "timestamp": "2024-01-15T09:30:02.062Z",
+    "service": "payment-service",
+    "severity": "WARN",
+    "message": "Response time elevated: 2346ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_116",
+    "timestamp": "2024-01-15T09:30:13.313Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_38989",
+      "source_ip": "10.0.156.13"
+    }
+  },
+  {
+    "id": "log_117",
+    "timestamp": "2024-01-15T09:30:20.662Z",
+    "service": "order-service",
+    "severity": "ERROR",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "3"
+    }
+  },
+  {
+    "id": "log_118",
+    "timestamp": "2024-01-15T09:30:36.064Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Slow query detected: 1280ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_119",
+    "timestamp": "2024-01-15T09:30:38.738Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "4"
+    }
+  },
+  {
+    "id": "log_120",
+    "timestamp": "2024-01-15T09:30:55.153Z",
+    "service": "payment-service",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v9",
+    "metadata": {}
+  },
+  {
+    "id": "log_121",
+    "timestamp": "2024-01-15T09:31:01.604Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "7"
+    }
+  },
+  {
+    "id": "log_122",
+    "timestamp": "2024-01-15T09:31:26.425Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_56037",
+    "metadata": {
+      "hit_rate": "82%"
+    }
+  },
+  {
+    "id": "log_123",
+    "timestamp": "2024-01-15T09:31:38.758Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "700"
+    }
+  },
+  {
+    "id": "log_124",
+    "timestamp": "2024-01-15T09:32:01.743Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_47542",
+    "metadata": {
+      "hit_rate": "73%"
+    }
+  },
+  {
+    "id": "log_125",
+    "timestamp": "2024-01-15T09:32:25.012Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "6"
+    }
+  },
+  {
+    "id": "log_126",
+    "timestamp": "2024-01-15T09:32:39.108Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "915"
+    }
+  },
+  {
+    "id": "log_127",
+    "timestamp": "2024-01-15T09:32:51.869Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_36910",
+    "metadata": {
+      "hit_rate": "88%"
+    }
+  },
+  {
+    "id": "log_128",
+    "timestamp": "2024-01-15T09:33:18.101Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1f70"
+    }
+  },
+  {
+    "id": "log_129",
+    "timestamp": "2024-01-15T09:33:36.229Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Connection reset by peer: 10.0.5.22:3306",
+    "metadata": {
+      "retry": "true"
+    }
+  },
+  {
+    "id": "log_130",
+    "timestamp": "2024-01-15T09:34:05.091Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=14/50 idle=13",
+    "metadata": {}
+  },
+  {
+    "id": "log_131",
+    "timestamp": "2024-01-15T09:34:18.446Z",
+    "service": "order-service",
+    "severity": "DEBUG",
+    "message": "SQL query executed in 1329ms",
+    "metadata": {
+      "query": "SELECT * FROM sessions"
+    }
+  },
+  {
+    "id": "log_132",
+    "timestamp": "2024-01-15T09:34:27.346Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_58261",
+    "metadata": {
+      "hit_rate": "76%"
+    }
+  },
+  {
+    "id": "log_133",
+    "timestamp": "2024-01-15T09:34:36.031Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=42/50 idle=23",
+    "metadata": {}
+  },
+  {
+    "id": "log_134",
+    "timestamp": "2024-01-15T09:35:01.054Z",
+    "service": "order-service",
+    "severity": "FATAL",
+    "message": "Message queue depth critical: 15000 messages pending (threshold: 5000). Consumer lag increasing. Order processing stalled.",
+    "metadata": {
+      "queue_depth": "15000",
+      "threshold": "5000",
+      "consumer_lag_ms": "45000"
+    }
+  },
+  {
+    "id": "log_135",
+    "timestamp": "2024-01-15T09:35:16.088Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Slow query detected: 3038ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_136",
+    "timestamp": "2024-01-15T09:35:39.046Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 3198ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_137",
+    "timestamp": "2024-01-15T09:35:50.736Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "472"
+    }
+  },
+  {
+    "id": "log_138",
+    "timestamp": "2024-01-15T09:36:13.406Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "5"
+    }
+  },
+  {
+    "id": "log_139",
+    "timestamp": "2024-01-15T09:36:31.740Z",
+    "service": "order-service",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v4",
+    "metadata": {}
+  },
+  {
+    "id": "log_140",
+    "timestamp": "2024-01-15T09:36:54.596Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Cache hit for key user_profile_30148",
+    "metadata": {
+      "hit_rate": "86%"
+    }
+  },
+  {
+    "id": "log_141",
+    "timestamp": "2024-01-15T09:36:57.649Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v11",
+    "metadata": {}
+  },
+  {
+    "id": "log_142",
+    "timestamp": "2024-01-15T09:37:02.138Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "7"
+    }
+  },
+  {
+    "id": "log_143",
+    "timestamp": "2024-01-15T09:37:07.421Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "3031"
+    }
+  },
+  {
+    "id": "log_144",
+    "timestamp": "2024-01-15T09:37:15.948Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1421"
+    }
+  },
+  {
+    "id": "log_145",
+    "timestamp": "2024-01-15T09:37:31.699Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "1"
+    }
+  },
+  {
+    "id": "log_146",
+    "timestamp": "2024-01-15T09:37:59.922Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_147",
+    "timestamp": "2024-01-15T09:38:29.370Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_20077",
+      "source_ip": "10.0.0.210"
+    }
+  },
+  {
+    "id": "log_148",
+    "timestamp": "2024-01-15T09:38:56.146Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_38164",
+    "metadata": {
+      "hit_rate": "68%"
+    }
+  },
+  {
+    "id": "log_149",
+    "timestamp": "2024-01-15T09:39:15.588Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "177"
+    }
+  },
+  {
+    "id": "log_150",
+    "timestamp": "2024-01-15T09:39:37.288Z",
+    "service": "api-gateway",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v15",
+    "metadata": {}
+  },
+  {
+    "id": "log_151",
+    "timestamp": "2024-01-15T09:40:01.973Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Slow query detected: 1039ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_152",
+    "timestamp": "2024-01-15T09:40:18.851Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_153",
+    "timestamp": "2024-01-15T09:40:23.500Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 79%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_154",
+    "timestamp": "2024-01-15T09:40:29.199Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "3475"
+    }
+  },
+  {
+    "id": "log_155",
+    "timestamp": "2024-01-15T09:40:55.446Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 80%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_156",
+    "timestamp": "2024-01-15T09:41:03.277Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "HTTP 503 Service Unavailable returned to client. Downstream dependency order-service not responding. Circuit breaker OPEN.",
+    "metadata": {
+      "downstream": "order-service",
+      "status": "503",
+      "circuit_breaker": "OPEN",
+      "client_ip": "203.0.113.45"
+    }
+  },
+  {
+    "id": "log_157",
+    "timestamp": "2024-01-15T09:41:10.626Z",
+    "service": "order-service",
+    "severity": "ERROR",
+    "message": "Connection pool stats: active=27/50 idle=22",
+    "metadata": {}
+  },
+  {
+    "id": "log_158",
+    "timestamp": "2024-01-15T09:41:32.348Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 380ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_159",
+    "timestamp": "2024-01-15T09:41:57.911Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=21/50 idle=29",
+    "metadata": {}
+  },
+  {
+    "id": "log_160",
+    "timestamp": "2024-01-15T09:42:10.509Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "364"
+    }
+  },
+  {
+    "id": "log_161",
+    "timestamp": "2024-01-15T09:42:28.657Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "1"
+    }
+  },
+  {
+    "id": "log_162",
+    "timestamp": "2024-01-15T09:42:51.054Z",
+    "service": "order-service",
+    "severity": "ERROR",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "119"
+    }
+  },
+  {
+    "id": "log_163",
+    "timestamp": "2024-01-15T09:43:06.961Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2045"
+    }
+  },
+  {
+    "id": "log_164",
+    "timestamp": "2024-01-15T09:43:19.084Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "5"
+    }
+  },
+  {
+    "id": "log_165",
+    "timestamp": "2024-01-15T09:43:21.237Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_14332",
+    "metadata": {
+      "hit_rate": "68%"
+    }
+  },
+  {
+    "id": "log_166",
+    "timestamp": "2024-01-15T09:43:45.332Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "1"
+    }
+  },
+  {
+    "id": "log_167",
+    "timestamp": "2024-01-15T09:43:48.520Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "3418"
+    }
+  },
+  {
+    "id": "log_168",
+    "timestamp": "2024-01-15T09:44:03.943Z",
+    "service": "payment-service",
+    "severity": "ERROR",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "5"
+    }
+  },
+  {
+    "id": "log_169",
+    "timestamp": "2024-01-15T09:44:17.066Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_54317",
+      "source_ip": "10.0.82.205"
+    }
+  },
+  {
+    "id": "log_170",
+    "timestamp": "2024-01-15T09:44:28.707Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Slow query detected: 2268ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_171",
+    "timestamp": "2024-01-15T09:44:45.493Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0c5f"
+    }
+  },
+  {
+    "id": "log_172",
+    "timestamp": "2024-01-15T09:45:03.087Z",
+    "service": "order-service",
+    "severity": "ERROR",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_90775",
+      "source_ip": "10.0.111.186"
+    }
+  },
+  {
+    "id": "log_173",
+    "timestamp": "2024-01-15T09:45:27.107Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_174",
+    "timestamp": "2024-01-15T09:45:50.860Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_175",
+    "timestamp": "2024-01-15T09:45:56.061Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_176",
+    "timestamp": "2024-01-15T09:46:07.625Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "393"
+    }
+  },
+  {
+    "id": "log_177",
+    "timestamp": "2024-01-15T09:46:15.359Z",
+    "service": "order-service",
+    "severity": "ERROR",
+    "message": "Request completed: GET /api/v1/users in 1834ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_178",
+    "timestamp": "2024-01-15T09:46:18.524Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "184"
+    }
+  },
+  {
+    "id": "log_179",
+    "timestamp": "2024-01-15T09:46:43.391Z",
+    "service": "payment-service",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_180",
+    "timestamp": "2024-01-15T09:47:07.597Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_181",
+    "timestamp": "2024-01-15T09:47:35.137Z",
+    "service": "api-gateway",
+    "severity": "ERROR",
+    "message": "Backup job completed with warnings",
+    "metadata": {
+      "warnings": "2"
+    }
+  },
+  {
+    "id": "log_182",
+    "timestamp": "2024-01-15T09:47:40.318Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 3094ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_183",
+    "timestamp": "2024-01-15T09:48:03.168Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_47167",
+      "source_ip": "10.0.35.43"
+    }
+  },
+  {
+    "id": "log_184",
+    "timestamp": "2024-01-15T09:48:17.793Z",
+    "service": "payment-service",
+    "severity": "ERROR",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "333"
+    }
+  },
+  {
+    "id": "log_185",
+    "timestamp": "2024-01-15T09:48:23.192Z",
+    "service": "payment-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 2472ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_186",
+    "timestamp": "2024-01-15T09:48:39.376Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 916ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_187",
+    "timestamp": "2024-01-15T09:49:04.414Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_188",
+    "timestamp": "2024-01-15T09:49:32.985Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_88452",
+      "source_ip": "10.0.2.123"
+    }
+  },
+  {
+    "id": "log_189",
+    "timestamp": "2024-01-15T09:49:41.623Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 3016ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_190",
+    "timestamp": "2024-01-15T09:50:03.616Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Slow query detected: 2936ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_191",
+    "timestamp": "2024-01-15T09:50:12.097Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=33/50 idle=18",
+    "metadata": {}
+  },
+  {
+    "id": "log_192",
+    "timestamp": "2024-01-15T09:50:22.916Z",
+    "service": "order-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 79%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_193",
+    "timestamp": "2024-01-15T09:50:29.669Z",
+    "service": "order-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1467"
+    }
+  },
+  {
+    "id": "log_194",
+    "timestamp": "2024-01-15T09:50:47.273Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "2603"
+    }
+  },
+  {
+    "id": "log_195",
+    "timestamp": "2024-01-15T09:50:57.010Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "198"
+    }
+  },
+  {
+    "id": "log_196",
+    "timestamp": "2024-01-15T09:51:22.686Z",
+    "service": "payment-service",
+    "severity": "INFO",
+    "message": "Connection pool stats: active=20/50 idle=17",
+    "metadata": {}
+  },
+  {
+    "id": "log_197",
+    "timestamp": "2024-01-15T09:51:48.025Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Response time elevated: 2370ms (p99 threshold: 500ms)",
+    "metadata": {}
+  },
+  {
+    "id": "log_198",
+    "timestamp": "2024-01-15T09:52:03.539Z",
+    "service": "payment-service",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_199",
+    "timestamp": "2024-01-15T09:52:21.438Z",
+    "service": "api-gateway",
+    "severity": "WARN",
+    "message": "Slow query detected: 3382ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_200",
+    "timestamp": "2024-01-15T09:52:50.397Z",
+    "service": "api-gateway",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1228"
+    }
+  }
+]

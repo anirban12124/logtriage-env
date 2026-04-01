@@ -1,6 +1,19 @@
 import re
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Set, Tuple, Optional
 from src.tasks import get_category_similarity
+
+# Lazy-import ML models so the server starts without them if not installed
+_ml: Optional[object] = None
+
+def _get_ml():
+    global _ml
+    if _ml is None:
+        try:
+            from src.ml_models import get_models
+            _ml = get_models()
+        except Exception:
+            _ml = False  # mark as unavailable
+    return _ml if _ml else None
 
 
 class TaskGrader:
@@ -194,30 +207,36 @@ class TaskGrader:
         # ─── H. Report Completeness ───
         report_source = behavior.get("report_source", "none")
         if agent_report:
-            report_lower = agent_report.lower()
-            finding_scores = []
-            for kf in gt_findings:
-                kf_lower = kf.lower()
-                # Exact substring match
-                if kf_lower in report_lower:
-                    finding_scores.append(1.0)
-                else:
-                    # Partial word matching
-                    kf_words = set(kf_lower.split())
-                    report_words = set(report_lower.split())
-                    overlap = len(kf_words & report_words) / max(len(kf_words), 1)
-                    if overlap >= 0.7:
-                        finding_scores.append(0.7)
-                    elif overlap >= 0.4:
-                        finding_scores.append(0.4)
+            ml = _get_ml()
+            task_id = task_config.get("id", "")
+            gt_desc = ground_truth.get("key_finding_descriptions", [])
+
+            if ml and gt_desc:
+                # Primary path: MiniLM semantic similarity
+                completeness = ml.report_completeness(
+                    agent_report, task_id, report_source
+                )
+            else:
+                # Fallback: word-overlap scoring
+                report_lower = agent_report.lower()
+                finding_scores = []
+                for kf in gt_findings:
+                    kf_lower = kf.lower()
+                    if kf_lower in report_lower:
+                        finding_scores.append(1.0)
                     else:
-                        finding_scores.append(0.0)
-
-            completeness = sum(finding_scores) / max(len(finding_scores), 1)
-
-            # Draft penalty
-            if report_source == "draft":
-                completeness *= 0.80
+                        kf_words = set(kf_lower.split())
+                        report_words = set(report_lower.split())
+                        overlap = len(kf_words & report_words) / max(len(kf_words), 1)
+                        if overlap >= 0.7:
+                            finding_scores.append(0.7)
+                        elif overlap >= 0.4:
+                            finding_scores.append(0.4)
+                        else:
+                            finding_scores.append(0.0)
+                completeness = sum(finding_scores) / max(len(finding_scores), 1)
+                if report_source == "draft":
+                    completeness *= 0.80
 
             scores["report_completeness"] = completeness
         else:
@@ -227,7 +246,7 @@ class TaskGrader:
         if agent_report and len(agent_report) > 10:
             # Length adequacy
             length = len(agent_report)
-            length_targets = {"easy": (50, 300), "medium": (100, 600),
+            length_targets = {"easy": (30, 300), "medium": (90, 600),
                              "hard": (150, 1500)}
             min_len, max_len = length_targets.get(difficulty, (50, 500))
 

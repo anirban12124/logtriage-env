@@ -1,0 +1,14 @@
+{
+  "annotations": {
+    "log_008": "error",
+    "log_023": "error",
+    "log_041": "error"
+  },
+  "correlations": [],
+  "severity": "MEDIUM",
+  "key_findings": [
+    "database connection refused",
+    "auth-service affected",
+    "postgresql port 5432"
+  ]
+}

@@ -27,7 +27,7 @@ from openai import OpenAI
 API_BASE_URL = os.getenv("API_BASE_URL", "https://router.huggingface.co/v1")
 API_KEY = os.getenv("HF_TOKEN") or os.getenv("API_KEY")
 MODEL_NAME = os.getenv("MODEL_NAME")
-SPACE_URL = os.getenv("SPACE_URL", "http://localhost:7860")
+SPACE_URL = os.getenv("SPACE_URL", "http://localhost:8000")
 
 TEMPERATURE = 0.2
 MAX_TOKENS = 400

@@ -1,0 +1,514 @@
+[
+  {
+    "id": "log_001",
+    "timestamp": "2024-01-15T09:00:23.862Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_98430",
+    "metadata": {
+      "hit_rate": "96%"
+    }
+  },
+  {
+    "id": "log_002",
+    "timestamp": "2024-01-15T09:00:30.144Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "1"
+    }
+  },
+  {
+    "id": "log_003",
+    "timestamp": "2024-01-15T09:00:40.790Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Slow query detected: 577ms for SELECT on users table",
+    "metadata": {
+      "threshold": "1000ms"
+    }
+  },
+  {
+    "id": "log_004",
+    "timestamp": "2024-01-15T09:01:00.258Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_49349",
+      "source_ip": "10.0.99.60"
+    }
+  },
+  {
+    "id": "log_005",
+    "timestamp": "2024-01-15T09:01:14.894Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_006",
+    "timestamp": "2024-01-15T09:01:31.388Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1fc0"
+    }
+  },
+  {
+    "id": "log_007",
+    "timestamp": "2024-01-15T09:01:41.462Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Request completed: GET /api/v1/users in 2412ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_008",
+    "timestamp": "2024-01-15T09:01:47.008Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Failed to acquire connection to db-primary:5432. java.sql.SQLException: Connection refused. Retry attempt 1/3 failed.",
+    "metadata": {
+      "db_host": "db-primary.internal",
+      "port": "5432",
+      "pool_active": "48",
+      "pool_max": "50"
+    }
+  },
+  {
+    "id": "log_009",
+    "timestamp": "2024-01-15T09:02:17.900Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "7"
+    }
+  },
+  {
+    "id": "log_010",
+    "timestamp": "2024-01-15T09:02:34.362Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_011",
+    "timestamp": "2024-01-15T09:03:01.353Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "182"
+    }
+  },
+  {
+    "id": "log_012",
+    "timestamp": "2024-01-15T09:03:06.735Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_013",
+    "timestamp": "2024-01-15T09:03:28.052Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "4"
+    }
+  },
+  {
+    "id": "log_014",
+    "timestamp": "2024-01-15T09:03:38.743Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1916"
+    }
+  },
+  {
+    "id": "log_015",
+    "timestamp": "2024-01-15T09:03:52.896Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Retry attempt 2/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_016",
+    "timestamp": "2024-01-15T09:04:14.669Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-1eca"
+    }
+  },
+  {
+    "id": "log_017",
+    "timestamp": "2024-01-15T09:04:40.035Z",
+    "service": "auth-service",
+    "severity": "DEBUG",
+    "message": "Thread pool utilization: 70%",
+    "metadata": {}
+  },
+  {
+    "id": "log_018",
+    "timestamp": "2024-01-15T09:05:07.958Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_32764",
+      "source_ip": "10.0.143.61"
+    }
+  },
+  {
+    "id": "log_019",
+    "timestamp": "2024-01-15T09:05:13.539Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Retry attempt 1/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_020",
+    "timestamp": "2024-01-15T09:05:23.615Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 2736ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_021",
+    "timestamp": "2024-01-15T09:05:44.498Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-063d"
+    }
+  },
+  {
+    "id": "log_022",
+    "timestamp": "2024-01-15T09:06:12.770Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Retry attempt 3/3 for downstream call",
+    "metadata": {
+      "target": "cache-service"
+    }
+  },
+  {
+    "id": "log_023",
+    "timestamp": "2024-01-15T09:06:17.157Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Failed to acquire connection to db-primary:5432. java.sql.SQLException: Connection refused. Circuit breaker OPEN after 3 failures.",
+    "metadata": {
+      "db_host": "db-primary.internal",
+      "port": "5432",
+      "pool_active": "50",
+      "pool_max": "50"
+    }
+  },
+  {
+    "id": "log_024",
+    "timestamp": "2024-01-15T09:06:37.152Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0a67"
+    }
+  },
+  {
+    "id": "log_025",
+    "timestamp": "2024-01-15T09:06:44.404Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "2"
+    }
+  },
+  {
+    "id": "log_026",
+    "timestamp": "2024-01-15T09:06:59.921Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "423"
+    }
+  },
+  {
+    "id": "log_027",
+    "timestamp": "2024-01-15T09:07:17.924Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_12783",
+      "source_ip": "10.0.161.136"
+    }
+  },
+  {
+    "id": "log_028",
+    "timestamp": "2024-01-15T09:07:46.409Z",
+    "service": "auth-service",
+    "severity": "DEBUG",
+    "message": "Entering method processRequest",
+    "metadata": {}
+  },
+  {
+    "id": "log_029",
+    "timestamp": "2024-01-15T09:08:02.727Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-07a3"
+    }
+  },
+  {
+    "id": "log_030",
+    "timestamp": "2024-01-15T09:08:28.297Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_75940",
+      "source_ip": "10.0.208.105"
+    }
+  },
+  {
+    "id": "log_031",
+    "timestamp": "2024-01-15T09:08:38.234Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 73%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_032",
+    "timestamp": "2024-01-15T09:09:01.470Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 85%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_033",
+    "timestamp": "2024-01-15T09:09:08.334Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Scheduled cleanup job completed",
+    "metadata": {
+      "rows_deleted": "104"
+    }
+  },
+  {
+    "id": "log_034",
+    "timestamp": "2024-01-15T09:09:36.167Z",
+    "service": "auth-service",
+    "severity": "DEBUG",
+    "message": "Cache lookup for key config_v12",
+    "metadata": {}
+  },
+  {
+    "id": "log_035",
+    "timestamp": "2024-01-15T09:09:39.864Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_85876",
+    "metadata": {
+      "hit_rate": "91%"
+    }
+  },
+  {
+    "id": "log_036",
+    "timestamp": "2024-01-15T09:10:08.150Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Token refreshed for session",
+    "metadata": {
+      "session_id": "sess-0ff6"
+    }
+  },
+  {
+    "id": "log_037",
+    "timestamp": "2024-01-15T09:10:34.206Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Audit event recorded",
+    "metadata": {
+      "action": "read",
+      "resource": "users"
+    }
+  },
+  {
+    "id": "log_038",
+    "timestamp": "2024-01-15T09:10:38.953Z",
+    "service": "auth-service",
+    "severity": "WARN",
+    "message": "Connection pool utilization high: 78%",
+    "metadata": {
+      "pool": "HikariPool-1"
+    }
+  },
+  {
+    "id": "log_039",
+    "timestamp": "2024-01-15T09:10:54.420Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Cache hit for key user_profile_50279",
+    "metadata": {
+      "hit_rate": "99%"
+    }
+  },
+  {
+    "id": "log_040",
+    "timestamp": "2024-01-15T09:11:23.846Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_041",
+    "timestamp": "2024-01-15T09:11:49.501Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "Database connection pool exhausted. java.sql.SQLException: Cannot acquire connection from pool. All 50 connections in use, 12 requests queued.",
+    "metadata": {
+      "db_host": "db-primary.internal",
+      "port": "5432",
+      "pool_active": "50",
+      "pool_max": "50",
+      "queue_depth": "12"
+    }
+  },
+  {
+    "id": "log_042",
+    "timestamp": "2024-01-15T09:12:15.255Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 1646ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_043",
+    "timestamp": "2024-01-15T09:12:32.699Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "59"
+    }
+  },
+  {
+    "id": "log_044",
+    "timestamp": "2024-01-15T09:12:36.408Z",
+    "service": "auth-service",
+    "severity": "ERROR",
+    "message": "User login successful",
+    "metadata": {
+      "user_id": "u_33539",
+      "source_ip": "10.0.80.153"
+    }
+  },
+  {
+    "id": "log_045",
+    "timestamp": "2024-01-15T09:13:01.043Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 460ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_046",
+    "timestamp": "2024-01-15T09:13:10.397Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "1727"
+    }
+  },
+  {
+    "id": "log_047",
+    "timestamp": "2024-01-15T09:13:26.424Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Request completed: GET /api/v1/users in 581ms",
+    "metadata": {
+      "status": "200"
+    }
+  },
+  {
+    "id": "log_048",
+    "timestamp": "2024-01-15T09:13:31.664Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Health check passed: all dependencies healthy",
+    "metadata": {
+      "endpoint": "/health"
+    }
+  },
+  {
+    "id": "log_049",
+    "timestamp": "2024-01-15T09:13:49.570Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Outbound request to downstream service completed",
+    "metadata": {
+      "latency_ms": "3149"
+    }
+  },
+  {
+    "id": "log_050",
+    "timestamp": "2024-01-15T09:14:06.534Z",
+    "service": "auth-service",
+    "severity": "INFO",
+    "message": "Configuration reloaded successfully",
+    "metadata": {
+      "properties": "5"
+    }
+  }
+]

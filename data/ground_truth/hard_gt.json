@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "log_023": "reconnaissance",
+    "log_078": "brute_force",
+    "log_091": "brute_force",
+    "log_145": "credential_compromise",
+    "log_201": "privilege_escalation",
+    "log_267": "data_exfiltration",
+    "log_312": "lateral_movement",
+    "log_389": "data_exfiltration"
+  },
+  "correlations": [
+    [
+      "log_023",
+      "log_078"
+    ],
+    [
+      "log_091",
+      "log_145"
+    ],
+    [
+      "log_145",
+      "log_201"
+    ],
+    [
+      "log_201",
+      "log_267"
+    ],
+    [
+      "log_201",
+      "log_312"
+    ],
+    [
+      "log_312",
+      "log_389"
+    ]
+  ],
+  "severity": "CRITICAL",
+  "key_findings": [
+    "brute force login attempts",
+    "privilege escalation via admin api",
+    "data exfiltration of customer records",
+    "lateral movement to file service",
+    "compromised credentials",
+    "unauthorized admin access"
+  ]
+}

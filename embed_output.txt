@@ -1,0 +1,31 @@
+﻿python : AttributeError: 'MessageFactory' 
+object has no attribute 'GetPrototype'
+At line:1 char:64
++ ... N_OPTS="0"; python -c "from 
+src.ml_models import precompute_all_embed 
+...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecifie 
+   d: (AttributeError:... 'GetPrototype'  
+  :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeComma 
+   ndError
+ 
+AttributeError: 'MessageFactory' object 
+has no attribute 'GetPrototype'
+AttributeError: 'MessageFactory' object 
+has no attribute 'GetPrototype'
+AttributeError: 'MessageFactory' object 
+has no attribute 'GetPrototype'
+AttributeError: 'MessageFactory' object 
+has no attribute 'GetPrototype'
+[ml_models] Downloading all-MiniLM-L6-v2 ΓÇª
+[ml_models] Ready ΓÇö 12 categories, 3 task finding sets
+Saved category embeddings -> data/embeddings\category_embeddings.npy shape=(12, 384)
+Saved category similarity matrix -> data/embeddings\category_similarity_matrix.npy shape=(12, 12)
+Saved easy finding embeddings -> data/embeddings\easy_finding_embeddings.npy shape=(3, 384)
+Saved medium finding embeddings -> data/embeddings\medium_finding_embeddings.npy shape=(4, 384)
+Saved hard finding embeddings -> data/embeddings\hard_finding_embeddings.npy shape=(6, 384)
+
+All embeddings precomputed and saved.

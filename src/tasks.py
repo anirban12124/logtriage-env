@@ -64,6 +64,15 @@ TASKS = {
                 "auth-service affected",
                 "postgresql port 5432",
             ],
+            # Longer descriptions used for MiniLM semantic similarity scoring (Grader H)
+            "key_finding_descriptions": [
+                "The auth-service experienced repeated database connection failures "
+                "with errors connecting to the primary database server on port 5432",
+                "Connection refused errors occurred on PostgreSQL port 5432 indicating "
+                "the database server was unreachable or overloaded",
+                "The auth-service was the sole affected component experiencing "
+                "intermittent database connectivity issues causing service degradation",
+            ],
         },
         "grader_weights": {
             "annotation_precision": 0.15,
@@ -112,6 +121,18 @@ TASKS = {
                 "order service queue backup",
                 "api gateway 503 errors",
                 "cascading failure from payment to gateway",
+            ],
+            # Longer descriptions used for MiniLM semantic similarity scoring (Grader H)
+            "key_finding_descriptions": [
+                "Payment service experienced database connection pool exhaustion with "
+                "all 50 connections in use causing transaction timeouts and service degradation",
+                "Order service message queue backed up with 15000 pending messages "
+                "as payment processing stalled causing consumer lag and order processing failure",
+                "API gateway returned HTTP 503 Service Unavailable errors to end users "
+                "because the downstream order-service dependency was not responding",
+                "Root cause was database connection pool exhaustion in payment-service "
+                "which triggered a cascading failure propagating through order-service "
+                "to the api-gateway affecting all end users",
             ],
         },
         "grader_weights": {
@@ -172,6 +193,22 @@ TASKS = {
                 "lateral movement to file service",
                 "compromised credentials",
                 "unauthorized admin access",
+            ],
+            # Longer descriptions used for MiniLM semantic similarity scoring (Grader H)
+            "key_finding_descriptions": [
+                "Automated brute force attacks targeted admin and service account "
+                "credentials with hundreds of failed login attempts from an external IP address",
+                "The attacker escalated privileges by accessing admin API endpoints "
+                "with a compromised non-admin service account bypassing authorization controls",
+                "Sensitive data including 15247 customer records with PII fields "
+                "was exfiltrated through bulk download operations totaling 48.3 megabytes",
+                "The attacker moved laterally from auth-service to file-service "
+                "by reusing a compromised authentication token across service boundaries",
+                "Credentials for the svc-deploy service account were compromised "
+                "after sustained brute force attempts totaling over 91 failed logins",
+                "Administrative API endpoints including the user listing endpoint "
+                "were accessed by a service account without admin privileges "
+                "indicating an authorization bypass through a legacy policy",
             ],
         },
         "grader_weights": {
