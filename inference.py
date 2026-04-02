@@ -113,6 +113,13 @@ KICKSTART_ACTIONS: Dict[str, List[Tuple[str, dict]]] = {
     ],
 }
 
+# Minimum annotations required before allowing report submission per task
+MIN_ANNOTATIONS: Dict[str, int] = {
+    "task_easy": 2,
+    "task_medium": 3,
+    "task_hard": 4,
+}
+
 
 # ─── System Prompt (1B + 1C) ────────────────────────────────────
 
@@ -128,6 +135,7 @@ Format: {"action_type": "<type>", "params": {<params>}}
 EXAMPLES:
 {"action_type": "search", "params": {"pattern": "connection refused"}}
 {"action_type": "filter_severity", "params": {"level": "ERROR"}}
+{"action_type": "filter_service", "params": {"service": "payment-service"}}
 {"action_type": "annotate", "params": {"log_id": "log_042", "category": "error"}}
 {"action_type": "correlate", "params": {"source_log_id": "log_012", "target_log_id": "log_042"}}
 {"action_type": "classify_incident", "params": {"severity": "HIGH"}}
@@ -144,8 +152,8 @@ NAVIGATION:
 
 INVESTIGATION:
   inspect(log_id) - View full details of a specific log entry.
-  annotate(log_id, category) - Mark a log with a category.
-  correlate(source_log_id, target_log_id) - Link cause → effect.
+  annotate(log_id, category) - Mark a log with a category. YOU MUST USE THIS.
+  correlate(source_log_id, target_log_id) - Link cause → effect. YOU MUST USE THIS.
 
 CONCLUSION:
   classify_incident(severity) - Set severity: LOW/MEDIUM/HIGH/CRITICAL.
@@ -157,52 +165,97 @@ Categories for annotation:
   Security: reconnaissance, brute_force, credential_compromise,
     privilege_escalation, lateral_movement, data_exfiltration, persistence
 
-STRATEGY (follow this order):
-  1. FIRST search and filter to narrow down relevant logs.
-  2. THEN inspect suspicious logs and annotate anomalies with correct categories.
-  3. THEN correlate related events (source caused target).
-  4. FINALLY classify severity and submit a detailed report.
+=== MANDATORY RULES (YOUR SCORE DEPENDS ON THESE) ===
 
-Hint: Use search and filter_service actions immediately to narrow down
-the logs before trying to annotate anything. Do NOT scroll through all pages.
+1. You MUST annotate EVERY suspicious log you find using the "annotate" action.
+   Each annotation needs a log_id and a category. If you skip annotations,
+   your score will be ZERO on investigation components (60% of your grade).
+
+2. You MUST correlate related events using the "correlate" action.
+   Link the root cause log to each symptom log (source_log_id caused target_log_id).
+   Without correlations, you lose 30% of your grade.
+
+3. Do NOT submit a report until you have:
+   - Annotated at least 2-3 suspicious logs
+   - Created at least 1 correlation between related logs
+   - Classified severity
+   Submitting a report without annotations = very low score.
+
+4. Do NOT stop after finding just ONE error. Keep searching for ALL related errors
+   across ALL services. Use filter_service to check each service.
+
+=== INVESTIGATION STRATEGY ===
+
+  Step 1: Search and filter to find ERROR and WARN logs.
+  Step 2: For EACH suspicious log you see, use "annotate" to mark it.
+  Step 3: After annotating 2+ logs, use "correlate" to link related ones.
+  Step 4: Check other services with filter_service for related issues.
+  Step 5: Classify severity.
+  Step 6: Submit a detailed report referencing your findings.
 
 Your report MUST include:
-  - Root cause of the incident
+  - Root cause of the incident (mention specific log IDs)
   - Affected services and impact
-  - Timeline of events (use words like "first", "then", "leading to")
-  - Severity justification
+  - Timeline: use "first", "then", "subsequently", "leading to", "finally"
+  - Severity justification (why you chose that level)
 
 CRITICAL: Output ONLY valid JSON. No other text whatsoever.""").strip()
 
 
 # ─── Phase-Aware User Prompt (1B) ───────────────────────────────
 
-def get_phase_hint(step: int, max_steps: int, obs: dict) -> str:
+def get_phase_hint(step: int, max_steps: int, obs: dict, task_id: str = "") -> str:
     """Generate phase-specific guidance based on progress."""
     ratio = step / max_steps
     ann_count = obs.get("annotations_count", 0)
+    corr_count = obs.get("correlations_count", 0)
     sev = obs.get("severity_classified")
     has_report = bool(obs.get("current_report_draft"))
+    min_ann = MIN_ANNOTATIONS.get(task_id, 2)
 
-    if ratio < 0.3:
+    if ratio < 0.25:
         return (
             "PHASE: EXPLORATION. Search and filter to find suspicious logs. "
-            "Do NOT annotate yet — find the right logs first."
+            "Look at ERROR and WARN entries. Once you see a suspicious log, "
+            "use 'annotate' to mark it immediately."
         )
-    elif ratio < 0.7:
-        remaining_steps = max_steps - step
-        hint = "PHASE: INVESTIGATION. Annotate suspicious logs and create correlations."
+    elif ratio < 0.6:
+        parts = ["PHASE: INVESTIGATION."]
         if ann_count == 0:
-            hint += " You have NO annotations yet — annotate ERROR/WARN logs NOW."
-        return hint
+            parts.append(
+                f"URGENT: You have ZERO annotations! You MUST annotate suspicious "
+                f"logs NOW. Look at the visible logs and annotate any ERROR/WARN "
+                f"entries. Use: {{\"action_type\": \"annotate\", \"params\": "
+                f"{{\"log_id\": \"<id>\", \"category\": \"error\"}}}}")
+        elif ann_count < min_ann:
+            parts.append(
+                f"You have {ann_count} annotations but need at least {min_ann}. "
+                f"Keep annotating suspicious logs. Also search other services.")
+        else:
+            parts.append(f"Good: {ann_count} annotations. Now create correlations between related logs.")
+        if corr_count == 0 and ann_count >= 2:
+            parts.append(
+                f"You have {ann_count} annotations but ZERO correlations. "
+                f"Use 'correlate' to link related events NOW.")
+        return " ".join(parts)
     else:
-        parts = ["PHASE: CONCLUSION. You are running low on steps!"]
-        if not sev:
-            parts.append("You have NOT classified severity yet — do it NOW.")
-        if not has_report:
-            parts.append("You have NOT submitted a report — submit one NOW.")
+        parts = ["PHASE: CONCLUSION."]
         if ann_count == 0:
-            parts.append("WARNING: You have zero annotations. Annotate any ERROR logs you see.")
+            parts.append(
+                f"CRITICAL: You have ZERO annotations and are running out of steps! "
+                f"Annotate the ERROR logs you can see RIGHT NOW before doing anything else.")
+        elif ann_count < min_ann:
+            parts.append(f"You have {ann_count}/{min_ann} minimum annotations. Annotate more if possible.")
+        if corr_count == 0 and ann_count >= 2:
+            parts.append(f"WARNING: {ann_count} annotations but 0 correlations. Correlate related logs NOW.")
+        if not sev:
+            parts.append("You have NOT classified severity — do it NOW.")
+        if ann_count >= min_ann and corr_count > 0 and sev and not has_report:
+            parts.append("You have annotations, correlations, and severity. Submit your report NOW.")
+        elif not has_report and ann_count >= min_ann:
+            parts.append("Submit your report soon — include log IDs and causal chain.")
+        remaining = max_steps - step
+        parts.append(f"({remaining} steps remaining)")
         return " ".join(parts)
 
 
@@ -216,8 +269,8 @@ def format_observation(obs: dict, history: List[str], step: int) -> str:
     parts.append(f"GOAL: {obs['goal']}")
     parts.append(f"Step: {obs['step_number']}/{obs['max_steps']}")
 
-    # Phase hint
-    parts.append(get_phase_hint(step, obs['max_steps'], obs))
+    # Phase hint (task_id extracted from goal heuristic or passed via obs)
+    parts.append(get_phase_hint(step, obs['max_steps'], obs, obs.get('_task_id', '')))
 
     # Last action feedback
     parts.append(f"Last action: {obs['last_action_message']}")
@@ -549,9 +602,14 @@ def run_task(
             break
 
     # ─── LLM-driven phase ───
+    min_ann = MIN_ANNOTATIONS.get(task_id, 2)
+
     if not (step_result and step_result.get("done", False)):
         for llm_step in range(step + 1, max_steps + 1):
             step = llm_step
+
+            # Inject task_id into obs for phase hint
+            obs['_task_id'] = task_id
 
             # ─── Auto-report guard (1G): force report in final 2 steps ───
             if step >= max_steps - 1:
@@ -583,8 +641,30 @@ def run_task(
                         step, max_steps, obs
                     )
 
-                params_str = json.dumps(params) if params else "{}"
-                print(f"  Step {step}: {action_type}({params_str})")
+                # ─── Annotation Gate: block premature reports ───
+                ann_count = obs.get("annotations_count", 0)
+                ratio = step / max_steps
+                if action_type in ("submit_report", "draft_report") and ann_count < min_ann and ratio < 0.85:
+                    # Redirect: the model is trying to report without annotating
+                    visible = obs.get("visible_logs", [])
+                    error_logs = [l for l in visible if l.get("severity") in ("ERROR", "WARN", "FATAL")]
+                    if error_logs:
+                        target = error_logs[0]
+                        cat = "error"
+                        if target.get("severity") == "WARN":
+                            cat = "warning"
+                        action_type = "annotate"
+                        params = {"log_id": target["id"], "category": cat}
+                        print(f"  Step {step}: [GATE] Blocked report (only {ann_count}/{min_ann} annotations). "
+                              f"Forced annotate({target['id']}, {cat})")
+                    else:
+                        # No error logs visible — scroll to find some
+                        action_type = "scroll"
+                        params = {"direction": "down"}
+                        print(f"  Step {step}: [GATE] Blocked report, scrolling to find logs")
+                else:
+                    params_str = json.dumps(params) if params else "{}"
+                    print(f"  Step {step}: {action_type}({params_str})")
 
             # Execute step
             step_result = env.step(action_type, params)
