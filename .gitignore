@@ -5,6 +5,7 @@ __pycache__/
 dist/
 build/
 .eggs/
+.gitignore
 
 # Virtual environment
 venv/
@@ -26,3 +27,5 @@ Thumbs.db
 
 # Logs
 *.log
+script.md
+uv_error.txt
