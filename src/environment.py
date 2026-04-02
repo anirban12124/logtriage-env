@@ -8,6 +8,7 @@ from src.reward import RewardCalculator
 from src.grader import TaskGrader
 
 from typing import List, Dict, Optional, Any
+from rank_bm25 import BM25Okapi
 class LogTriageEnv:
     def __init__(self):
         self.task_config: Optional[dict] = None
@@ -38,6 +39,35 @@ class LogTriageEnv:
         self.last_action_message: str = "OK"
         self.draft_feedback: Optional[str] = None
 
+        # BM25 search index (built at reset)
+        self._bm25_index: Optional[BM25Okapi] = None
+        self._bm25_corpus_tokens: List[List[str]] = []
+        self._search_ranked_ids: Optional[List[str]] = None  # ordered log IDs from last search
+
+    @staticmethod
+    def _tokenize(text: str) -> List[str]:
+        """Simple whitespace + lowering tokenizer for BM25."""
+        return text.lower().split()
+
+    def _build_bm25_index(self):
+        """Build BM25 index over all log messages + service + metadata."""
+        corpus_tokens = []
+        for log in self.logs:
+            # Combine all searchable text for each log entry
+            parts = [
+                log.get("message", ""),
+                log.get("service", ""),
+                log.get("severity", ""),
+            ]
+            for v in log.get("metadata", {}).values():
+                if isinstance(v, str):
+                    parts.append(v)
+            doc_text = " ".join(parts)
+            corpus_tokens.append(self._tokenize(doc_text))
+
+        self._bm25_corpus_tokens = corpus_tokens
+        self._bm25_index = BM25Okapi(corpus_tokens)
+
     def reset(self, task_id: str) -> dict:
         if task_id not in TASKS:
             raise ValueError(f"Unknown task: {task_id}. Available: {list(TASKS.keys())}")
@@ -49,6 +79,9 @@ class LogTriageEnv:
         self.reward_calc = RewardCalculator(
             self.task_config["ground_truth"], self.task_config
         )
+
+        # Build BM25 index for ranked search
+        self._build_bm25_index()
 
         # Track initial page view
         self._track_page_view()
@@ -236,6 +269,7 @@ class LogTriageEnv:
     def _do_search(self, pattern: str) -> dict:
         if not pattern:
             self.search_pattern = ""
+            self._search_ranked_ids = None
             self.active_filters.pop("search", None)
             self._apply_filters()
             self.last_action_message = "Search cleared. Showing all logs."
@@ -243,6 +277,27 @@ class LogTriageEnv:
 
         self.search_pattern = pattern.lower()
         self.active_filters["search"] = pattern
+
+        # BM25 ranking: score all logs, keep those above threshold
+        if self._bm25_index is not None:
+            query_tokens = self._tokenize(pattern)
+            scores = self._bm25_index.get_scores(query_tokens)
+
+            # Pair each log with its BM25 score, sort descending
+            scored = sorted(
+                zip(self.logs, scores),
+                key=lambda x: x[1],
+                reverse=True,
+            )
+
+            # Keep logs with score > 0 (matched at least one query token)
+            self._search_ranked_ids = [
+                log["id"] for log, score in scored if score > 0.0
+            ]
+        else:
+            # Fallback: naive substring match
+            self._search_ranked_ids = None
+
         self._apply_filters()
         self.current_page = 0
 
@@ -253,7 +308,7 @@ class LogTriageEnv:
             if log["id"] in gt_ids:
                 found_gt.add(log["id"])
 
-        self.last_action_message = f"Search '{pattern}': {len(self.filtered_logs)} results."
+        self.last_action_message = f"Search '{pattern}': {len(self.filtered_logs)} results (BM25 ranked)."
         return {
             "search_hits": len(self.filtered_logs),
             "relevant_hits": len(found_gt),
@@ -416,12 +471,26 @@ class LogTriageEnv:
             end = self.active_filters["time_end"]
             result = [l for l in result if start <= l["timestamp"] <= end]
 
+        # Search: use BM25 ranked order if available, else naive substring
         if self.search_pattern:
-            pattern = self.search_pattern
-            result = [l for l in result if pattern in l["message"].lower()
-                      or pattern in l["service"].lower()
-                      or any(pattern in v.lower()
-                             for v in l.get("metadata", {}).values())]
+            if self._search_ranked_ids is not None:
+                # BM25 path: filter to only ranked IDs, preserve rank order
+                ranked_set = set(self._search_ranked_ids)
+                # First narrow by other filters (severity/service/time)
+                filtered_ids = set(l["id"] for l in result)
+                # Keep only logs that pass both BM25 and other filters, in rank order
+                id_to_log = {l["id"]: l for l in result}
+                result = [
+                    id_to_log[lid] for lid in self._search_ranked_ids
+                    if lid in filtered_ids and lid in ranked_set
+                ]
+            else:
+                # Fallback: naive substring match
+                pattern = self.search_pattern
+                result = [l for l in result if pattern in l["message"].lower()
+                          or pattern in l["service"].lower()
+                          or any(pattern in v.lower()
+                                  for v in l.get("metadata", {}).values())]
 
         self.filtered_logs = result
 
