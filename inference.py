@@ -137,218 +137,137 @@ MIN_ANNOTATIONS: Dict[str, int] = {
 }
 
 
-# ─── System Prompt (1B + 1C) ────────────────────────────────────
+# ─── Task-Specific System Prompts ────────────────────────────────
+#
+# Compact prompts (~300-400 tokens each) to avoid hallucination on
+# small models (9B).  Each task gets ONLY its relevant categories,
+# services, and a short strategy.
 
-SYSTEM_PROMPT = textwrap.dedent("""\
-You are an expert SRE investigating system logs during an incident.
-You interact with a log investigation environment via JSON actions.
+_PROMPT_CORE = textwrap.dedent("""\
+You are an SRE investigating logs. Reply with ONLY a raw JSON object.
+No markdown, no explanation. Format: {"action_type": "<type>", "params": {<params>}}
 
-OUTPUT FORMAT: You MUST reply with ONLY a single raw JSON object.
-No markdown, no code blocks, no explanations, no text before or after.
+Actions:
+  search(pattern) | filter_severity(level) | filter_service(service)
+  clear_filters() | scroll(direction=up/down)
+  inspect(log_id) | annotate(log_id, category) | correlate(source_log_id, target_log_id)
+  classify_incident(severity=LOW/MEDIUM/HIGH/CRITICAL)
+  draft_report(summary) | submit_report(summary)
 
-Format: {"action_type": "<type>", "params": {<params>}}
+Rules:
+- Annotate EVERY suspicious log before submitting.
+- Correlate related logs (source caused target).
+- Classify severity before submitting.
+- Report must mention log IDs, root cause, affected services, and timeline.
 
-EXAMPLES:
-{"action_type": "search", "params": {"pattern": "connection refused"}}
-{"action_type": "filter_severity", "params": {"level": "ERROR"}}
-{"action_type": "filter_service", "params": {"service": "payment-service"}}
-{"action_type": "annotate", "params": {"log_id": "log_042", "category": "error"}}
-{"action_type": "correlate", "params": {"source_log_id": "log_012", "target_log_id": "log_042"}}
-{"action_type": "classify_incident", "params": {"severity": "HIGH"}}
-{"action_type": "submit_report", "params": {"summary": "Root cause: ... Impact: ... Timeline: ..."}}
+Output ONLY valid JSON.""").strip()
 
-Available actions:
+TASK_PROMPTS: Dict[str, str] = {
+    "task_easy": _PROMPT_CORE + "\n\n" + textwrap.dedent("""\
+TASK: Find database connection errors in auth-service logs.
+Categories: error, warning
+Services: auth-service
+Strategy: filter ERROR logs → annotate each error → classify severity → submit report.""").strip(),
 
-NAVIGATION:
-  search(pattern) - Search logs by keyword. Use this FIRST to find relevant logs.
-  filter_severity(level) - Filter by DEBUG/INFO/WARN/ERROR/FATAL.
-  filter_service(service) - Filter by service name.
-  clear_filters() - Remove all filters.
-  scroll(direction) - Scroll "up" or "down" through log pages.
+    "task_medium": _PROMPT_CORE + "\n\n" + textwrap.dedent("""\
+TASK: Trace a cascading failure across 3 services.
+Categories: root_cause, symptom, cascading_failure
+Services: payment-service, order-service, api-gateway
+Strategy: check payment-service first → annotate root cause → check other services → correlate cause→effect → classify severity → submit report.""").strip(),
 
-INVESTIGATION:
-  inspect(log_id) - View full details of a specific log entry.
-  annotate(log_id, category) - Mark a log with a category. YOU MUST USE THIS.
-  correlate(source_log_id, target_log_id) - Link cause → effect. YOU MUST USE THIS.
+    "task_hard": _PROMPT_CORE + "\n\n" + textwrap.dedent("""\
+TASK: Investigate a multi-stage security breach across 5 services.
+Categories: reconnaissance, brute_force, credential_compromise, privilege_escalation, lateral_movement, data_exfiltration
+Services: auth-service, api-gateway, user-service, file-service, audit-log
+Strategy: search for suspicious IPs and failed logins → annotate each attack stage → correlate the attack chain → classify CRITICAL → submit report.""").strip(),
+}
 
-CONCLUSION:
-  classify_incident(severity) - Set severity: LOW/MEDIUM/HIGH/CRITICAL.
-  draft_report(summary) - Save a draft report (does NOT end episode).
-  submit_report(summary) - Submit final report (ENDS episode).
-
-Categories for annotation:
-  Infrastructure: error, root_cause, symptom, cascading_failure, warning
-  Security: reconnaissance, brute_force, credential_compromise,
-    privilege_escalation, lateral_movement, data_exfiltration, persistence
-
-=== MANDATORY RULES (YOUR SCORE DEPENDS ON THESE) ===
-
-1. You MUST annotate EVERY suspicious log you find using the "annotate" action.
-   Each annotation needs a log_id and a category. If you skip annotations,
-   your score will be ZERO on investigation components (60% of your grade).
-
-2. You MUST correlate related events using the "correlate" action.
-   Link the root cause log to each symptom log (source_log_id caused target_log_id).
-   Without correlations, you lose 30% of your grade.
-
-3. Do NOT submit a report until you have:
-   - Annotated at least 2-3 suspicious logs
-   - Created at least 1 correlation between related logs
-   - Classified severity
-   Submitting a report without annotations = very low score.
-
-4. Do NOT stop after finding just ONE error. Keep searching for ALL related errors
-   across ALL services. Use filter_service to check each service.
-
-=== INVESTIGATION STRATEGY ===
-
-  Step 1: Search and filter to find ERROR and WARN logs.
-  Step 2: For EACH suspicious log you see, use "annotate" to mark it.
-  Step 3: After annotating 2+ logs, use "correlate" to link related ones.
-  Step 4: Check other services with filter_service for related issues.
-  Step 5: Classify severity.
-  Step 6: Submit a detailed report referencing your findings.
-
-Your report MUST include:
-  - Root cause of the incident (mention specific log IDs)
-  - Affected services and impact
-  - Timeline: use "first", "then", "subsequently", "leading to", "finally"
-  - Severity justification (why you chose that level)
-
-CRITICAL: Output ONLY valid JSON. No other text whatsoever.""").strip()
+# Fallback for unknown task IDs
+SYSTEM_PROMPT = _PROMPT_CORE
 
 
 # ─── Phase-Aware User Prompt (1B) ───────────────────────────────
 
 def get_phase_hint(step: int, max_steps: int, obs: dict, task_id: str = "") -> str:
-    """Generate phase-specific guidance based on progress."""
+    """Short, directive phase hint — kept small for 9B models."""
     ratio = step / max_steps
-    ann_count = obs.get("annotations_count", 0)
-    corr_count = obs.get("correlations_count", 0)
+    ann = obs.get("annotations_count", 0)
+    corr = obs.get("correlations_count", 0)
     sev = obs.get("severity_classified")
-    has_report = bool(obs.get("current_report_draft"))
+    remaining = max_steps - step
     min_ann = MIN_ANNOTATIONS.get(task_id, 2)
 
-    if ratio < 0.25:
-        return (
-            "PHASE: EXPLORATION. Search and filter to find suspicious logs. "
-            "Look at ERROR and WARN entries. Once you see a suspicious log, "
-            "use 'annotate' to mark it immediately."
-        )
-    elif ratio < 0.6:
-        parts = ["PHASE: INVESTIGATION."]
-        if ann_count == 0:
-            parts.append(
-                f"URGENT: You have ZERO annotations! You MUST annotate suspicious "
-                f"logs NOW. Look at the visible logs and annotate any ERROR/WARN "
-                f"entries. Use: {{\"action_type\": \"annotate\", \"params\": "
-                f"{{\"log_id\": \"<id>\", \"category\": \"error\"}}}}")
-        elif ann_count < min_ann:
-            parts.append(
-                f"You have {ann_count} annotations but need at least {min_ann}. "
-                f"Keep annotating suspicious logs. Also search other services.")
-        else:
-            parts.append(f"Good: {ann_count} annotations. Now create correlations between related logs.")
-        if corr_count == 0 and ann_count >= 2:
-            parts.append(
-                f"You have {ann_count} annotations but ZERO correlations. "
-                f"Use 'correlate' to link related events NOW.")
-        return " ".join(parts)
+    if ratio < 0.3:
+        return f"EXPLORE: Find and annotate suspicious logs. ({remaining} steps left)"
+    elif ratio < 0.65:
+        if ann == 0:
+            return f"URGENT: Annotate ERROR/WARN logs NOW. ({remaining} left)"
+        if ann < min_ann:
+            return f"Have {ann}/{min_ann} annotations. Annotate more. ({remaining} left)"
+        if corr == 0:
+            return f"Have {ann} annotations, 0 correlations. Correlate NOW. ({remaining} left)"
+        return f"Good progress ({ann} ann, {corr} corr). Continue investigating. ({remaining} left)"
     else:
-        parts = ["PHASE: CONCLUSION."]
-        if ann_count == 0:
-            parts.append(
-                f"CRITICAL: You have ZERO annotations and are running out of steps! "
-                f"Annotate the ERROR logs you can see RIGHT NOW before doing anything else.")
-        elif ann_count < min_ann:
-            parts.append(f"You have {ann_count}/{min_ann} minimum annotations. Annotate more if possible.")
-        if corr_count == 0 and ann_count >= 2:
-            parts.append(f"WARNING: {ann_count} annotations but 0 correlations. Correlate related logs NOW.")
+        if ann == 0:
+            return f"CRITICAL: 0 annotations! Annotate visible ERROR logs NOW. ({remaining} left)"
         if not sev:
-            parts.append("You have NOT classified severity — do it NOW.")
-        if ann_count >= min_ann and corr_count > 0 and sev and not has_report:
-            parts.append("You have annotations, correlations, and severity. Submit your report NOW.")
-        elif not has_report and ann_count >= min_ann:
-            parts.append("Submit your report soon — include log IDs and causal chain.")
-        remaining = max_steps - step
-        parts.append(f"({remaining} steps remaining)")
-        return " ".join(parts)
+            return f"Classify severity NOW. ({remaining} left)"
+        if corr == 0 and ann >= 2:
+            return f"Correlate your {ann} annotations NOW, then submit. ({remaining} left)"
+        return f"Submit your report NOW with log IDs and timeline. ({remaining} left)"
 
 
 # ─── Compact Observation Formatting (1A) ─────────────────────────
 
 def format_observation(obs: dict, history: List[str], step: int) -> str:
-    """Format observation compactly for small LLM context windows."""
-    parts = []
+    """Compact observation for small models. Targets ~500 tokens."""
+    p = []
+    task_id = obs.get('_task_id', '')
 
-    # Goal and progress
-    parts.append(f"GOAL: {obs['goal']}")
-    parts.append(f"Step: {obs['step_number']}/{obs['max_steps']}")
+    # Step progress + phase hint (1 line)
+    p.append(f"Step {obs['step_number']}/{obs['max_steps']}. {get_phase_hint(step, obs['max_steps'], obs, task_id)}")
 
-    # Phase hint (task_id extracted from goal heuristic or passed via obs)
-    parts.append(get_phase_hint(step, obs['max_steps'], obs, obs.get('_task_id', '')))
-
-    # Last action feedback
-    parts.append(f"Last action: {obs['last_action_message']}")
-
+    # Feedback from last action
+    p.append(f"Last: {obs['last_action_message'][:80]}")
     if obs.get("draft_feedback"):
-        parts.append(f"DRAFT FEEDBACK: {obs['draft_feedback']}")
+        p.append(f"Feedback: {obs['draft_feedback']}")
 
-    # Dashboard (compact)
-    parts.append(f"\nSEVERITY COUNTS: {json.dumps(obs['severity_counts'])}")
-    parts.append(f"SERVICES: {', '.join(obs['available_services'])}")
-    parts.append(f"TOTAL LOGS: {obs['total_log_count']}")
-    if obs['current_filters']:
-        parts.append(f"FILTERS: {json.dumps(obs['current_filters'])}")
-    else:
-        parts.append("FILTERS: none")
-    parts.append(f"PAGE: {obs['current_page'] + 1}/{obs['total_pages']}")
+    # Dashboard — 1 line
+    filters = json.dumps(obs['current_filters']) if obs['current_filters'] else 'none'
+    p.append(f"Logs: {obs['total_log_count']} | Page {obs['current_page']+1}/{obs['total_pages']} | Filters: {filters}")
 
-    # Visible logs — compact format, max 15 entries, truncated to 80 chars
-    visible = obs.get("visible_logs", [])[:15]
-    parts.append(f"\nVISIBLE LOGS ({len(visible)} entries):")
-    for log in visible:
-        msg = log['message'][:80]
-        parts.append(
-            f"  {log['id']} | {log['severity']} | {log['service']} | {msg}"
-        )
+    # Visible logs — compact, max 12, truncated to 70 chars
+    visible = obs.get("visible_logs", [])[:12]
+    if visible:
+        p.append(f"LOGS ({len(visible)}):")
+        for log in visible:
+            p.append(f"  {log['id']}|{log['severity']}|{log['service']}|{log['message'][:70]}")
 
-    # Inspected log (full, if present)
+    # Inspected log (only if present)
     if obs.get("inspected_log"):
         il = obs["inspected_log"]
-        parts.append(f"\nINSPECTED LOG ({il['id']}):")
-        parts.append(f"  Message: {il['message']}")
-        meta = il.get('metadata', {})
-        if meta:
-            parts.append(f"  Metadata: {json.dumps(meta)}")
+        p.append(f"INSPECTED {il['id']}: {il['message'][:150]}")
+        if il.get('metadata'):
+            p.append(f"  Meta: {json.dumps(il['metadata'])}")
 
-    # Agent's work summary (compact)
-    parts.append(f"\nYOUR WORK:")
-    parts.append(f"  Annotations: {obs['annotations_count']}")
+    # Work summary — 1-2 lines
+    ann = obs['annotations_count']
+    corr = obs['correlations_count']
+    sev = obs.get('severity_classified') or '-'
+    work = f"Work: {ann} annotations, {corr} correlations, severity={sev}"
     if obs.get("recent_annotations"):
-        anns = [f"{a['log_id']}:{a['category']}" for a in obs["recent_annotations"]]
-        parts.append(f"  Recent: {', '.join(anns)}")
-    parts.append(f"  Correlations: {obs['correlations_count']}")
-    if obs.get("recent_correlations"):
-        corrs = [f"{c[0]}→{c[1]}" for c in obs["recent_correlations"]]
-        parts.append(f"  Recent: {', '.join(corrs)}")
-    parts.append(f"  Severity: {obs.get('severity_classified') or 'NOT SET'}")
-    if obs.get("current_report_draft"):
-        parts.append(f"  Report draft: saved ({len(obs['current_report_draft'])} chars)")
+        recent = ' '.join(f"{a['log_id']}:{a['category']}" for a in obs["recent_annotations"][-3:])
+        work += f" | Recent: {recent}"
+    p.append(work)
 
-    # History — last 3 only
+    # History — last 2 only
     if history:
-        parts.append(f"\nRECENT HISTORY:")
-        for h in history[-3:]:
-            parts.append(f"  {h}")
+        p.append(f"History: {' | '.join(history[-2:])}")
 
-    # Final enforcement
-    parts.append(
-        "\nRespond with ONLY a JSON object: "
-        '{"action_type": "<type>", "params": {<params>}}'
-    )
+    # JSON reminder (short)
+    p.append('Reply with JSON only.')
 
-    return "\n".join(parts)
+    return "\n".join(p)
 
 
 # ─── Action Parsing with Retry (1D) ─────────────────────────────
@@ -670,8 +589,9 @@ def run_task(
             else:
                 # Normal LLM-driven step
                 user_prompt = format_observation(obs, history, step)
+                task_prompt = TASK_PROMPTS.get(task_id, SYSTEM_PROMPT)
                 action_type, params = call_llm_with_retry(
-                    llm_client, model_name, SYSTEM_PROMPT, user_prompt
+                    llm_client, model_name, task_prompt, user_prompt
                 )
 
                 # If LLM returned noop, use intelligent fallback (1E)
