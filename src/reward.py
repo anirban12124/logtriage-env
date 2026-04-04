@@ -231,8 +231,14 @@ class RewardCalculator:
                 components["duplicate_correlation"] = -0.03
                 total -= 0.03
             else:
-                components["wrong_correlation"] = -0.05
-                total -= 0.05
+                reversed_pair = (target, source)
+                if reversed_pair in gt_pairs:
+                    # Right logs, wrong direction — softer penalty to signal "fix the order"
+                    components["reversed_correlation"] = -0.02
+                    total -= 0.02
+                else:
+                    components["wrong_correlation"] = -0.05
+                    total -= 0.05
 
         # ─── SEARCH ───
         elif action_type == "search":

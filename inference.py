@@ -160,6 +160,26 @@ Rules:
 - Classify severity before submitting.
 - Report must mention log IDs, root cause, affected services, and timeline.
 
+Rules of Engagement (CRITICAL — follow these EXACTLY):
+1. NEVER annotate the same log_id twice. If you see a log_id in ALREADY_ANNOTATED, skip it.
+2. NEVER correlate the same pair twice. If you see a pair in ALREADY_CORRELATED, skip it.
+3. Before calling annotate, CHECK the ALREADY_ANNOTATED list. If the log_id is there, DO NOT annotate it — move to a NEW log.
+4. After annotating a log, MOVE ON. Use search, scroll, or filter_service to find the NEXT unannotated log.
+5. You must annotate at least 3 different logs before submitting your report.
+6. If you have already annotated all visible suspicious logs, use scroll(down) or search to find more.
+7. NEVER use scroll more than 2 times in a row. If you need more logs, use search with a specific term or filter_service.
+8. CORRELATION DIRECTION IS STRICT: source_log_id MUST be the earlier/cause event; target_log_id MUST be the later/effect event. Timeline flows forward: cause→effect, earlier→later. NEVER reverse this.
+9. If a filter or search reveals no new suspicious logs (STALE FILTER warning), immediately use clear_filters() or a different search term.
+
+Completion Criteria (you MUST satisfy ALL of these before calling submit_report):
+- You have annotated at least 3 UNIQUE suspicious logs from different timestamps.
+- You have searched for DOWNSTREAM CONSEQUENCES of each finding. Do not stop at the first anomaly.
+  If you find an error in service A, you MUST search service B and service C for follow-on effects.
+- You have correlated at least one source→target pair linking a cause log to an effect log.
+- You have classified the incident severity.
+- Assume every anomaly is part of a chain until you have searched for evidence proving it ended.
+  Do not submit until you have actively looked for what happened NEXT after each suspicious event.
+
 Output ONLY valid JSON.""").strip()
 
 TASK_PROMPTS: Dict[str, str] = {
@@ -167,19 +187,45 @@ TASK_PROMPTS: Dict[str, str] = {
 TASK: Find database connection errors in auth-service logs.
 Categories: error, warning
 Services: auth-service
-Strategy: filter ERROR logs → annotate each error → classify severity → submit report.""").strip(),
+Strategy: filter ERROR logs → annotate each error → classify severity → submit report.
+Remember: annotate each UNIQUE log_id ONCE, then move on. If filter shows same results twice, use clear_filters() or search a different term.
+
+Completion Criteria (satisfy ALL before submitting):
+- Found and annotated ALL database connection error logs (search 'connection refused', 'port 5432', 'database').
+- Verified whether errors are isolated or recurring (search by timestamp range or scroll).
+- Classified severity as MEDIUM or HIGH based on error frequency.""").strip(),
 
     "task_medium": _PROMPT_CORE + "\n\n" + textwrap.dedent("""\
 TASK: Trace a cascading failure across 3 services.
 Categories: root_cause, symptom, cascading_failure
 Services: payment-service, order-service, api-gateway
-Strategy: check payment-service first → annotate root cause → check other services → correlate cause→effect → classify severity → submit report.""").strip(),
+Strategy: check payment-service first → annotate root cause → check other services → correlate cause→effect → classify severity → submit report.
+Correlation direction: root_cause log → symptom log → cascading_failure log (ALWAYS earlier cause → later effect).
+Remember: annotate each UNIQUE log_id ONCE, then move to the NEXT service. Never re-annotate.
+
+Completion Criteria (satisfy ALL before submitting):
+- Found the ROOT CAUSE in payment-service. If you found a DB pool error, MUST search order-service for queue backup symptoms.
+- Found SYMPTOMS in order-service. If you found queue backup, MUST search api-gateway for 503/timeout errors.
+- Found CASCADING FAILURES in api-gateway. Do NOT stop at step 1 — the failure chain spans all 3 services.
+- Correlated across services: payment→order and order→gateway.
+- Assume the failure propagated to ALL 3 services until you have searched each one.""").strip(),
 
     "task_hard": _PROMPT_CORE + "\n\n" + textwrap.dedent("""\
 TASK: Investigate a multi-stage security breach across 5 services.
 Categories: reconnaissance, brute_force, credential_compromise, privilege_escalation, lateral_movement, data_exfiltration
 Services: auth-service, api-gateway, user-service, file-service, audit-log
-Strategy: search for suspicious IPs and failed logins → annotate each attack stage → correlate the attack chain → classify CRITICAL → submit report.""").strip(),
+Attack chain direction: reconnaissance → brute_force → credential_compromise → privilege_escalation → lateral_movement → data_exfiltration.
+Correlation direction: earlier attack stage log → later attack stage log. source=cause, target=effect.
+Strategy: search for suspicious IPs and failed logins → annotate each attack stage → correlate the attack chain → classify CRITICAL → submit report.
+Remember: annotate each UNIQUE log_id ONCE, then move to the NEXT attack stage. Never re-annotate.
+
+Completion Criteria (satisfy ALL before submitting):
+- Found brute force logs? MUST search auth-service for successful logins from the same IP (credential_compromise).
+- Found compromised credentials? MUST search api-gateway or user-service for privilege escalation attempts.
+- Found privilege escalation? MUST search file-service and audit-log for lateral movement and data exfiltration.
+- Assume the attack SUCCEEDED at every stage until you find evidence that it stopped.
+- Do NOT submit until you have searched for the FULL attack chain: recon → brute_force → compromise → escalation → lateral_movement → exfiltration.
+- Each discovered stage requires a follow-up search for the NEXT stage.""").strip(),
 }
 
 # Fallback for unknown task IDs
@@ -219,8 +265,29 @@ def get_phase_hint(step: int, max_steps: int, obs: dict, task_id: str = "") -> s
 
 # ─── Compact Observation Formatting (1A) ─────────────────────────
 
-def format_observation(obs: dict, history: List[str], step: int) -> str:
-    """Compact observation for small models. Targets ~500 tokens."""
+# Category sets used to derive correlation direction hints
+_CAUSE_CATEGORIES = frozenset({
+    "root_cause", "reconnaissance", "brute_force", "credential_compromise",
+})
+_EFFECT_CATEGORIES = frozenset({
+    "symptom", "cascading_failure", "privilege_escalation",
+    "lateral_movement", "data_exfiltration",
+})
+
+
+def format_observation(
+    obs: dict,
+    history: List[str],
+    step: int,
+    annotated_ids: set = None,
+    correlated_pairs: set = None,
+    stale_filter_flag: bool = False,
+) -> str:
+    """Compact observation for small models. Targets ~500 tokens.
+
+    Includes ALREADY_ANNOTATED, ALREADY_CORRELATED, STALE FILTER warnings,
+    and CORRELATE HIΝTs so the LLM avoids loops and correlates causally.
+    """
     p = []
     task_id = obs.get('_task_id', '')
 
@@ -232,16 +299,45 @@ def format_observation(obs: dict, history: List[str], step: int) -> str:
     if obs.get("draft_feedback"):
         p.append(f"Feedback: {obs['draft_feedback']}")
 
+    # ─── Stale filter warning ───
+    if stale_filter_flag:
+        p.append(
+            "STALE FILTER: Your last filter/search revealed no new suspicious logs. "
+            "You MUST use clear_filters() or search() with a DIFFERENT term now."
+        )
+
+    # ─── State tracking: show what has already been done ───
+    if annotated_ids:
+        p.append(f"ALREADY_ANNOTATED (do NOT annotate these again): {', '.join(sorted(annotated_ids))}")
+    if correlated_pairs:
+        pairs_str = ', '.join(f"{s}\u2192{t}" for s, t in sorted(correlated_pairs))
+        p.append(f"ALREADY_CORRELATED (do NOT correlate these again): {pairs_str}")
+
+    # ─── Correlation direction hint (derived from what's been annotated) ───
+    if annotated_ids:
+        ann_data = obs.get("recent_annotations", [])
+        # Build full map from env's recent_annotations
+        cat_map = {a['log_id']: a['category'] for a in ann_data}
+        causes  = [lid for lid, cat in cat_map.items() if cat in _CAUSE_CATEGORIES]
+        effects = [lid for lid, cat in cat_map.items() if cat in _EFFECT_CATEGORIES]
+        if causes and effects:
+            p.append(
+                f"CORRELATE HINT (source=cause→target=effect): "
+                f"Causes={causes}, Effects={effects}. "
+                f"Always put the cause log as source_log_id and the effect log as target_log_id."
+            )
+
     # Dashboard — 1 line
     filters = json.dumps(obs['current_filters']) if obs['current_filters'] else 'none'
     p.append(f"Logs: {obs['total_log_count']} | Page {obs['current_page']+1}/{obs['total_pages']} | Filters: {filters}")
 
-    # Visible logs — compact, max 12, truncated to 70 chars
+    # Visible logs — compact, max 12, marked [DONE] if already annotated
     visible = obs.get("visible_logs", [])[:12]
     if visible:
         p.append(f"LOGS ({len(visible)}):")
         for log in visible:
-            p.append(f"  {log['id']}|{log['severity']}|{log['service']}|{log['message'][:70]}")
+            already = " [DONE]" if (annotated_ids and log['id'] in annotated_ids) else ""
+            p.append(f"  {log['id']}|{log['severity']}|{log['service']}|{log['message'][:65]}{already}")
 
     # Inspected log (only if present)
     if obs.get("inspected_log"):
@@ -264,8 +360,8 @@ def format_observation(obs: dict, history: List[str], step: int) -> str:
     if history:
         p.append(f"History: {' | '.join(history[-2:])}")
 
-    # JSON reminder (short)
-    p.append('Reply with JSON only.')
+    # JSON reminder
+    p.append('Reply with JSON only. Do NOT re-annotate [DONE] logs. source_log_id=cause, target_log_id=effect.')
 
     return "\n".join(p)
 
@@ -521,6 +617,13 @@ def run_task(
     grader_result = None
     step_result = None
 
+    # ─── State tracking: prevent loops and spam ───
+    annotated_ids: set = set()       # log_ids we have already annotated
+    correlated_pairs: set = set()    # (source, target) pairs already correlated
+    consecutive_scroll_count: int = 0   # scroll spam guard
+    last_filter_log_count: int = -1     # stale filter detection
+    stale_filter_flag: bool = False     # injected into observation when filter is stale
+
     # ─── Kickstart phase (1F): execute pre-planned actions ───
     kickstart = KICKSTART_ACTIONS.get(task_id, [])
     step = 0
@@ -588,11 +691,19 @@ def run_task(
                     print(f"  Step {step}: [AUTO] submit_report(existing draft)")
             else:
                 # Normal LLM-driven step
-                user_prompt = format_observation(obs, history, step)
+                user_prompt = format_observation(
+                    obs, history, step,
+                    annotated_ids=annotated_ids,
+                    correlated_pairs=correlated_pairs,
+                    stale_filter_flag=stale_filter_flag,
+                )
                 task_prompt = TASK_PROMPTS.get(task_id, SYSTEM_PROMPT)
                 action_type, params = call_llm_with_retry(
                     llm_client, model_name, task_prompt, user_prompt
                 )
+
+                # Reset stale flag once we've handed it to the LLM this step
+                stale_filter_flag = False
 
                 # If LLM returned noop, use intelligent fallback (1E)
                 if action_type == "noop":
@@ -600,13 +711,69 @@ def run_task(
                         step, max_steps, obs
                     )
 
+                # ─── Scroll Spam Guard: max 2 consecutive scrolls ───
+                if action_type == "scroll":
+                    consecutive_scroll_count += 1
+                    if consecutive_scroll_count > 2:
+                        # Force tool rotation — search with a task-relevant term
+                        _spam_searches = {
+                            "task_easy":   "error",
+                            "task_medium": "timeout",
+                            "task_hard":   "failed login",
+                        }
+                        fallback_pattern = _spam_searches.get(task_id, "error")
+                        print(
+                            f"  Step {step}: [ANTI-SPAM] Blocked scroll #{consecutive_scroll_count} in a row. "
+                            f"Forcing search('{fallback_pattern}')."
+                        )
+                        action_type = "search"
+                        params = {"pattern": fallback_pattern}
+                        consecutive_scroll_count = 0
+                else:
+                    consecutive_scroll_count = 0  # reset on any non-scroll action
+
+                # ─── Deduplication Guard: intercept duplicate annotations/correlations ───
+                if action_type == "annotate":
+                    log_id = params.get("log_id", "")
+                    if log_id in annotated_ids:
+                        # BLOCKED: duplicate annotation. Redirect to a useful action.
+                        print(f"  Step {step}: [DEDUP] Blocked duplicate annotate({log_id}). Finding new log.")
+                        visible = obs.get("visible_logs", [])
+                        unannotated_errors = [
+                            l for l in visible
+                            if l['id'] not in annotated_ids
+                            and l.get('severity') in ('ERROR', 'WARN', 'FATAL')
+                        ]
+                        if unannotated_errors:
+                            target = unannotated_errors[0]
+                            cat = params.get("category", "error")
+                            action_type = "annotate"
+                            params = {"log_id": target["id"], "category": cat}
+                            print(f"           \u2192 Redirected to annotate({target['id']}, {cat})")
+                        else:
+                            action_type = "scroll"
+                            params = {"direction": "down"}
+                            consecutive_scroll_count += 1
+                            print(f"           \u2192 Redirected to scroll(down)")
+
+                elif action_type == "correlate":
+                    pair = (params.get("source_log_id", ""), params.get("target_log_id", ""))
+                    if pair in correlated_pairs:
+                        print(f"  Step {step}: [DEDUP] Blocked duplicate correlate{pair}. Scrolling.")
+                        action_type = "scroll"
+                        params = {"direction": "down"}
+                        consecutive_scroll_count += 1
+
                 # ─── Annotation Gate: block premature reports ───
                 ann_count = obs.get("annotations_count", 0)
                 ratio = step / max_steps
                 if action_type in ("submit_report", "draft_report") and ann_count < min_ann and ratio < 0.85:
-                    # Redirect: the model is trying to report without annotating
                     visible = obs.get("visible_logs", [])
-                    error_logs = [l for l in visible if l.get("severity") in ("ERROR", "WARN", "FATAL")]
+                    error_logs = [
+                        l for l in visible
+                        if l.get("severity") in ("ERROR", "WARN", "FATAL")
+                        and l['id'] not in annotated_ids
+                    ]
                     if error_logs:
                         target = error_logs[0]
                         cat = "error"
@@ -617,9 +784,9 @@ def run_task(
                         print(f"  Step {step}: [GATE] Blocked report (only {ann_count}/{min_ann} annotations). "
                               f"Forced annotate({target['id']}, {cat})")
                     else:
-                        # No error logs visible — scroll to find some
                         action_type = "scroll"
                         params = {"direction": "down"}
+                        consecutive_scroll_count += 1
                         print(f"  Step {step}: [GATE] Blocked report, scrolling to find logs")
                 else:
                     params_str = json.dumps(params) if params else "{}"
@@ -630,6 +797,25 @@ def run_task(
             obs = step_result["observation"]
             reward = step_result["reward"]
             done = step_result["done"]
+
+            # ─── Update state tracking after successful action ───
+            if action_type == "annotate" and obs.get("last_action_success", True):
+                annotated_ids.add(params.get("log_id", ""))
+            elif action_type == "correlate" and obs.get("last_action_success", True):
+                correlated_pairs.add(
+                    (params.get("source_log_id", ""), params.get("target_log_id", ""))
+                )
+            elif action_type in ("filter_severity", "filter_service",
+                                 "filter_time_range", "search"):
+                # ─── Stale filter detection ───
+                new_count = obs.get("total_log_count", 0)
+                if new_count == last_filter_log_count and new_count > 0:
+                    stale_filter_flag = True
+                    print(f"           [STALE-FILTER] Same log count ({new_count}) as before. "
+                          f"Will warn agent next step.")
+                else:
+                    stale_filter_flag = False
+                    last_filter_log_count = new_count
 
             # Record history
             reward_val = reward.get("value", 0) if isinstance(reward, dict) else 0
