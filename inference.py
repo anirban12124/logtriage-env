@@ -14,12 +14,28 @@ Required environment variables:
 import os
 import re
 import json
+import sys
 import time
 import textwrap
+from datetime import datetime, timezone
 from typing import List, Tuple, Dict, Any
 
 import requests
 from openai import OpenAI
+
+
+# ─── Structured Stdout Logging ───────────────────────────────────
+
+def _emit(tag: str, payload: dict):
+    """Emit a structured log line: [TAG] {json}
+
+    The OpenEnv evaluation pipeline parses these markers from stdout.
+    - [START]  — beginning of a task episode
+    - [STEP]   — after each agent step
+    - [END]    — task episode complete with final scores
+    """
+    line = json.dumps(payload, default=str)
+    print(f"[{tag}] {line}", flush=True)
 
 
 # ─── .env Loader ─────────────────────────────────────────────────
@@ -568,6 +584,16 @@ def run_task(
     obs = result["observation"]
     max_steps = obs["max_steps"]
 
+    # ─── [START] structured log ───
+    _emit("START", {
+        "task_id": task_id,
+        "model_name": model_name,
+        "max_steps": max_steps,
+        "total_logs": obs["total_log_count"],
+        "goal": obs["goal"],
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    })
+
     print(f"  Goal: {obs['goal'][:80]}...")
     print(f"  Max steps: {max_steps}")
     print(f"  Total logs: {obs['total_log_count']}")
@@ -591,11 +617,24 @@ def run_task(
         done = step_result["done"]
 
         reward_val = reward.get("value", 0) if isinstance(reward, dict) else 0
+        cumulative = reward.get("cumulative", 0) if isinstance(reward, dict) else 0
         history.append(
             f"Step {step}: {ks_action_type} → reward={reward_val:+.3f} "
             f"| {obs.get('last_action_message', '')[:50]}"
         )
         print(f"         reward={reward_val:+.3f} | done={done}")
+
+        # ─── [STEP] structured log ───
+        _emit("STEP", {
+            "task_id": task_id,
+            "step": step,
+            "action_type": ks_action_type,
+            "params": ks_params,
+            "reward": reward_val,
+            "cumulative_reward": cumulative,
+            "done": done,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        })
 
         if done:
             grader_result = step_result.get("info", {}).get("grader_result")
@@ -674,11 +713,24 @@ def run_task(
 
             # Record history
             reward_val = reward.get("value", 0) if isinstance(reward, dict) else 0
+            cumulative = reward.get("cumulative", 0) if isinstance(reward, dict) else 0
             history.append(
                 f"Step {step}: {action_type} → reward={reward_val:+.3f} "
                 f"| {obs.get('last_action_message', '')[:50]}"
             )
             print(f"         reward={reward_val:+.3f} | done={done}")
+
+            # ─── [STEP] structured log ───
+            _emit("STEP", {
+                "task_id": task_id,
+                "step": step,
+                "action_type": action_type,
+                "params": params,
+                "reward": reward_val,
+                "cumulative_reward": cumulative,
+                "done": done,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            })
 
             if done:
                 grader_result = step_result.get("info", {}).get("grader_result")
@@ -697,6 +749,16 @@ def run_task(
             "final_score": 0.0,
             "components": {},
         }
+
+    # ─── [END] structured log ───
+    _emit("END", {
+        "task_id": task_id,
+        "final_score": grader_result.get("final_score", 0.0) if grader_result else 0.0,
+        "components": grader_result.get("components", {}) if grader_result else {},
+        "steps_used": step,
+        "max_steps": max_steps,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    })
 
     return grader_result
 
