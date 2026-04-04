@@ -2,6 +2,7 @@ from src.environment import LogTriageEnv
 from src.tasks import TASKS
 from src.session import SessionManager
 
+from typing import Optional
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
@@ -12,7 +13,7 @@ session_mgr = SessionManager(max_sessions=10, ttl_seconds=1800)
 
 
 class ResetRequest(BaseModel):
-    task_id: str
+    task_id: str = "task_easy"
 
 
 class StepRequest(BaseModel):
@@ -46,7 +47,10 @@ def list_tasks():
 
 
 @app.post("/reset")
-def reset(req: ResetRequest):
+def reset(req: Optional[ResetRequest] = None):
+    if req is None:
+        req = ResetRequest()
+
     if req.task_id not in TASKS:
         raise HTTPException(
             status_code=400,
