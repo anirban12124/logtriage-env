@@ -40,24 +40,31 @@ def _emit(tag: str, payload: dict):
 
 # ─── .env Loader ─────────────────────────────────────────────────
 
-try:
-    with open('.env') as _f:
-        for _line in _f:
-            _line = _line.strip()
-            if _line and not _line.startswith('#') and '=' in _line:
-                if _line.lower().startswith('export '):
-                    _line = _line[7:]
-                _k, _v = _line.split('=', 1)
-                os.environ.setdefault(_k.strip(), _v.strip().strip('"\''))
-except FileNotFoundError:
-    pass
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_ENV_PATHS = [
+    os.path.join(_SCRIPT_DIR, '.env'),   # same dir as inference.py
+    os.path.join(os.getcwd(), '.env'),    # current working directory
+]
+for _env_path in _ENV_PATHS:
+    try:
+        with open(_env_path) as _f:
+            for _line in _f:
+                _line = _line.strip()
+                if _line and not _line.startswith('#') and '=' in _line:
+                    if _line.lower().startswith('export '):
+                        _line = _line[7:]
+                    _k, _v = _line.split('=', 1)
+                    os.environ.setdefault(_k.strip(), _v.strip().strip('"\''))
+        break  # stop after first .env found
+    except FileNotFoundError:
+        continue
 
 
 # ─── Configuration ───────────────────────────────────────────────
 
 API_BASE_URL = os.getenv("API_BASE_URL", "https://router.huggingface.co/v1")
-API_KEY = os.getenv("HF_TOKEN") or os.getenv("API_KEY")
-MODEL_NAME = os.getenv("MODEL_NAME")
+API_KEY = os.getenv("HF_TOKEN") or os.getenv("API_KEY") or ""
+MODEL_NAME = os.getenv("MODEL_NAME", "Qwen/Qwen3.5-9B")
 SPACE_URL = os.getenv("SPACE_URL", "http://localhost:8000")
 
 TEMPERATURE = 0.1          # Lower for more deterministic JSON output
@@ -890,11 +897,11 @@ def main():
     print("LogTriage — Baseline Inference")
     print("=" * 60)
 
-    # Validate configuration
+    # Validate configuration (warn but do not crash)
     if not MODEL_NAME:
-        raise ValueError("MODEL_NAME environment variable is required.")
+        print("WARNING: MODEL_NAME not set. Defaulting to 'Qwen/Qwen3.5-9B'.")
     if not API_KEY:
-        raise ValueError("HF_TOKEN or API_KEY environment variable is required.")
+        print("WARNING: HF_TOKEN / API_KEY not set. LLM calls may fail.")
 
     print(f"API Base URL: {API_BASE_URL}")
     print(f"Model: {MODEL_NAME}")
