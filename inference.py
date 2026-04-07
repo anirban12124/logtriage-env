@@ -65,7 +65,7 @@ for _env_path in _ENV_PATHS:
 API_BASE_URL = os.getenv("API_BASE_URL", "https://router.huggingface.co/v1")
 API_KEY = os.getenv("HF_TOKEN") or os.getenv("API_KEY") or ""
 MODEL_NAME = os.getenv("MODEL_NAME", "Qwen/Qwen3.5-9B")
-SPACE_URL = os.getenv("SPACE_URL", "http://localhost:8000")
+SPACE_URL = os.getenv("SPACE_URL", "https://anix12-logtriage-openenv.hf.space")
 
 TEMPERATURE = 0.1          # Lower for more deterministic JSON output
 MAX_TOKENS = 350
@@ -876,7 +876,7 @@ def run_task(
     return grader_result
 
 
-def wait_for_server(env: LogTriageClient, max_wait: int = 60):
+def wait_for_server(env: LogTriageClient, max_wait: int = 120):
     """Wait for the environment server to be ready."""
     print(f"Waiting for server at {env.base_url}...")
     start = time.time()
@@ -885,9 +885,12 @@ def wait_for_server(env: LogTriageClient, max_wait: int = 60):
             health = env.health()
             print(f"Server ready: {health}")
             return True
-        except Exception:
-            time.sleep(2)
-    raise RuntimeError(f"Server not ready after {max_wait}s")
+        except Exception as exc:
+            elapsed = int(time.time() - start)
+            print(f"  Server not ready yet ({elapsed}s elapsed): {exc}")
+            time.sleep(3)
+    print(f"WARNING: Server not ready after {max_wait}s. Attempting to continue anyway...")
+    return False
 
 
 def main():
