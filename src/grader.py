@@ -390,7 +390,7 @@ class TaskGrader:
             components[key] = {
                 "score": round(clamped, 4),
                 "weight": round(weight, 4),
-                "weighted": round(weighted, 4),
+                "weighted": round(_clamp01(weighted), 4),
                 "detail": self._detail(key, scores, gt_ann, gt_corr,
                                        agent_annotations, agent_correlations,
                                        behavior),

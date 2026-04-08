@@ -17,6 +17,7 @@ session_mgr = SessionManager(max_sessions=10, ttl_seconds=1800)
 
 SCORE_KEYS = frozenset({
     "score", "final_score", "task_score", "value", "cumulative",
+    "cumulative_reward", "reward", "weighted",
     "annotation_precision", "annotation_recall", "annotation_quality",
     "correlation_precision", "correlation_recall", "chain_reconstruction",
     "severity_classification", "report_completeness", "report_coherence",
