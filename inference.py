@@ -827,21 +827,21 @@ def run_task(
     if grader_result is None and step_result is not None:
         grader_result = step_result.get("info", {}).get("grader_result", {
             "task_id": task_id,
-            "final_score": 0.0,
+            "final_score": 0.001,
             "components": {},
         })
 
     if grader_result is None:
         grader_result = {
             "task_id": task_id,
-            "final_score": 0.0,
+            "final_score": 0.001,
             "components": {},
         }
 
     elapsed = time.time() - task_start
     _emit("END", {
         "task_id": task_id,
-        "final_score": grader_result.get("final_score", 0.0) if grader_result else 0.0,
+        "final_score": grader_result.get("final_score", 0.001) if grader_result else 0.001,
         "components": grader_result.get("components", {}) if grader_result else {},
         "steps_used": step,
         "max_steps": effective_max,
@@ -908,7 +908,7 @@ def main():
             print(f"\n  GLOBAL TIMEOUT: Skipping {task_id} ({elapsed_global:.0f}s elapsed)")
             results[task_id] = {
                 "task_id": task_id,
-                "final_score": 0.0,
+                "final_score": 0.001,
                 "components": {},
                 "error": "Skipped due to global timeout",
             }
@@ -938,7 +938,7 @@ def main():
             print(f"\n  ERROR running {task_id}: {exc}")
             results[task_id] = {
                 "task_id": task_id,
-                "final_score": 0.0,
+                "final_score": 0.001,
                 "components": {},
                 "error": str(exc),
             }
@@ -951,7 +951,7 @@ def main():
 
     scores = []
     for task_id in task_ids:
-        score = results[task_id].get("final_score", 0.0)
+        score = results[task_id].get("final_score", 0.001)
         scores.append(score)
         print(f"  {task_id:<20} {score:.4f}")
 
