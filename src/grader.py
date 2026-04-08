@@ -363,22 +363,23 @@ class TaskGrader:
             scores["investigation_efficiency"] = 0.2 * (1 - step_ratio)
 
         # ─── Final weighted score ───
-        # OpenEnv validator requires scores strictly in (0, 1),
-        # so we clamp to [0.001, 0.999].
+        # OpenEnv validator requires ALL scores strictly in (0, 1),
+        # i.e. never exactly 0.0 or 1.0.  Clamp every emitted value.
         def _clamp(v: float) -> float:
             return max(0.001, min(0.999, v))
 
         final = 0.0
         components = {}
         for key, weight in weights.items():
-            score = scores.get(key, 0.0)
-            score = max(0.0, min(1.0, score))
-            weighted = score * weight
+            raw = scores.get(key, 0.0)
+            raw = max(0.0, min(1.0, raw))
+            clamped = _clamp(raw)
+            weighted = clamped * weight
             final += weighted
             components[key] = {
-                "score": round(_clamp(score), 4),
+                "score": round(clamped, 4),
                 "weight": round(weight, 4),
-                "weighted": round(_clamp(score) * weight, 4),
+                "weighted": round(_clamp(weighted), 4),
                 "detail": self._detail(key, scores, gt_ann, gt_corr,
                                        agent_annotations, agent_correlations,
                                        behavior),
