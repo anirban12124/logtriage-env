@@ -64,7 +64,7 @@ for _env_path in _ENV_PATHS:
 
 API_BASE_URL = os.getenv("API_BASE_URL", "https://router.huggingface.co/v1")
 API_KEY = os.getenv("HF_TOKEN") or os.getenv("API_KEY") or ""
-MODEL_NAME = os.getenv("MODEL_NAME", "Qwen/Qwen3.5-9B")
+MODEL_NAME = os.getenv("MODEL_NAME", "meta-llama/Llama-3.1-70B-Instruct")
 SPACE_URL = os.getenv("SPACE_URL", "https://anix12-logtriage-openenv.hf.space")
 
 TEMPERATURE = 0.1          # Lower for more deterministic JSON output

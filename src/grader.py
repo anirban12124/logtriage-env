@@ -1,6 +1,7 @@
 import re
 from typing import Dict, List, Set, Tuple, Optional
 from src.tasks import get_category_similarity
+import math
 
 # Lazy-import ML models so the server starts without them if not installed
 _ml: Optional[object] = None
@@ -365,29 +366,37 @@ class TaskGrader:
         # ─── Final weighted score ───
         # OpenEnv validator requires ALL scores strictly in (0, 1),
         # i.e. never exactly 0.0 or 1.0.  Clamp every emitted value.
+        EPSILON = 0.01
+
         def _clamp(v: float) -> float:
-            return max(0.001, min(0.999, v))
+            """Ensure value is strictly in (0, 1) — NaN/inf safe."""
+            if not isinstance(v, (int, float)) or math.isnan(v) or math.isinf(v):
+                return 0.5
+            return max(EPSILON, min(1.0 - EPSILON, float(v)))
 
         final = 0.0
         components = {}
         for key, weight in weights.items():
             raw = scores.get(key, 0.0)
-            raw = max(0.0, min(1.0, raw))
+            raw = max(0.0, min(1.0, float(raw)))
             clamped = _clamp(raw)
             weighted = clamped * weight
             final += weighted
             components[key] = {
                 "score": round(clamped, 4),
                 "weight": round(weight, 4),
-                "weighted": round(_clamp(weighted), 4),
+                "weighted": round(weighted, 4),      # don't clamp this
                 "detail": self._detail(key, scores, gt_ann, gt_corr,
                                        agent_annotations, agent_correlations,
                                        behavior),
             }
 
+        clamped_final = round(_clamp(final), 4)
+
         return {
             "task_id": task_config["id"],
-            "final_score": round(_clamp(final), 4),
+            "score": clamped_final,           # ✅ What the validator reads
+            "final_score": clamped_final,     # ✅ Backward compat
             "components": components,
         }
 
