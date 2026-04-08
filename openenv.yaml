@@ -70,9 +70,9 @@ tasks:
 
 reward:
   type: dense
-  range: [-0.15, 0.40]
+  range: [0.001, 0.999]
   description: >
-    Per-step rewards for correct discoveries, penalties for
-    false positives. Dynamic scaling based on difficulty,
-    timing, and coverage. Anti-exploit guards for spam
-    and repetitive actions.
+    Per-step rewards for correct discoveries, clamped to
+    the open interval (0, 1). Dynamic scaling based on
+    difficulty, timing, and coverage. Anti-exploit guards
+    for spam and repetitive actions.
