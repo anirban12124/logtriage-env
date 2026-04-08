@@ -50,7 +50,7 @@ class LogTriageEnv:
     # ─── Score Clamping Helpers ─────────────────────────────────
 
     @staticmethod
-    def _clamp_score(v, eps=0.01):
+    def _clamp_score(v, eps=0.001):
         """Clamp value to strictly (0, 1) — safe against NaN/inf/None."""
         if v is None or not isinstance(v, (int, float)):
             return 0.5
@@ -59,7 +59,7 @@ class LogTriageEnv:
         return max(eps, min(1.0 - eps, float(v)))
 
     @staticmethod
-    def _clamp_reward(reward_obj, eps=0.01):
+    def _clamp_reward(reward_obj, eps=0.001):
         """Clamp all numeric score-like values inside a reward dict or float."""
         SCORE_KEYS = {
             "value", "cumulative", "score", "task_score", "final_score",

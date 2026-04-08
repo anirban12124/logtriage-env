@@ -24,7 +24,7 @@ SCORE_KEYS = frozenset({
 })
 
 
-def _safe_clamp(v, eps=0.01):
+def _safe_clamp(v, eps=0.001):
     """Clamp a single numeric value to strictly (0, 1)."""
     try:
         v = float(v)

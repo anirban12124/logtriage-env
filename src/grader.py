@@ -3,6 +3,18 @@ from typing import Dict, List, Set, Tuple, Optional
 from src.tasks import get_category_similarity
 import math
 
+# Strict epsilon — ensures scores are NEVER exactly 0.0 or 1.0
+_EPS = 0.001
+
+def _clamp01(v) -> float:
+    """Clamp a value to the OPEN interval (0, 1). NaN/inf/None safe."""
+    if v is None or not isinstance(v, (int, float)):
+        return 0.5
+    v = float(v)
+    if math.isnan(v) or math.isinf(v):
+        return 0.5
+    return max(_EPS, min(1.0 - _EPS, v))
+
 # Lazy-import ML models so the server starts without them if not installed
 _ml: Optional[object] = None
 
@@ -43,16 +55,16 @@ class TaskGrader:
         # ─── A. Annotation Precision ───
         if agent_annotations:
             correct = sum(1 for lid in agent_annotations if lid in gt_ann)
-            scores["annotation_precision"] = correct / len(agent_annotations)
+            scores["annotation_precision"] = _clamp01(correct / len(agent_annotations))
         else:
-            scores["annotation_precision"] = 0.0 if gt_ann else 1.0
+            scores["annotation_precision"] = _clamp01(0.0 if gt_ann else 1.0)
 
         # ─── B. Annotation Recall ───
         if gt_ann:
             found = sum(1 for lid in gt_ann if lid in agent_annotations)
-            scores["annotation_recall"] = found / len(gt_ann)
+            scores["annotation_recall"] = _clamp01(found / len(gt_ann))
         else:
-            scores["annotation_recall"] = 1.0
+            scores["annotation_recall"] = _clamp01(1.0)
 
         # ─── C. Annotation Quality ───
         correct_ids = [lid for lid in agent_annotations if lid in gt_ann]
@@ -63,7 +75,7 @@ class TaskGrader:
                     agent_annotations[lid], gt_ann[lid]
                 )
                 if sim >= 1.0:
-                    qualities.append(1.0)
+                    qualities.append(0.999)
                 elif sim > 0.80:
                     qualities.append(0.85)
                 elif sim > 0.60:
@@ -71,10 +83,10 @@ class TaskGrader:
                 elif sim > 0.40:
                     qualities.append(0.30)
                 else:
-                    qualities.append(0.0)
-            scores["annotation_quality"] = sum(qualities) / len(qualities)
+                    qualities.append(0.001)
+            scores["annotation_quality"] = _clamp01(sum(qualities) / len(qualities))
         else:
-            scores["annotation_quality"] = 0.0
+            scores["annotation_quality"] = _clamp01(0.0)
 
         # ─── D. Correlation Precision ───
         agent_pairs: Set[Tuple[str, str]] = set()
@@ -88,12 +100,12 @@ class TaskGrader:
 
         if agent_pairs:
             correct_corr = len(agent_pairs & gt_pairs)
-            scores["correlation_precision"] = correct_corr / len(agent_pairs)
+            scores["correlation_precision"] = _clamp01(correct_corr / len(agent_pairs))
         else:
             if not gt_pairs:
-                scores["correlation_precision"] = 1.0
+                scores["correlation_precision"] = _clamp01(1.0)
             else:
-                scores["correlation_precision"] = 0.0
+                scores["correlation_precision"] = _clamp01(0.0)
 
         # ─── E. Correlation Recall (with transitive credit) ───
         if gt_pairs:
@@ -126,13 +138,13 @@ class TaskGrader:
                     transitive_credit += 0.5
 
             recall = min(1.0, (direct_found + transitive_credit) / len(gt_pairs))
-            scores["correlation_recall"] = recall
+            scores["correlation_recall"] = _clamp01(recall)
         else:
-            scores["correlation_recall"] = 1.0
+            scores["correlation_recall"] = _clamp01(1.0)
 
         # ─── F. Chain Reconstruction ───
         if not gt_pairs:
-            scores["chain_reconstruction"] = 1.0
+            scores["chain_reconstruction"] = _clamp01(1.0)
         else:
             # Build graphs
             def build_graph(pairs):
@@ -182,7 +194,7 @@ class TaskGrader:
             direction = (sum(direction_scores) / max(len(direction_scores), 1)
                         if direction_scores else 0.0)
 
-            scores["chain_reconstruction"] = (
+            scores["chain_reconstruction"] = _clamp01(
                 0.4 * path_score + 0.4 * coverage + 0.2 * direction
             )
 
@@ -193,17 +205,17 @@ class TaskGrader:
         gt_lvl = levels.get(gt_sev.upper(), 0)
 
         if agent_lvl == 0:
-            scores["severity_classification"] = 0.0
+            scores["severity_classification"] = _clamp01(0.0)
         else:
             distance = abs(agent_lvl - gt_lvl)
             if distance == 0:
-                scores["severity_classification"] = 1.0
+                scores["severity_classification"] = _clamp01(1.0)
             elif distance == 1:
                 scores["severity_classification"] = 0.5
             elif distance == 2:
                 scores["severity_classification"] = 0.15
             else:
-                scores["severity_classification"] = 0.0
+                scores["severity_classification"] = _clamp01(0.0)
 
         # ─── H. Report Completeness ───
         report_source = behavior.get("report_source", "none")
@@ -239,9 +251,9 @@ class TaskGrader:
                 if report_source == "draft":
                     completeness *= 0.80
 
-            scores["report_completeness"] = completeness
+            scores["report_completeness"] = _clamp01(completeness)
         else:
-            scores["report_completeness"] = 0.0
+            scores["report_completeness"] = _clamp01(0.0)
 
         # ─── I. Report Coherence ───
         if agent_report and len(agent_report) > 10:
@@ -328,9 +340,9 @@ class TaskGrader:
             if report_source == "draft":
                 coherence *= 0.80
 
-            scores["report_coherence"] = coherence
+            scores["report_coherence"] = _clamp01(coherence)
         else:
-            scores["report_coherence"] = 0.0
+            scores["report_coherence"] = _clamp01(0.0)
 
         # ─── J. Investigation Efficiency ───
         steps_taken = behavior.get("steps_taken", max_steps)
@@ -346,7 +358,7 @@ class TaskGrader:
 
         if quality_score >= 0.7:
             if step_ratio <= 0.4:
-                scores["investigation_efficiency"] = 1.0
+                scores["investigation_efficiency"] = _clamp01(1.0)
             elif step_ratio <= 0.6:
                 scores["investigation_efficiency"] = 0.85
             elif step_ratio <= 0.8:
@@ -361,37 +373,30 @@ class TaskGrader:
             else:
                 scores["investigation_efficiency"] = 0.50
         else:
-            scores["investigation_efficiency"] = 0.2 * (1 - step_ratio)
+            scores["investigation_efficiency"] = _clamp01(0.2 * (1 - step_ratio))
 
         # ─── Final weighted score ───
         # OpenEnv validator requires ALL scores strictly in (0, 1),
-        # i.e. never exactly 0.0 or 1.0.  Clamp every emitted value.
-        EPSILON = 0.01
-
-        def _clamp(v: float) -> float:
-            """Ensure value is strictly in (0, 1) — NaN/inf safe."""
-            if not isinstance(v, (int, float)) or math.isnan(v) or math.isinf(v):
-                return 0.5
-            return max(EPSILON, min(1.0 - EPSILON, float(v)))
+        # i.e. never exactly 0.0 or 1.0.  Every score was already
+        # run through _clamp01 above; belt-and-suspenders clamp again.
 
         final = 0.0
         components = {}
         for key, weight in weights.items():
-            raw = scores.get(key, 0.0)
-            raw = max(0.0, min(1.0, float(raw)))
-            clamped = _clamp(raw)
+            raw = scores.get(key, 0.5)  # default to mid if missing
+            clamped = _clamp01(raw)     # double-clamp for safety
             weighted = clamped * weight
             final += weighted
             components[key] = {
                 "score": round(clamped, 4),
                 "weight": round(weight, 4),
-                "weighted": round(weighted, 4),      # don't clamp this
+                "weighted": round(weighted, 4),
                 "detail": self._detail(key, scores, gt_ann, gt_corr,
                                        agent_annotations, agent_correlations,
                                        behavior),
             }
 
-        clamped_final = round(_clamp(final), 4)
+        clamped_final = round(_clamp01(final), 4)
 
         return {
             "task_id": task_config["id"],

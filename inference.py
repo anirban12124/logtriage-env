@@ -824,25 +824,51 @@ def run_task(
                 grader_result = step_result.get("info", {}).get("grader_result")
                 break
 
+    # ── Clamp helper (belt-and-suspenders for emitted scores) ──
+    def _clamp_score(v, eps=0.001):
+        try:
+            v = float(v)
+        except (TypeError, ValueError):
+            return 0.5
+        if v != v or v == float('inf') or v == float('-inf'):  # NaN/inf
+            return 0.5
+        return max(eps, min(1.0 - eps, v))
+
     if grader_result is None and step_result is not None:
         grader_result = step_result.get("info", {}).get("grader_result", {
             "task_id": task_id,
-            "final_score": 0.001,
+            "final_score": 0.01,
+            "score": 0.01,
             "components": {},
         })
 
     if grader_result is None:
         grader_result = {
             "task_id": task_id,
-            "final_score": 0.001,
+            "final_score": 0.01,
+            "score": 0.01,
             "components": {},
         }
+
+    # Clamp the score keys in grader_result before emitting
+    for score_key in ("score", "final_score", "task_score"):
+        if score_key in grader_result:
+            grader_result[score_key] = _clamp_score(grader_result[score_key])
+
+    # Also clamp component scores
+    for comp_name, comp_data in grader_result.get("components", {}).items():
+        if isinstance(comp_data, dict) and "score" in comp_data:
+            comp_data["score"] = _clamp_score(comp_data["score"])
+
+    raw_final = grader_result.get("final_score") or grader_result.get("score") or 0.01
+    clamped_final = _clamp_score(raw_final)
 
     elapsed = time.time() - task_start
     _emit("END", {
         "task_id": task_id,
-        "final_score": grader_result.get("final_score", 0.001) if grader_result else 0.001,
-        "components": grader_result.get("components", {}) if grader_result else {},
+        "final_score": clamped_final,
+        "score": clamped_final,
+        "components": grader_result.get("components", {}),
         "steps_used": step,
         "max_steps": effective_max,
         "elapsed_seconds": round(elapsed, 1),
@@ -908,7 +934,8 @@ def main():
             print(f"\n  GLOBAL TIMEOUT: Skipping {task_id} ({elapsed_global:.0f}s elapsed)")
             results[task_id] = {
                 "task_id": task_id,
-                "final_score": 0.001,
+                "final_score": 0.01,
+                "score": 0.01,
                 "components": {},
                 "error": "Skipped due to global timeout",
             }
@@ -938,7 +965,8 @@ def main():
             print(f"\n  ERROR running {task_id}: {exc}")
             results[task_id] = {
                 "task_id": task_id,
-                "final_score": 0.001,
+                "final_score": 0.01,
+                "score": 0.01,
                 "components": {},
                 "error": str(exc),
             }
@@ -951,7 +979,7 @@ def main():
 
     scores = []
     for task_id in task_ids:
-        score = results[task_id].get("final_score", 0.001)
+        score = results[task_id].get("final_score", 0.01)
         scores.append(score)
         print(f"  {task_id:<20} {score:.4f}")
 

@@ -1,9 +1,12 @@
 """
 Tests for src/grader.py — final episode grading across 10 components.
+
+All scores are clamped to the open interval (0, 1) by _clamp01.
+Never exactly 0.0 or 1.0.  The epsilon is 0.001.
 """
 
 import pytest
-from src.grader import TaskGrader
+from src.grader import TaskGrader, _clamp01, _EPS
 from src.tasks import TASKS
 
 
@@ -43,6 +46,11 @@ def _default_behavior(steps=10, report_source="submitted"):
     return {"steps_taken": steps, "report_source": report_source}
 
 
+# Helper: assert a score is strictly in (0, 1)
+def _assert_open01(val, label="score"):
+    assert 0.0 < val < 1.0, f"{label} = {val} is not in the open interval (0, 1)"
+
+
 # ─── Overall grading structure ───────────────────────────────────
 
 
@@ -58,11 +66,12 @@ class TestGraderStructure:
         assert "components" in result
         assert result["task_id"] == "task_easy"
 
-    def test_final_score_between_0_and_1(self, grader):
+    def test_final_score_strictly_between_0_and_1(self, grader):
         result = grader.grade(
             {}, [], "", "", _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert 0.0 <= result["final_score"] <= 1.0
+        _assert_open01(result["final_score"], "final_score")
+        _assert_open01(result["score"], "score")
 
     def test_all_10_components_present(self, grader):
         result = grader.grade(
@@ -76,7 +85,8 @@ class TestGraderStructure:
         }
         assert set(result["components"].keys()) == expected_components
 
-    def test_component_has_score_weight_weighted_detail(self, grader):
+    def test_component_scores_strictly_between_0_and_1(self, grader):
+        """Every component score must be strictly in (0, 1)."""
         result = grader.grade(
             {"log_008": "error"}, [], "MEDIUM", "Test report",
             _easy_gt(), _easy_config(), _default_behavior()
@@ -86,7 +96,7 @@ class TestGraderStructure:
             assert "weight" in comp, f"{name} missing 'weight'"
             assert "weighted" in comp, f"{name} missing 'weighted'"
             assert "detail" in comp, f"{name} missing 'detail'"
-            assert 0.0 <= comp["score"] <= 1.0, f"{name} score out of range"
+            _assert_open01(comp["score"], f"{name}.score")
 
     def test_weights_sum_to_one(self, grader):
         """Grader weights for each task should sum to ~1.0."""
@@ -97,6 +107,31 @@ class TestGraderStructure:
                 f"{task_id} weights sum to {total}, expected 1.0"
             )
 
+    def test_no_score_is_exactly_0_or_1(self, grader):
+        """Comprehensive: run multiple scenarios, verify NO score is 0.0 or 1.0."""
+        scenarios = [
+            # Empty agent
+            ({}, [], "", "", _easy_gt(), _easy_config(), _default_behavior()),
+            # Perfect annotations
+            ({"log_008": "error", "log_023": "error", "log_041": "error"},
+             [], "MEDIUM", "database connection refused auth-service affected postgresql port 5432",
+             _easy_gt(), _easy_config(), _default_behavior(steps=5)),
+            # Wrong annotations
+            ({"log_001": "error"}, [], "LOW", "short",
+             _easy_gt(), _easy_config(), _default_behavior(steps=15)),
+            # Perfect everything (medium)
+            (_medium_gt()["annotations"],
+             _medium_gt()["correlations"], "HIGH",
+             "payment service database pool exhausted order service queue backup api gateway 503 errors",
+             _medium_gt(), _medium_config(), _default_behavior(steps=10)),
+        ]
+        for i, args in enumerate(scenarios):
+            result = grader.grade(*args)
+            _assert_open01(result["score"], f"scenario[{i}].score")
+            _assert_open01(result["final_score"], f"scenario[{i}].final_score")
+            for name, comp in result["components"].items():
+                _assert_open01(comp["score"], f"scenario[{i}].{name}.score")
+
 
 # ─── Annotation precision ───────────────────────────────────────
 
@@ -105,25 +140,25 @@ class TestAnnotationPrecision:
     """Component A: Annotation Precision."""
 
     def test_perfect_precision(self, grader):
-        """All annotations are correct → precision = 1.0."""
         result = grader.grade(
             {"log_008": "error", "log_023": "error", "log_041": "error"},
             [], "MEDIUM", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["annotation_precision"]["score"] == 1.0
+        score = result["components"]["annotation_precision"]["score"]
+        assert score >= 0.99  # Clamped from 1.0 → 0.999
 
     def test_zero_precision(self, grader):
-        """All annotations are wrong → precision = 0.0."""
         result = grader.grade(
             {"log_001": "error", "log_002": "error"},
             [], "MEDIUM", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["annotation_precision"]["score"] == 0.0
+        score = result["components"]["annotation_precision"]["score"]
+        assert score <= 0.01  # Clamped from 0.0 → 0.001
+        _assert_open01(score)
 
     def test_partial_precision(self, grader):
-        """Mix of correct and wrong → 0 < precision < 1."""
         result = grader.grade(
             {"log_008": "error", "log_001": "error"},
             [], "MEDIUM", "Report",
@@ -132,12 +167,13 @@ class TestAnnotationPrecision:
         assert result["components"]["annotation_precision"]["score"] == 0.5
 
     def test_no_annotations_with_gt(self, grader):
-        """No annotations when GT exists → precision = 0.0."""
         result = grader.grade(
             {}, [], "MEDIUM", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["annotation_precision"]["score"] == 0.0
+        score = result["components"]["annotation_precision"]["score"]
+        assert score <= 0.01
+        _assert_open01(score)
 
 
 # ─── Annotation recall ──────────────────────────────────────────
@@ -152,17 +188,19 @@ class TestAnnotationRecall:
             [], "MEDIUM", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["annotation_recall"]["score"] == 1.0
+        score = result["components"]["annotation_recall"]["score"]
+        assert score >= 0.99
 
     def test_zero_recall(self, grader):
         result = grader.grade(
             {}, [], "MEDIUM", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["annotation_recall"]["score"] == 0.0
+        score = result["components"]["annotation_recall"]["score"]
+        assert score <= 0.01
+        _assert_open01(score)
 
     def test_partial_recall(self, grader):
-        """Finding 1 of 3 GT annotations → recall ≈ 0.333."""
         result = grader.grade(
             {"log_008": "error"},
             [], "MEDIUM", "Report",
@@ -179,32 +217,32 @@ class TestAnnotationQuality:
     """Component C: Annotation Quality (category similarity)."""
 
     def test_perfect_quality(self, grader):
-        """Exact category matches → quality = 1.0."""
         result = grader.grade(
             {"log_008": "error", "log_023": "error", "log_041": "error"},
             [], "MEDIUM", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["annotation_quality"]["score"] == 1.0
+        score = result["components"]["annotation_quality"]["score"]
+        assert score >= 0.99
 
     def test_related_category_gives_partial_quality(self, grader):
-        """Related but not exact category → 0 < quality < 1."""
         result = grader.grade(
-            {"log_008": "symptom"},  # GT is "error", similarity ~0.65
+            {"log_008": "symptom"},
             [], "MEDIUM", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
         quality = result["components"]["annotation_quality"]["score"]
-        assert 0 < quality < 1.0
+        _assert_open01(quality)
 
     def test_no_correct_annotations_zero_quality(self, grader):
-        """No correct annotations → quality = 0.0."""
         result = grader.grade(
             {"log_001": "error"},
             [], "MEDIUM", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["annotation_quality"]["score"] == 0.0
+        score = result["components"]["annotation_quality"]["score"]
+        assert score <= 0.01
+        _assert_open01(score)
 
 
 # ─── Correlation precision & recall ──────────────────────────────
@@ -220,46 +258,45 @@ class TestCorrelations:
             gt_corrs, "HIGH", "Report",
             _medium_gt(), _medium_config(), _default_behavior()
         )
-        assert result["components"]["correlation_precision"]["score"] == 1.0
-        assert result["components"]["correlation_recall"]["score"] == 1.0
+        assert result["components"]["correlation_precision"]["score"] >= 0.99
+        assert result["components"]["correlation_recall"]["score"] >= 0.99
 
     def test_wrong_correlations(self, grader):
         result = grader.grade(
             {}, [["log_001", "log_002"]], "HIGH", "Report",
             _medium_gt(), _medium_config(), _default_behavior()
         )
-        assert result["components"]["correlation_precision"]["score"] == 0.0
+        score = result["components"]["correlation_precision"]["score"]
+        assert score <= 0.01
+        _assert_open01(score)
 
     def test_no_correlations_with_gt(self, grader):
         result = grader.grade(
             {}, [], "HIGH", "Report",
             _medium_gt(), _medium_config(), _default_behavior()
         )
-        assert result["components"]["correlation_recall"]["score"] == 0.0
+        score = result["components"]["correlation_recall"]["score"]
+        assert score <= 0.01
+        _assert_open01(score)
 
     def test_transitive_correlation_gives_partial_credit(self, grader):
-        """
-        If GT has A→B→C and agent submits A→C (skipping B),
-        should get partial recall credit via transitive matching.
-        """
         result = grader.grade(
             {},
-            [["log_045", "log_134"]],  # GT has log_045→log_067→log_134
+            [["log_045", "log_134"]],
             "HIGH", "Report",
             _medium_gt(), _medium_config(), _default_behavior()
         )
         recall = result["components"]["correlation_recall"]["score"]
-        # Should get some transitive credit (0.5), but not full recall
-        assert recall > 0.0
+        _assert_open01(recall)
+        assert recall > 0.001
 
     def test_easy_task_no_correlations_needed(self, grader):
-        """Easy task has empty correlations → should get 1.0 for empty GT."""
         result = grader.grade(
             {}, [], "MEDIUM", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["correlation_precision"]["score"] == 1.0
-        assert result["components"]["correlation_recall"]["score"] == 1.0
+        assert result["components"]["correlation_precision"]["score"] >= 0.99
+        assert result["components"]["correlation_recall"]["score"] >= 0.99
 
 
 # ─── Chain reconstruction ───────────────────────────────────────
@@ -273,7 +310,7 @@ class TestChainReconstruction:
             {}, [], "MEDIUM", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["chain_reconstruction"]["score"] == 1.0
+        assert result["components"]["chain_reconstruction"]["score"] >= 0.99
 
     def test_perfect_chain(self, grader):
         gt_corrs = TASKS["task_medium"]["ground_truth"]["correlations"]
@@ -284,14 +321,12 @@ class TestChainReconstruction:
         assert result["components"]["chain_reconstruction"]["score"] > 0.8
 
     def test_reversed_direction_partial_credit(self, grader):
-        """Reversed correlation direction should get partial credit (0.5)."""
-        # GT has log_045→log_067; agent submits log_067→log_045
         result = grader.grade(
             {}, [["log_067", "log_045"]], "HIGH", "Report",
             _medium_gt(), _medium_config(), _default_behavior()
         )
         chain = result["components"]["chain_reconstruction"]["score"]
-        assert chain > 0.0  # Some partial credit
+        _assert_open01(chain)
 
 
 # ─── Severity classification ────────────────────────────────────
@@ -305,43 +340,46 @@ class TestSeverityClassification:
             {}, [], "MEDIUM", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["severity_classification"]["score"] == 1.0
+        assert result["components"]["severity_classification"]["score"] >= 0.99
 
     def test_off_by_one(self, grader):
         result = grader.grade(
-            {}, [], "HIGH", "Report",  # GT is MEDIUM
+            {}, [], "HIGH", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
         assert result["components"]["severity_classification"]["score"] == 0.5
 
     def test_off_by_two(self, grader):
         result = grader.grade(
-            {}, [], "CRITICAL", "Report",  # GT is MEDIUM
+            {}, [], "CRITICAL", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
         assert result["components"]["severity_classification"]["score"] == 0.15
 
     def test_off_by_three(self, grader):
-        # GT for hard is CRITICAL; if agent says LOW → distance 3
         result = grader.grade(
             {}, [], "LOW", "Report",
             _hard_gt(), _hard_config(), _default_behavior()
         )
-        assert result["components"]["severity_classification"]["score"] == 0.0
+        score = result["components"]["severity_classification"]["score"]
+        assert score <= 0.01
+        _assert_open01(score)
 
     def test_empty_severity(self, grader):
         result = grader.grade(
             {}, [], "", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["severity_classification"]["score"] == 0.0
+        score = result["components"]["severity_classification"]["score"]
+        assert score <= 0.01
+        _assert_open01(score)
 
     def test_case_insensitive_severity(self, grader):
         result = grader.grade(
             {}, [], "medium", "Report",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["severity_classification"]["score"] == 1.0
+        assert result["components"]["severity_classification"]["score"] >= 0.99
 
 
 # ─── Report completeness (word-overlap fallback) ────────────────
@@ -351,7 +389,6 @@ class TestReportCompleteness:
     """Component H: Report Completeness (word-overlap fallback path)."""
 
     def test_perfect_report(self, grader):
-        """Report containing all key findings verbatim → high completeness."""
         findings = TASKS["task_easy"]["ground_truth"]["key_findings"]
         report = ", ".join(findings) + ". Detailed analysis."
         result = grader.grade(
@@ -366,10 +403,11 @@ class TestReportCompleteness:
             {}, [], "MEDIUM", "",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["report_completeness"]["score"] == 0.0
+        score = result["components"]["report_completeness"]["score"]
+        assert score <= 0.01
+        _assert_open01(score)
 
     def test_draft_report_penalized(self, grader):
-        """Draft reports should get a 20% penalty vs submitted."""
         report = "database connection refused auth-service affected postgresql port 5432"
         submitted = grader.grade(
             {}, [], "MEDIUM", report,
@@ -379,7 +417,6 @@ class TestReportCompleteness:
             {}, [], "MEDIUM", report,
             _easy_gt(), _easy_config(), _default_behavior(report_source="draft")
         )
-        # Draft should be <= submitted (could be equal if ML is used)
         assert draft["components"]["report_completeness"]["score"] <= \
                submitted["components"]["report_completeness"]["score"]
 
@@ -395,17 +432,20 @@ class TestReportCoherence:
             {}, [], "MEDIUM", "",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["report_coherence"]["score"] == 0.0
+        score = result["components"]["report_coherence"]["score"]
+        assert score <= 0.01
+        _assert_open01(score)
 
     def test_short_report_low_coherence(self, grader):
         result = grader.grade(
             {}, [], "MEDIUM", "Bad.",
             _easy_gt(), _easy_config(), _default_behavior()
         )
-        assert result["components"]["report_coherence"]["score"] == 0.0
+        score = result["components"]["report_coherence"]["score"]
+        assert score <= 0.01
+        _assert_open01(score)
 
     def test_well_structured_report(self, grader):
-        """A report with temporal, causal, and structural markers → high coherence."""
         report = (
             "Root cause: The auth-service experienced database connection failures. "
             "First, the connection pool became exhausted on port 5432. "
@@ -424,6 +464,7 @@ class TestReportCoherence:
         )
         coherence = result["components"]["report_coherence"]["score"]
         assert coherence > 0.5
+        _assert_open01(coherence)
 
     def test_draft_coherence_penalized(self, grader):
         report = (
@@ -450,7 +491,6 @@ class TestInvestigationEfficiency:
     """Component J: Investigation Efficiency."""
 
     def test_fast_high_quality_gives_best_efficiency(self, grader):
-        """Good results in few steps → efficiency ≈ 1.0."""
         gt = _easy_gt()
         ann = {lid: cat for lid, cat in gt["annotations"].items()}
         result = grader.grade(
@@ -461,9 +501,9 @@ class TestInvestigationEfficiency:
         )
         eff = result["components"]["investigation_efficiency"]["score"]
         assert eff >= 0.5
+        _assert_open01(eff)
 
     def test_max_steps_poor_quality_low_efficiency(self, grader):
-        """No results + all steps used → very low efficiency."""
         result = grader.grade(
             {}, [], "", "",
             _easy_gt(), _easy_config(),
@@ -471,6 +511,7 @@ class TestInvestigationEfficiency:
         )
         eff = result["components"]["investigation_efficiency"]["score"]
         assert eff < 0.1
+        _assert_open01(eff)
 
 
 # ─── Perfect run scoring ────────────────────────────────────────
@@ -493,6 +534,7 @@ class TestPerfectRun:
             gt["annotations"], gt["correlations"], gt["severity"],
             report, gt, _easy_config(), _default_behavior(steps=8)
         )
+        _assert_open01(result["final_score"])
         assert result["final_score"] > 0.6
 
     def test_perfect_medium_run(self, grader):
@@ -511,4 +553,36 @@ class TestPerfectRun:
             gt["annotations"], gt["correlations"], gt["severity"],
             report, gt, _medium_config(), _default_behavior(steps=15)
         )
+        _assert_open01(result["final_score"])
         assert result["final_score"] > 0.6
+
+
+# ─── Clamp function tests ───────────────────────────────────────
+
+
+class TestClamp01:
+    """Direct tests for the _clamp01 utility."""
+
+    def test_clamp_zero(self):
+        assert _clamp01(0.0) == _EPS
+
+    def test_clamp_one(self):
+        assert _clamp01(1.0) == 1.0 - _EPS
+
+    def test_clamp_negative(self):
+        assert _clamp01(-5.0) == _EPS
+
+    def test_clamp_above_one(self):
+        assert _clamp01(2.5) == 1.0 - _EPS
+
+    def test_clamp_mid(self):
+        assert _clamp01(0.5) == 0.5
+
+    def test_clamp_none(self):
+        assert _clamp01(None) == 0.5
+
+    def test_clamp_nan(self):
+        assert _clamp01(float('nan')) == 0.5
+
+    def test_clamp_inf(self):
+        assert _clamp01(float('inf')) == 0.5
