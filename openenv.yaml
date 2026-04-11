@@ -14,6 +14,7 @@ tags:
   - log-analysis
   - incident-response
   - security
+app_port: 7860
 
 observation_space:
   type: object
