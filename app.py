@@ -17,7 +17,6 @@ session_mgr = SessionManager(max_sessions=10, ttl_seconds=1800)
 
 SCORE_KEYS = frozenset({
     "score", "final_score", "task_score", "value", "cumulative",
-    "cumulative_reward", "reward", "weighted",
     "annotation_precision", "annotation_recall", "annotation_quality",
     "correlation_precision", "correlation_recall", "chain_reconstruction",
     "severity_classification", "report_completeness", "report_coherence",
@@ -28,12 +27,19 @@ SCORE_KEYS = frozenset({
 def _safe_clamp(v, eps=0.001):
     """Clamp a single numeric value to strictly (0, 1)."""
     try:
-        v = float(v)
+        v = float(v)  # ensure pure Python float
     except (TypeError, ValueError):
-        return 0.5
+        return float(0.5)
     if math.isnan(v) or math.isinf(v):
-        return 0.5
-    return max(eps, min(1.0 - eps, v))
+        return float(0.5)
+    # Clamp to [0, 1] first
+    v = max(0.0, min(1.0, v))
+    # Then enforce strict open interval
+    if v <= 0.0:
+        v = eps
+    if v >= 1.0:
+        v = 1.0 - eps
+    return float(v)
 
 
 def _deep_clamp_scores(obj):

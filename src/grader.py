@@ -9,11 +9,18 @@ _EPS = 0.001
 def _clamp01(v) -> float:
     """Clamp a value to the OPEN interval (0, 1). NaN/inf/None safe."""
     if v is None or not isinstance(v, (int, float)):
-        return 0.5
-    v = float(v)
+        return float(0.5)
+    v = float(v)  # ensure pure Python float (not numpy)
     if math.isnan(v) or math.isinf(v):
-        return 0.5
-    return max(_EPS, min(1.0 - _EPS, v))
+        return float(0.5)
+    # Clamp to [0, 1] first
+    v = max(0.0, min(1.0, v))
+    # Then enforce strict (0, 1) — never exactly 0 or 1
+    if v <= 0.0:
+        v = _EPS
+    if v >= 1.0:
+        v = 1.0 - _EPS
+    return float(v)
 
 # Lazy-import ML models so the server starts without them if not installed
 _ml: Optional[object] = None
@@ -385,18 +392,20 @@ class TaskGrader:
         for key, weight in weights.items():
             raw = scores.get(key, 0.5)  # default to mid if missing
             clamped = _clamp01(raw)     # double-clamp for safety
-            weighted = clamped * weight
+            print(f"GRADE: {key} = {clamped} (type={type(clamped).__name__})")
+            weighted = float(clamped * weight)
             final += weighted
             components[key] = {
-                "score": round(clamped, 4),
-                "weight": round(weight, 4),
-                "weighted": round(_clamp01(weighted), 4),
+                "score": float(round(clamped, 4)),
+                "weight": float(round(weight, 4)),
+                "weighted": float(round(weighted, 4)),
                 "detail": self._detail(key, scores, gt_ann, gt_corr,
                                        agent_annotations, agent_correlations,
                                        behavior),
             }
 
-        clamped_final = round(_clamp01(final), 4)
+        clamped_final = float(round(_clamp01(final), 4))
+        print(f"GRADE: final_score = {clamped_final} (type={type(clamped_final).__name__})")
 
         return {
             "task_id": task_config["id"],

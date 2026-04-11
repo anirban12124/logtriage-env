@@ -72,17 +72,6 @@ MAX_TOKENS = 200           # JSON actions are typically 50-100 tokens
 LLM_TIMEOUT = 30           # seconds — hard timeout per LLM API call
 FALLBACK_ACTION = ("noop", {})
 
-
-def _clamp_val(v, eps=0.001):
-    """Clamp a numeric value to strictly (0, 1) for validator compliance."""
-    try:
-        v = float(v)
-    except (TypeError, ValueError):
-        return 0.5
-    if v != v or v == float('inf') or v == float('-inf'):
-        return 0.5
-    return max(eps, min(1.0 - eps, v))
-
 # ─── Time Budget ─────────────────────────────────────────────────
 
 GLOBAL_TIMEOUT = 1080      # 18 minutes total (2 min buffer for setup/grading)
@@ -599,9 +588,8 @@ def run_task(
             "step": step,
             "action_type": ks_action_type,
             "params": ks_params,
-            "reward": _clamp_val(reward_val),
-            "cumulative_reward": _clamp_val(cumulative),
-            "score": _clamp_val(reward_val),
+            "reward": reward_val,
+            "cumulative_reward": cumulative,
             "done": done,
             "timestamp": datetime.now(timezone.utc).isoformat(),
         })
@@ -636,14 +624,11 @@ def run_task(
                 reward = step_result["reward"]
                 done = step_result["done"]
                 grader_result = step_result.get("info", {}).get("grader_result")
-                _timeout_reward = reward.get("value", 0) if isinstance(reward, dict) else 0
-                _timeout_cumul = reward.get("cumulative", 0) if isinstance(reward, dict) else 0
                 _emit("STEP", {
                     "task_id": task_id, "step": step,
                     "action_type": "submit_report", "params": {},
-                    "reward": _clamp_val(_timeout_reward),
-                    "cumulative_reward": _clamp_val(_timeout_cumul),
-                    "score": _clamp_val(_timeout_reward),
+                    "reward": reward.get("value", 0) if isinstance(reward, dict) else 0,
+                    "cumulative_reward": reward.get("cumulative", 0) if isinstance(reward, dict) else 0,
                     "done": done,
                     "timestamp": datetime.now(timezone.utc).isoformat(),
                 })
@@ -824,25 +809,16 @@ def run_task(
             )
             print(f"         reward={reward_val:+.3f} | done={done}")
 
-            step_payload = {
+            _emit("STEP", {
                 "task_id": task_id,
                 "step": step,
                 "action_type": action_type,
                 "params": params,
-                "reward": _clamp_val(reward_val),
-                "cumulative_reward": _clamp_val(cumulative),
-                "score": _clamp_val(reward_val),
+                "reward": reward_val,
+                "cumulative_reward": cumulative,
                 "done": done,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
-            }
-            # When episode ends, include final task score at every key
-            if done:
-                gr = step_result.get("info", {}).get("grader_result", {})
-                task_score = gr.get("score") or gr.get("final_score") or reward_val
-                step_payload["score"] = _clamp_val(task_score)
-                step_payload["task_score"] = _clamp_val(task_score)
-                step_payload["final_score"] = _clamp_val(task_score)
-            _emit("STEP", step_payload)
+            })
 
             if done:
                 grader_result = step_result.get("info", {}).get("grader_result")
@@ -851,12 +827,19 @@ def run_task(
     # ── Clamp helper (belt-and-suspenders for emitted scores) ──
     def _clamp_score(v, eps=0.001):
         try:
-            v = float(v)
+            v = float(v)  # ensure pure Python float
         except (TypeError, ValueError):
-            return 0.5
+            return float(0.5)
         if v != v or v == float('inf') or v == float('-inf'):  # NaN/inf
-            return 0.5
-        return max(eps, min(1.0 - eps, v))
+            return float(0.5)
+        # Clamp to [0, 1] first
+        v = max(0.0, min(1.0, v))
+        # Then enforce strict open interval
+        if v <= 0.0:
+            v = eps
+        if v >= 1.0:
+            v = 1.0 - eps
+        return float(v)
 
     if grader_result is None and step_result is not None:
         grader_result = step_result.get("info", {}).get("grader_result", {
@@ -886,6 +869,7 @@ def run_task(
 
     raw_final = grader_result.get("final_score") or grader_result.get("score") or 0.01
     clamped_final = _clamp_score(raw_final)
+    print(f"GRADE: {task_id} final_score = {clamped_final} (type={type(clamped_final).__name__})")
 
     elapsed = time.time() - task_start
     _emit("END", {

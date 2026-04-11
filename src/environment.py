@@ -53,10 +53,18 @@ class LogTriageEnv:
     def _clamp_score(v, eps=0.001):
         """Clamp value to strictly (0, 1) — safe against NaN/inf/None."""
         if v is None or not isinstance(v, (int, float)):
-            return 0.5
+            return float(0.5)
+        v = float(v)  # ensure pure Python float
         if math.isnan(v) or math.isinf(v):
-            return 0.5
-        return max(eps, min(1.0 - eps, float(v)))
+            return float(0.5)
+        # Clamp to [0, 1] first
+        v = max(0.0, min(1.0, v))
+        # Then enforce strict open interval
+        if v <= 0.0:
+            v = eps
+        if v >= 1.0:
+            v = 1.0 - eps
+        return float(v)
 
     @staticmethod
     def _clamp_reward(reward_obj, eps=0.001):
@@ -72,10 +80,16 @@ class LogTriageEnv:
 
         def safe(v):
             if v is None or not isinstance(v, (int, float)):
-                return 0.5
+                return float(0.5)
+            v = float(v)  # ensure pure Python float
             if math.isnan(v) or math.isinf(v):
-                return 0.5
-            return max(eps, min(1.0 - eps, float(v)))
+                return float(0.5)
+            v = max(0.0, min(1.0, v))
+            if v <= 0.0:
+                v = eps
+            if v >= 1.0:
+                v = 1.0 - eps
+            return float(v)
 
         if isinstance(reward_obj, (int, float)):
             return safe(reward_obj)
@@ -249,6 +263,7 @@ class LogTriageEnv:
 
             # Expose clamped score at EVERY level the validator might check
             task_score = self._clamp_score(grader_result.get("score", 0.5))
+            print(f"GRADE: task_score = {task_score} (type={type(task_score).__name__})")
             info["score"] = task_score
             info["task_score"] = task_score
             info["final_score"] = task_score

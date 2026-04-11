@@ -368,13 +368,8 @@ class RewardCalculator:
 
         self.prev_actions.append(action_sig)
 
-        # Clamp ALL returned values to strict (0, 1) for validator compliance
-        _EPS = 0.001
-        def _clamp(v):
-            return max(_EPS, min(1.0 - _EPS, float(v)))
-
         return {
-            "value": round(_clamp(total), 4),
-            "components": {k: round(_clamp(v), 4) for k, v in components.items()},
-            "cumulative": round(_clamp(self.cumulative), 4),
+            "value": round(total, 4),
+            "components": {k: round(v, 4) for k, v in components.items()},
+            "cumulative": round(self.cumulative, 4),
         }
